@@ -542,21 +542,33 @@ function renderMarketplace() {
     const currentDays = state.cardDaysMap[item.id] || 1;
     const totalCalc = (item.dailyRate * currentDays) + item.deposit - 50;
 
+    const categoryClassMap = {
+      audio: 'badge-cat-audio',
+      projection: 'badge-cat-projection',
+      lighting: 'badge-cat-lighting',
+      photography: 'badge-cat-photography',
+      cables: 'badge-cat-cables'
+    };
+    const catBadgeClass = categoryClassMap[item.category] || 'badge-cat-audio';
+
     return `
-      <!-- SWISS-PAIRING EQUIPMENT PASS CARD -->
-      <div class="neo-card rounded-xl overflow-hidden flex flex-col bg-white">
+      <!-- VIBRANT PLAYFUL EQUIPMENT PASS CARD -->
+      <div class="neo-card card-accent-${item.category} rounded-2xl overflow-hidden flex flex-col bg-white border border-slate-200">
         
         <!-- Top Pass Header -->
-        <div class="bg-[#F7F6F2] border-b-[1.5px] border-black p-2.5 flex items-center justify-between text-xs font-medium">
-          <span class="text-slate-700 font-semibold uppercase tracking-wider text-[11px]">${item.categoryCode}</span>
-          <div class="punch-slot"></div>
-          <span class="text-[11px] font-bold uppercase tracking-wider ${isLocked ? 'text-amber-800' : 'text-emerald-800'}">
-            ${item.statusText}
+        <div class="bg-slate-50 border-b border-slate-100 p-3 flex items-center justify-between text-xs font-medium">
+          <span class="${catBadgeClass} text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+            ${item.categoryName}
           </span>
+          <div class="punch-slot"></div>
+          ${isLocked 
+            ? `<span class="badge-fest-locked">Booked for Fest</span>`
+            : `<span class="flex items-center text-xs font-bold text-emerald-700"><span class="pulse-dot-green mr-1.5"></span> Available Today</span>`
+          }
         </div>
 
         <!-- Hardware Image Container -->
-        <div class="relative h-48 w-full overflow-hidden bg-slate-100 border-b-[1.5px] border-black">
+        <div class="relative h-48 w-full overflow-hidden bg-slate-100 border-b border-slate-100 group">
           <img 
             src="${item.image}" 
             alt="${item.title}" 
@@ -566,61 +578,63 @@ function renderMarketplace() {
           />
 
           <!-- Deposit Badge -->
-          <div class="absolute bottom-2 left-2 flex items-center gap-1.5 text-xs bg-white/95 px-2.5 py-1 rounded border border-black shadow-[2px_2px_0px_#000]">
-            <span class="font-bold text-slate-800">Deposit:</span> ₹${item.deposit} <span class="text-emerald-700 font-semibold">(Refundable)</span>
+          <div class="absolute bottom-2.5 left-2.5">
+            <span class="badge-deposit shadow-sm">
+              <span class="font-bold">Deposit:</span> ₹${item.deposit} <span class="text-emerald-700 font-semibold">(Refundable)</span>
+            </span>
           </div>
 
           <!-- Safe Zone Tag -->
-          <div class="absolute top-2 right-2 text-[10px] font-semibold bg-black text-white px-2 py-0.5 rounded tracking-wider uppercase">
+          <div class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-slate-900/90 text-white px-2.5 py-1 rounded-lg tracking-wider uppercase shadow-sm">
             ${item.safeZone.split(' ')[0]}
           </div>
         </div>
 
         <!-- Content Body -->
-        <div class="p-4 flex-1 flex flex-col justify-between">
+        <div class="p-5 flex-1 flex flex-col justify-between">
           <div>
             <!-- Title & PRN Badge -->
-            <div class="flex items-start justify-between gap-2 mb-1.5">
-              <h3 class="text-base font-bold font-heading text-black tracking-tight leading-snug">
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <h3 class="text-base font-bold font-heading text-slate-900 tracking-tight leading-snug">
                 ${item.title}
               </h3>
-              <span class="text-[10px] font-bold bg-[#ECFDF5] text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded shrink-0">
-                ${item.owner.prn}
+              <span class="badge-verified shrink-0">
+                <i data-lucide="check" class="w-2.5 h-2.5 text-emerald-600"></i> PRN Verified
               </span>
             </div>
 
-            <p class="text-xs text-slate-600 mb-3 line-clamp-2 leading-relaxed">
+            <p class="text-xs text-slate-600 mb-3.5 line-clamp-2 leading-relaxed">
               ${item.specs}
             </p>
 
             <!-- Technical Spec Sheet Table -->
-            <div class="p-3 rounded bg-[#F7F6F2] border border-black mb-3 text-xs space-y-1">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 mb-3.5 text-xs space-y-1">
               ${Object.entries(item.techSheet).slice(0, 3).map(([key, val]) => `
                 <div class="flex justify-between text-slate-700">
                   <span class="uppercase text-slate-500 font-medium text-[10px] tracking-wider">${key}:</span>
-                  <span class="font-semibold text-black truncate max-w-[170px]">${val}</span>
+                  <span class="font-semibold text-slate-900 truncate max-w-[170px]">${val}</span>
                 </div>
               `).join('')}
             </div>
 
             <!-- Owner Strip -->
-            <div class="flex items-center justify-between text-xs py-2 border-y border-slate-200 mb-3">
+            <div class="flex items-center justify-between text-xs py-2.5 border-y border-slate-100 mb-3.5">
               <div class="flex items-center gap-2">
-                <img src="${item.owner.avatar}" alt="${item.owner.name}" class="w-5 h-5 rounded-full object-cover border border-black">
-                <span class="font-semibold text-black">${item.owner.name}</span>
+                <img src="${item.owner.avatar}" alt="${item.owner.name}" class="w-6 h-6 rounded-full object-cover border-2 border-indigo-200">
+                <span class="font-bold text-slate-900">${item.owner.name}</span>
                 <span class="text-[11px] text-slate-500">(${item.owner.dept})</span>
               </div>
-              <div class="font-bold text-slate-800">
-                ★ ${item.owner.rating}
+              <div class="font-bold text-slate-800 flex items-center gap-1">
+                <span class="text-amber-500">★</span> ${item.owner.rating}
               </div>
             </div>
 
             <!-- Mini Interactive Rent Estimator Slider directly on card -->
-            <div class="p-2.5 rounded bg-white border border-slate-300 mb-3">
-              <div class="flex justify-between items-center text-xs mb-1">
-                <span class="text-slate-500 font-medium text-[11px] uppercase tracking-wider">Days:</span>
-                <span class="font-semibold text-black" id="calc-days-${item.id}">${currentDays}d est:</span>
-                <span class="font-bold text-indigo-700 text-sm" id="calc-price-${item.id}">₹${totalCalc}</span>
+            <div class="p-3 rounded-xl bg-slate-50/70 border border-slate-200 mb-3.5">
+              <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="text-slate-500 font-bold text-[10px] uppercase tracking-wider">Estimated Cost:</span>
+                <span class="font-semibold text-slate-700" id="calc-days-${item.id}">${currentDays}d:</span>
+                <span class="font-bold text-[#4F46E5] text-sm" id="calc-price-${item.id}">₹${totalCalc}</span>
               </div>
               <input 
                 type="range" 
@@ -635,30 +649,24 @@ function renderMarketplace() {
 
           <!-- Bottom Action & Barcode Strip -->
           <div>
-            <div class="pt-2 flex items-center justify-between gap-3 mb-2.5">
+            <div class="pt-2 flex items-center justify-between gap-3 mb-3">
               <div>
-                <span class="text-xl font-bold font-heading text-black">₹${item.dailyRate}</span>
+                <span class="text-2xl font-extrabold font-heading text-slate-900">₹${item.dailyRate}</span>
                 <span class="text-xs text-slate-500 font-medium">/day</span>
               </div>
 
-              <button 
-                onclick="handleRentClick('${item.id}')"
-                class="px-4 py-2 rounded text-xs font-semibold uppercase tracking-wider transition-all ${
-                  isLocked 
-                    ? 'neo-btn-secondary opacity-75' 
-                    : 'neo-btn bg-black text-white hover:bg-indigo-600'
-                }"
-              >
-                ${isLocked ? 'Waitlist' : 'Rent Now →'}
-              </button>
+              ${isLocked 
+                ? `<button onclick="handleRentClick('${item.id}')" class="neo-btn-secondary opacity-75 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider">Waitlist</button>`
+                : `<button onclick="handleRentClick('${item.id}')" class="btn-coral px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm"><span>Rent Now →</span></button>`
+              }
             </div>
 
             <!-- Barcode Footer Strip -->
-            <div class="pt-2 border-t border-slate-200">
-              <div class="barcode-lines opacity-75 mb-1"></div>
-              <div class="flex justify-between text-[9px] text-slate-500 font-medium uppercase tracking-wider">
+            <div class="pt-2 border-t border-slate-100">
+              <div class="barcode-lines opacity-60 mb-1"></div>
+              <div class="flex justify-between text-[9px] text-slate-400 font-medium uppercase tracking-wider">
                 <span>Pass #${item.barcodeId}</span>
-                <span>Verified Studio Equipment</span>
+                <span class="text-emerald-700 font-semibold">✓ Safe-Zone Verified</span>
               </div>
             </div>
           </div>
@@ -692,14 +700,40 @@ function openBookingModal(item) {
   if (!modal) return;
 
   // Set equipment preview
-  document.getElementById('modal-item-title').textContent = item.title;
-  document.getElementById('modal-item-category').textContent = item.categoryCode;
-  document.getElementById('modal-item-specs').textContent = item.specs;
-  document.getElementById('modal-item-img').src = item.image;
-  document.getElementById('modal-item-owner').textContent = `${item.owner.name} (${item.owner.dept}) • ${item.owner.prn}`;
-  document.getElementById('modal-item-rate').textContent = `₹${item.dailyRate}/day`;
-  document.getElementById('modal-item-deposit').textContent = `₹${item.deposit} refundable deposit`;
-  document.getElementById('modal-barcode-id').textContent = item.barcodeId;
+  const titleEl = document.getElementById('modal-item-title');
+  if (titleEl) titleEl.textContent = item.title;
+
+  const categoryClassMap = {
+    audio: 'badge-cat-audio',
+    projection: 'badge-cat-projection',
+    lighting: 'badge-cat-lighting',
+    photography: 'badge-cat-photography',
+    cables: 'badge-cat-cables'
+  };
+
+  const catEl = document.getElementById('modal-item-category');
+  if (catEl) {
+    catEl.className = `${categoryClassMap[item.category] || 'badge-cat-audio'} text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider`;
+    catEl.textContent = item.categoryName;
+  }
+
+  const specsEl = document.getElementById('modal-item-specs');
+  if (specsEl) specsEl.textContent = item.specs;
+
+  const imgEl = document.getElementById('modal-item-img');
+  if (imgEl) imgEl.src = item.image;
+
+  const ownerEl = document.getElementById('modal-item-owner');
+  if (ownerEl) ownerEl.textContent = `Owner: ${item.owner.name} (${item.owner.dept}) • ${item.owner.prn}`;
+
+  const rateEl = document.getElementById('modal-item-rate');
+  if (rateEl) rateEl.textContent = `₹${item.dailyRate}/day`;
+
+  const depEl = document.getElementById('modal-item-deposit');
+  if (depEl) depEl.textContent = `₹${item.deposit} refundable deposit`;
+
+  const barcodeEl = document.getElementById('modal-barcode-id');
+  if (barcodeEl) barcodeEl.textContent = item.barcodeId;
 
   // Set default dates
   const today = new Date().toISOString().split('T')[0];
@@ -858,45 +892,49 @@ function closeOtpSuccessModal() {
 }
 
 // ----------------------------------------------------
-// Campus Wanted Board
+// Campus Wanted Board (Sticky Note / Notice Board Style)
 // ----------------------------------------------------
 function renderWantedBoard() {
   const container = document.getElementById('wanted-board-cards');
   if (!container) return;
 
-  container.innerHTML = state.wantedRequests.map(req => {
+  container.innerHTML = state.wantedRequests.map((req, idx) => {
+    const isYellow = idx % 2 === 0;
+    const memoClass = isYellow ? 'memo-card-yellow' : 'memo-card-coral';
+    const tagBg = isYellow ? 'bg-amber-400 text-amber-950' : 'bg-rose-400 text-rose-950';
+
     return `
-      <!-- Clean Notice Board Card with Tape Graphic -->
-      <div class="neo-card p-5 rounded-xl border-1.5 border-black bg-white relative flex flex-col justify-between pt-6">
+      <!-- Sticky Note Notice Board Card with Tape Graphic -->
+      <div class="${memoClass} p-6 rounded-2xl relative flex flex-col justify-between pt-7">
         <div class="masking-tape"></div>
 
         <div>
           <!-- Top Badge & Needed Date -->
           <div class="flex items-center justify-between gap-2 mb-3 text-xs">
-            <span class="px-2.5 py-0.5 rounded bg-black text-white font-semibold text-[10px] uppercase tracking-wider">
+            <span class="px-2.5 py-0.5 rounded-full ${tagBg} font-extrabold text-[10px] uppercase tracking-wider shadow-sm">
               ${req.urgencyText}
             </span>
-            <span class="text-slate-600 font-medium flex items-center gap-1.5">
+            <span class="text-slate-600 font-semibold flex items-center gap-1.5">
               <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i>
               ${req.neededDate}
             </span>
           </div>
 
           <!-- Request Title -->
-          <h4 class="text-sm font-bold font-heading text-black mb-2 leading-snug">
+          <h4 class="text-base font-bold font-heading text-slate-900 mb-2 leading-snug">
             ${req.title}
           </h4>
-          <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          <p class="text-xs text-slate-700 mb-4 leading-relaxed font-normal">
             "${req.description}"
           </p>
 
           <!-- Requester Club Info -->
-          <div class="flex items-center justify-between text-xs py-2 border-y border-dashed border-slate-300 mb-4">
-            <div class="flex items-center gap-1.5 font-semibold text-black">
-              <i data-lucide="users" class="w-3.5 h-3.5 text-indigo-600"></i>
+          <div class="flex items-center justify-between text-xs py-2 border-y border-dashed border-slate-300/80 mb-4">
+            <div class="flex items-center gap-1.5 font-bold text-slate-900">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-[#4F46E5]"></i>
               <span>${req.club}</span>
             </div>
-            <div class="text-[11px] text-slate-500">
+            <div class="text-[11px] text-slate-500 font-medium">
               by ${req.requester}
             </div>
           </div>
@@ -905,15 +943,15 @@ function renderWantedBoard() {
         <!-- Budget & Offer Button -->
         <div class="flex items-center justify-between gap-3 pt-1">
           <div>
-            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-semibold">Budget:</span>
-            <span class="text-sm font-bold font-heading text-emerald-800">${req.budget}</span>
+            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-bold">Budget:</span>
+            <span class="text-base font-extrabold font-heading text-emerald-800">${req.budget}</span>
           </div>
 
           <button 
             onclick="openOfferModal('${req.id}')"
-            class="neo-btn-secondary px-3.5 py-1.5 rounded text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5"
+            class="btn-gradient-list px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm"
           >
-            <i data-lucide="handshake" class="w-3.5 h-3.5"></i>
+            <i data-lucide="handshake" class="w-3.5 h-3.5 text-amber-300"></i>
             <span>Offer Rent →</span>
           </button>
         </div>
@@ -1016,6 +1054,7 @@ function submitPostWanted(e) {
 
 // ----------------------------------------------------
 // Active Handover Tracker & Escrow Console
+// Colorful Progress Nodes (Emerald, Electric Indigo, Violet)
 // ----------------------------------------------------
 function renderActiveTracker() {
   const container = document.getElementById('tracker-card-container');
@@ -1037,90 +1076,96 @@ function renderActiveTracker() {
 
   container.innerHTML = `
     <!-- Top Equipment Summary Strip -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 rounded-lg bg-[#F7F6F2] border-1.5 border-black">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 rounded-2xl bg-slate-50 border border-slate-200">
       <div class="flex items-center gap-4">
         <div class="relative">
-          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded object-cover border-1.5 border-black shadow-[2px_2px_0px_#000]">
+          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded-xl object-cover border-2 border-indigo-200 shadow-sm">
         </div>
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] px-2 py-0.5 rounded bg-black text-white font-bold uppercase tracking-wider">
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-bold uppercase tracking-wider">
               ${b.id}
             </span>
             <span class="text-xs text-slate-600 font-semibold">${b.categoryCode || b.category}</span>
           </div>
-          <h3 class="text-base font-bold font-heading text-black">${b.title}</h3>
-          <p class="text-xs text-slate-600 mt-0.5">Owner: <span class="text-black font-semibold">${b.ownerName}</span> • Pickup: <span class="text-indigo-700 font-semibold">${b.pickupSpot}</span></p>
+          <h3 class="text-base font-bold font-heading text-slate-900">${b.title}</h3>
+          <p class="text-xs text-slate-600 mt-0.5">Owner: <span class="text-slate-900 font-bold">${b.ownerName}</span> • Pickup: <span class="text-[#4F46E5] font-bold">${b.pickupSpot}</span></p>
         </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <div class="bg-white border-1.5 border-black p-2.5 px-4 rounded text-center shadow-[2px_2px_0px_#000]">
-          <span class="text-[9px] text-slate-500 uppercase tracking-widest block font-bold">Handover OTP</span>
-          <span class="text-2xl font-black text-black tracking-widest">${b.otp}</span>
+        <div class="bg-white border border-slate-200 p-2.5 px-5 rounded-2xl text-center shadow-sm">
+          <span class="text-[9px] text-slate-400 uppercase tracking-widest block font-bold">Handover OTP</span>
+          <span class="text-2xl font-black text-[#4F46E5] tracking-widest font-mono">${b.otp}</span>
         </div>
 
         <!-- Segmented Step Controller -->
         <div class="flex flex-col gap-1 text-right">
-          <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Simulate Stage:</span>
-          <div class="inline-flex p-0.5 rounded bg-[#EFECE6] border border-black shadow-[2px_2px_0px_#000]">
+          <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Simulate Stage:</span>
+          <div class="inline-flex p-1 rounded-xl bg-slate-100 border border-slate-200 shadow-inner">
             <button 
               onclick="setBookingStep(1)" 
-              class="px-2.5 py-1 text-xs font-semibold uppercase rounded transition-all ${b.statusStep === 1 ? 'bg-black text-white' : 'text-black hover:bg-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}"
             >
-              1. Reserved
+              1. Verified
             </button>
             <button 
               onclick="setBookingStep(2)" 
-              class="px-2.5 py-1 text-xs font-semibold uppercase rounded transition-all ${b.statusStep === 2 ? 'bg-amber-500 text-black' : 'text-black hover:bg-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-[#4F46E5] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}"
             >
-              2. In Use
+              2. Handover
             </button>
             <button 
               onclick="setBookingStep(3)" 
-              class="px-2.5 py-1 text-xs font-semibold uppercase rounded transition-all ${b.statusStep === 3 ? 'bg-emerald-600 text-white' : 'text-black hover:bg-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-[#7C3AED] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}"
             >
-              3. Returned
+              3. Settled
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Stepper Stage Cards -->
+    <!-- Stepper Stage Cards with Colorful Progress Nodes -->
     <div class="py-6 px-1">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
-        <!-- Step 1: Reserved -->
-        <div class="p-4 rounded-lg border-1.5 border-black transition-all ${step1Active ? 'bg-white shadow-[3px_3px_0px_#4F46E5]' : 'bg-[#F7F6F2] opacity-75'}">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="w-6 h-6 rounded bg-black text-white font-bold text-xs flex items-center justify-center">1</span>
-            <h4 class="text-xs font-bold text-black uppercase tracking-wider">1. Reserved • OTP Ready</h4>
+        <!-- Step 1: Emerald Node (Verified) -->
+        <div class="p-5 rounded-2xl border transition-all ${step1Active ? 'tracker-card-emerald shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+          <div class="flex items-center gap-2.5 mb-2">
+            <span class="w-7 h-7 rounded-full tracker-node-emerald font-extrabold text-xs flex items-center justify-center">
+              ${step1Active ? '✓' : '1'}
+            </span>
+            <h4 class="text-xs font-bold text-emerald-900 uppercase tracking-wider">1. Verified • OTP Ready</h4>
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            OTP #${b.otp} locked. Unit reserved in Safe-Zone locker box for student handover.
+            OTP #${b.otp} active. Unit verified and stored in Safe-Zone locker box for student handover.
           </p>
         </div>
 
-        <!-- Step 2: Handed Over & In Use -->
-        <div class="p-4 rounded-lg border-1.5 border-black transition-all ${step2Active ? 'bg-white shadow-[3px_3px_0px_#F59E0B]' : 'bg-[#F7F6F2] opacity-75'}">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="w-6 h-6 rounded bg-amber-500 text-black font-bold text-xs flex items-center justify-center">2</span>
-            <h4 class="text-xs font-bold text-black uppercase tracking-wider">2. In Use • Escrow Locked</h4>
+        <!-- Step 2: Indigo Node (Handover / In Use) -->
+        <div class="p-5 rounded-2xl border transition-all ${step2Active ? 'tracker-card-indigo shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+          <div class="flex items-center gap-2.5 mb-2">
+            <span class="w-7 h-7 rounded-full tracker-node-indigo font-extrabold text-xs flex items-center justify-center">
+              ${step2Active ? '✓' : '2'}
+            </span>
+            <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider">2. Handover • In Use</h4>
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            OTP verified by Safe-Zone volunteer. ₹${b.deposit} deposit securely held in campus escrow.
+            OTP verified by Safe-Zone volunteer. ₹${b.deposit} security deposit locked in peer escrow.
           </p>
         </div>
 
-        <!-- Step 3: Returned & Inspected -->
-        <div class="p-4 rounded-lg border-1.5 border-black transition-all ${step3Active ? 'bg-white shadow-[3px_3px_0px_#10B981]' : 'bg-[#F7F6F2] opacity-75'}">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="w-6 h-6 rounded bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">3</span>
-            <h4 class="text-xs font-bold text-black uppercase tracking-wider">3. Inspected • Refunded</h4>
+        <!-- Step 3: Violet Node (Deposit Settled / Inspected) -->
+        <div class="p-5 rounded-2xl border transition-all ${step3Active ? 'tracker-card-violet shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+          <div class="flex items-center gap-2.5 mb-2">
+            <span class="w-7 h-7 rounded-full tracker-node-violet font-extrabold text-xs flex items-center justify-center">
+              ${step3Active ? '✓' : '3'}
+            </span>
+            <h4 class="text-xs font-bold text-purple-900 uppercase tracking-wider">3. Deposit Settled</h4>
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Hardware returned clean. Auto-release initiated straight to peer UPI handle.
+            Hardware passed return inspection. ₹${b.deposit} deposit instantaneously settled to UPI.
           </p>
         </div>
 

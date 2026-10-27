@@ -1,30 +1,54 @@
 /* =========================================================================
-   CampusEquip — High-End Swiss Typography & Clean Neo-Collegiate Aesthetic
-   Typography Pairing: 'Plus Jakarta Sans' (Headings) + 'Inter' (Body/UI)
+   CampusEquip — Vibrant, Colorful Neo-Collegiate Aesthetic (Clean Light Mode)
+   Swiss Typography: 'Plus Jakarta Sans' (Headings) + 'Inter' (Body/UI)
+   Palette: Base #FAFAFC, Electric Indigo #4F46E5, Vibrant Coral #FF6B4A
    ========================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --canvas-ivory: #F7F6F2;
+  --canvas-bg: #FAFAFC;
   --surface-card: #FFFFFF;
-  --surface-alt: #EFECE6;
+  --surface-alt: #F1F3F9;
   --surface-dark: #121316;
   
-  --border-black: #1A1A1A;
-  --border-hairline: #262626;
-  --border-light: #D6D3CD;
+  --border-black: #1E293B;
+  --border-light: #E2E8F0;
+  --border-accent: #C7D2FE;
 
-  --accent-indigo: #4F46E5;
-  --accent-amber: #F59E0B;
-  --accent-emerald: #10B981;
-  --accent-rose: #F43F5E;
-  --accent-orange: #FF5C00;
-  
-  --shadow-offset: 4px 4px 0px #1A1A1A;
-  --shadow-offset-hover: 6px 6px 0px #4F46E5;
-  --shadow-offset-amber: 4px 4px 0px #F59E0B;
-  --shadow-offset-dark: 4px 4px 0px rgba(0, 0, 0, 0.4);
+  /* Brand Primaries */
+  --brand-indigo: #4F46E5;
+  --brand-indigo-dark: #4338CA;
+  --brand-coral: #FF6B4A;
+  --brand-coral-hover: #F05A38;
+  --brand-violet: #7C3AED;
+
+  /* Category Color Coding */
+  --cat-audio-bg: #F3E8FF;
+  --cat-audio-text: #7E22CE;
+  --cat-audio-border: #D8B4FE;
+
+  --cat-proj-bg: #E0F2FE;
+  --cat-proj-text: #0369A1;
+  --cat-proj-border: #BAE6FD;
+
+  --cat-light-bg: #FEF3C7;
+  --cat-light-text: #B45309;
+  --cat-light-border: #FDE68A;
+
+  --cat-photo-bg: #D1FAE5;
+  --cat-photo-text: #047857;
+  --cat-photo-border: #A7F3D0;
+
+  --cat-cable-bg: #FFE4E6;
+  --cat-cable-text: #BE123C;
+  --cat-cable-border: #FECDD3;
+
+  /* Shadows */
+  --shadow-offset: 3px 3px 0px #1E293B;
+  --shadow-card-hover: 0 12px 24px -6px rgba(79, 70, 229, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-coral-hover: 0 6px 18px rgba(255, 107, 74, 0.35);
+  --shadow-indigo-glow: 0 6px 20px rgba(79, 70, 229, 0.35);
 }
 
 *, *::before, *::after {
@@ -33,59 +57,186 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--canvas-ivory);
-  color: #1A1A1A;
+  background-color: var(--canvas-bg);
+  color: #1E293B;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(#D6D3CD 1.1px, transparent 1.1px);
-  background-size: 20px 20px;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
   font-family: 'Plus Jakarta Sans', sans-serif;
   letter-spacing: -0.02em;
-  color: #121316;
+  color: #0F172A;
   font-weight: 700;
 }
 
-/* Clean Swiss Meta & Badge Typography replacing monospaced quirks */
 .font-mono, .font-swiss-meta {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 0.01em;
 }
 
 /* =========================================================================
-   Tactile Clean Surfaces
+   Ambient Gradient Orbs (Hero Background)
+   ========================================================================= */
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(75px);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
+.ambient-orb-amber {
+  background: radial-gradient(circle, #FDE68A 0%, #F59E0B 100%);
+  width: 320px;
+  height: 320px;
+}
+
+.ambient-orb-lavender {
+  background: radial-gradient(circle, #DDD6FE 0%, #818CF8 100%);
+  width: 420px;
+  height: 420px;
+}
+
+.ambient-orb-sky {
+  background: radial-gradient(circle, #BAE6FD 0%, #38BDF8 100%);
+  width: 360px;
+  height: 360px;
+}
+
+.ambient-orb-coral {
+  background: radial-gradient(circle, #FECDD3 0%, #FF6B4A 100%);
+  width: 300px;
+  height: 300px;
+}
+
+/* =========================================================================
+   Category Color Coding Badges
+   ========================================================================= */
+
+.badge-cat-audio {
+  background-color: var(--cat-audio-bg);
+  color: var(--cat-audio-text);
+  border: 1px solid var(--cat-audio-border);
+}
+
+.badge-cat-projection {
+  background-color: var(--cat-proj-bg);
+  color: var(--cat-proj-text);
+  border: 1px solid var(--cat-proj-border);
+}
+
+.badge-cat-lighting {
+  background-color: var(--cat-light-bg);
+  color: var(--cat-light-text);
+  border: 1px solid var(--cat-light-border);
+}
+
+.badge-cat-photography {
+  background-color: var(--cat-photo-bg);
+  color: var(--cat-photo-text);
+  border: 1px solid var(--cat-photo-border);
+}
+
+.badge-cat-cables {
+  background-color: var(--cat-cable-bg);
+  color: var(--cat-cable-text);
+  border: 1px solid var(--cat-cable-border);
+}
+
+/* Category Accent Strips on Equipment Cards */
+.card-accent-audio { border-top: 4px solid #7E22CE !important; }
+.card-accent-projection { border-top: 4px solid #0284C7 !important; }
+.card-accent-lighting { border-top: 4px solid #F59E0B !important; }
+.card-accent-photography { border-top: 4px solid #10B981 !important; }
+.card-accent-cables { border-top: 4px solid #F43F5E !important; }
+
+/* =========================================================================
+   Lively Cards & Interactive Surfaces
    ========================================================================= */
 
 .neo-panel {
   background: #FFFFFF;
-  border: 1.5px solid var(--border-black);
+  border: 1.5px solid #1E293B;
   box-shadow: var(--shadow-offset);
 }
 
 .neo-card {
   background: #FFFFFF;
-  border: 1.5px solid var(--border-black);
-  box-shadow: var(--shadow-offset);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1.5px solid #1E293B;
+  box-shadow: 2px 2px 0px #1E293B;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .neo-card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-offset-hover);
-  border-color: #1A1A1A;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: #4F46E5;
 }
 
+/* =========================================================================
+   Vibrant Buttons & CTAs
+   ========================================================================= */
+
+/* Radiant Indigo-Violet Gradient (+ List Equipment) */
+.btn-gradient-list {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  color: #FFFFFF;
+  border: 1.5px solid #4338CA;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-gradient-list:hover {
+  background: linear-gradient(135deg, #4338CA 0%, #6D28D9 100%);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-gradient-list:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+}
+
+/* High-Energy Vibrant Coral Button (Rent Now) */
+.btn-coral {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  background-color: var(--brand-coral);
+  color: #FFFFFF;
+  border: 1.5px solid #EA580C;
+  box-shadow: 0 4px 12px rgba(255, 107, 74, 0.32);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-coral:hover {
+  background-color: var(--brand-coral-hover);
+  box-shadow: 0 6px 18px rgba(255, 107, 74, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-coral:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(255, 107, 74, 0.25);
+}
+
+/* Standard Neo Button */
 .neo-btn {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  background: #1A1A1A;
+  background: #1E293B;
   color: #FFFFFF;
-  border: 1.5px solid #1A1A1A;
-  box-shadow: 3px 3px 0px #1A1A1A;
+  border: 1.5px solid #1E293B;
+  box-shadow: 2px 2px 0px #1E293B;
   transition: all 0.15s ease;
   cursor: pointer;
 }
@@ -93,164 +244,235 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .neo-btn:hover {
   background: #4F46E5;
   border-color: #4F46E5;
-  box-shadow: 4px 4px 0px #1A1A1A;
+  box-shadow: 3px 3px 0px #1E293B;
   transform: translate(-1px, -1px);
-  color: #FFFFFF;
 }
 
 .neo-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px #1A1A1A;
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #1E293B;
 }
 
 .neo-btn-secondary {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   background: #FFFFFF;
-  color: #1A1A1A;
-  border: 1.5px solid #1A1A1A;
-  box-shadow: 3px 3px 0px #1A1A1A;
+  color: #1E293B;
+  border: 1.5px solid #CBD5E1;
+  box-shadow: 2px 2px 0px #E2E8F0;
   transition: all 0.15s ease;
   cursor: pointer;
 }
 
 .neo-btn-secondary:hover {
-  background: #F1EFEA;
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0px #1A1A1A;
-}
-
-.neo-btn-secondary:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px #1A1A1A;
+  background: #F8FAFC;
+  border-color: #4F46E5;
+  color: #4F46E5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.12);
 }
 
 .neo-input {
   font-family: 'Inter', sans-serif;
   background: #FFFFFF;
-  border: 1.5px solid #1A1A1A;
-  color: #1A1A1A;
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.08);
+  border: 1.5px solid #CBD5E1;
+  color: #1E293B;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
 }
 
 .neo-input:focus {
   border-color: #4F46E5;
-  box-shadow: 3px 3px 0px #4F46E5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
   outline: none;
 }
 
 /* =========================================================================
-   Tactile Visual Treatments: Punch Holes, Barcodes & Tape Graphics
+   Badges: Verification & Pricing
    ========================================================================= */
 
-/* Punch hole on top of Backstage Equipment Pass */
-.punch-hole {
-  width: 14px;
-  height: 14px;
-  background-color: var(--canvas-ivory);
-  border: 1.5px solid var(--border-black);
+/* Eye-Catching Emerald Verification Pill */
+.badge-verified {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  background-color: #ECFDF5;
+  color: #047857;
+  border: 1px solid #A7F3D0;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.02em;
+}
+
+/* Crisp Security Deposit Pill */
+.badge-deposit {
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #EEF2FF;
+  color: #4338CA;
+  border: 1px solid #C7D2FE;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Booking Status Indicators */
+.pulse-dot-green {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
   border-radius: 50%;
-  margin: 0 auto;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.badge-fest-locked {
+  background-color: #FFF7ED;
+  color: #C2410C;
+  border: 1px solid #FFEDD5;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================================
+   Wanted Board: Campus Memo / Sticky Note Styling
+   ========================================================================= */
+
+.memo-card-yellow {
+  background-color: #FEF9C3;
+  border: 1.5px solid #FDE047;
+  box-shadow: 3px 3px 0px rgba(202, 138, 4, 0.25);
+  transition: all 0.2s ease;
   position: relative;
 }
 
-.punch-slot {
-  width: 32px;
-  height: 8px;
-  background-color: var(--canvas-ivory);
-  border: 1.5px solid var(--border-black);
-  border-radius: 4px;
-  margin: 0 auto;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+.memo-card-yellow:hover {
+  transform: translateY(-2px) rotate(-0.5deg);
+  box-shadow: 4px 6px 12px rgba(202, 138, 4, 0.2);
+}
+
+.memo-card-coral {
+  background-color: #FFF1F2;
+  border: 1.5px solid #FECDD3;
+  box-shadow: 3px 3px 0px rgba(225, 29, 72, 0.2);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.memo-card-coral:hover {
+  transform: translateY(-2px) rotate(0.5deg);
+  box-shadow: 4px 6px 12px rgba(225, 29, 72, 0.18);
+}
+
+/* Masking Tape Graphic on Wanted Board */
+.masking-tape {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 105px;
+  height: 24px;
+  background-color: rgba(254, 240, 138, 0.9);
+  border: 1px dashed rgba(202, 138, 4, 0.45);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  pointer-events: none;
 }
 
 /* Barcode Strip Graphic */
 .barcode-lines {
   background: repeating-linear-gradient(
     90deg,
-    #1A1A1A 0px,
-    #1A1A1A 2px,
+    #1E293B 0px,
+    #1E293B 2px,
     transparent 2px,
     transparent 4px,
-    #1A1A1A 4px,
-    #1A1A1A 5px,
+    #1E293B 4px,
+    #1E293B 5px,
     transparent 5px,
     transparent 8px,
-    #1A1A1A 8px,
-    #1A1A1A 11px,
+    #1E293B 8px,
+    #1E293B 11px,
     transparent 11px,
     transparent 13px,
-    #1A1A1A 13px,
-    #1A1A1A 14px,
+    #1E293B 13px,
+    #1E293B 14px,
     transparent 14px,
     transparent 17px
   );
-  height: 24px;
+  height: 22px;
   width: 100%;
 }
 
-/* Masking Tape Graphic on Wanted Board */
-.masking-tape {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-1.5deg);
-  width: 110px;
-  height: 26px;
-  background-color: rgba(254, 240, 138, 0.85);
-  border: 1px dashed rgba(202, 138, 4, 0.4);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* Clean High-End Swiss Stamp */
-.rubber-stamp {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 11px;
-  text-transform: uppercase;
-  border: 1.5px solid #10B981;
-  color: #065F46;
-  background: #ECFDF5;
-  padding: 3px 8px;
+.punch-slot {
+  width: 28px;
+  height: 6px;
+  background-color: var(--canvas-bg);
+  border: 1px solid #94A3B8;
   border-radius: 4px;
-  display: inline-block;
-  letter-spacing: 0.04em;
+  margin: 0 auto;
 }
 
-.rubber-stamp-danger {
-  border-color: #F43F5E;
-  color: #9F1239;
-  background: #FFF1F2;
+/* =========================================================================
+   Step-by-Step Tracker Progress Nodes
+   ========================================================================= */
+
+.tracker-node-emerald {
+  background-color: #10B981;
+  color: #FFFFFF;
+  box-shadow: 0 0 0 4px #D1FAE5;
 }
 
-/* Perforated Ticket Edge for Checkout Modal */
-.ticket-perforation-v {
-  position: relative;
+.tracker-node-indigo {
+  background-color: #4F46E5;
+  color: #FFFFFF;
+  box-shadow: 0 0 0 4px #E0E7FF;
 }
 
-.ticket-perforation-v::before, .ticket-perforation-v::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: var(--canvas-ivory);
-  border: 1.5px solid var(--border-black);
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
+.tracker-node-violet {
+  background-color: #7C3AED;
+  color: #FFFFFF;
+  box-shadow: 0 0 0 4px #EDE9FE;
 }
 
-.ticket-perforation-v::before {
-  left: -11px;
+.tracker-card-emerald {
+  background-color: #F0FDF4;
+  border: 1.5px solid #86EFAC;
 }
 
-.ticket-perforation-v::after {
-  right: -11px;
+.tracker-card-indigo {
+  background-color: #EEF2FF;
+  border: 1.5px solid #A5B4FC;
+}
+
+.tracker-card-violet {
+  background-color: #F5F3FF;
+  border: 1.5px solid #C4B5FD;
 }
 
 /* =========================================================================
@@ -260,51 +482,52 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .filter-pill {
   transition: all 0.15s ease;
   background: #FFFFFF;
-  border: 1.5px solid var(--border-black);
-  color: #1A1A1A;
+  border: 1.5px solid #E2E8F0;
+  color: #334155;
   font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  box-shadow: 2px 2px 0px #1A1A1A;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.05);
 }
 
 .filter-pill:hover {
-  background: #F1EFEA;
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px #1A1A1A;
+  background: #F8FAFC;
+  border-color: #4F46E5;
+  color: #4F46E5;
+  transform: translateY(-1px);
 }
 
 .filter-pill.active {
-  background: #1A1A1A;
+  background: #4F46E5;
+  border-color: #4F46E5;
   color: #FFFFFF;
-  box-shadow: 3px 3px 0px #4F46E5;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
 }
 
 /* Custom Tactical Range Slider */
 input[type="range"] {
-  accent-color: #1A1A1A;
+  accent-color: #4F46E5;
   height: 6px;
-  border-radius: 0px;
-  background: #D6D3CD;
+  border-radius: 9999px;
+  background: #E2E8F0;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F7F6F2;
-  border-left: 1px solid #D6D3CD;
+  background: #FAFAFC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1A1A1A;
-  border-radius: 0px;
+  background: #CBD5E1;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4F46E5;
+  background: #94A3B8;
 }
