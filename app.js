@@ -412,16 +412,20 @@ function initLucideIcons() {
 }
 
 // ----------------------------------------------------
-// Clean Swiss Toast Notification Engine
+// Clean Obsidian Dark SaaS Toast Notification Engine
 // ----------------------------------------------------
 function showToast(message, type = 'info', title = '') {
   const container = document.getElementById('toast-container');
   if (!container) return;
 
   const toast = document.createElement('div');
-  toast.className = `p-4 rounded-xl border border-[#E5E7EB] bg-white shadow-lg flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full`;
+  toast.className = `p-4 rounded-2xl border border-white/[0.1] bg-[#111827]/90 backdrop-blur-xl shadow-2xl flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full text-slate-200`;
 
-  const badgeColor = type === 'success' ? 'bg-[#10B981] text-white' : type === 'warning' ? 'bg-[#F59E0B] text-black' : 'bg-[#FBBF24] text-[#111827]';
+  const badgeColor = type === 'success' 
+    ? 'bg-emerald-500/20 text-[#A3E635] border border-emerald-500/30' 
+    : type === 'warning' 
+    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' 
+    : 'bg-white/10 text-white border border-white/20';
   const label = type === 'success' ? 'SUCCESS' : type === 'warning' ? 'NOTICE' : 'UPDATE';
 
   toast.innerHTML = `
@@ -429,10 +433,10 @@ function showToast(message, type = 'info', title = '') {
       ${label}
     </div>
     <div class="flex-1 min-w-0">
-      ${title ? `<h4 class="text-xs font-black tracking-tight mb-0.5 text-[#111827] font-heading">${title}</h4>` : ''}
-      <p class="text-xs leading-relaxed text-slate-600">${message}</p>
+      ${title ? `<h4 class="text-xs font-black tracking-tight mb-0.5 text-white font-heading">${title}</h4>` : ''}
+      <p class="text-xs leading-relaxed text-slate-400">${message}</p>
     </div>
-    <button class="text-slate-400 hover:text-[#111827] transition-colors p-1" onclick="this.parentElement.remove()">
+    <button class="text-slate-500 hover:text-white transition-colors p-1" onclick="this.parentElement.remove()">
       <i data-lucide="x" class="w-3.5 h-3.5"></i>
     </button>
   `;
@@ -487,7 +491,7 @@ function handlePassDayChange(id, days) {
 }
 
 // ----------------------------------------------------
-// Equipment Marketplace: High-Energy Industrial E-Commerce Cards
+// Equipment Marketplace: Obsidian Dark Glass Cards (Orbix / ZeBeyond Inspired)
 // ----------------------------------------------------
 function renderMarketplace() {
   const grid = document.getElementById('equipment-grid');
@@ -517,18 +521,18 @@ function renderMarketplace() {
   }
 
   if (countBadge) {
-    countBadge.innerHTML = `<span class="font-extrabold text-xs text-[#111827] bg-[#FEF3C7] border border-[#FDE68A] px-3 py-1 rounded-full">${filtered.length} Units Available</span>`;
+    countBadge.innerHTML = `<span class="font-bold text-xs text-[#A3E635] bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 rounded-full">${filtered.length} Units Online</span>`;
   }
 
   if (filtered.length === 0) {
     grid.innerHTML = `
-      <div class="col-span-full py-16 text-center marketplace-panel rounded-xl p-8 border border-[#E5E7EB] bg-white shadow-sm">
-        <div class="w-12 h-12 mx-auto mb-3 bg-[#FEF3C7] border border-[#FDE68A] rounded-xl flex items-center justify-center font-black text-xl text-[#92400E]">
+      <div class="col-span-full py-16 text-center glass-panel rounded-2xl p-8 border border-white/[0.08] shadow-xl">
+        <div class="w-12 h-12 mx-auto mb-3 bg-emerald-500/10 border border-emerald-500/25 rounded-2xl flex items-center justify-center font-black text-xl text-emerald-400">
           !
         </div>
-        <h3 class="text-base font-extrabold font-heading text-[#111827] mb-1">No matching hardware found</h3>
-        <p class="text-xs text-slate-500 max-w-sm mx-auto mb-5">Broadcast an urgent request onto the campus wanted notice board.</p>
-        <button onclick="openPostWantedModal()" class="btn-yellow px-5 py-2.5 text-xs font-black uppercase rounded-xl">
+        <h3 class="text-base font-extrabold font-heading text-white mb-1">No matching hardware found</h3>
+        <p class="text-xs text-slate-400 max-w-sm mx-auto mb-5">Broadcast an urgent request onto the campus wanted notice board.</p>
+        <button onclick="openPostWantedModal()" class="btn-neon px-6 py-2.5 text-xs font-black uppercase rounded-full">
           + Post Request on Wanted Board
         </button>
       </div>
@@ -552,38 +556,41 @@ function renderMarketplace() {
     const catBadgeClass = categoryClassMap[item.category] || 'badge-cat-audio';
 
     return `
-      <!-- STRUCTURED E-COMMERCE EQUIPMENT CARD -->
-      <div class="equipment-card rounded-xl overflow-hidden flex flex-col bg-white border border-[#E5E7EB] shadow-sm hover:shadow-md hover:border-[#FBBF24] transition-all duration-200">
+      <!-- DARK GLASS HARDWARE CARD (ORBIX / ZEBEYOND) -->
+      <div 
+        class="equipment-card rounded-2xl overflow-hidden flex flex-col transition-all duration-300"
+        style="background: rgba(17, 24, 39, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
+      >
         
-        <!-- Top Image Container with #F3F4F6 background -->
-        <div class="relative h-48 w-full overflow-hidden bg-[#F3F4F6] border-b border-[#E5E7EB] group flex items-center justify-center">
+        <!-- Top Image Container with #0B0F17 background -->
+        <div class="relative h-48 w-full overflow-hidden bg-[#0B0F17]/90 border-b border-white/[0.08] group flex items-center justify-center">
           <img 
             src="${item.image}" 
             alt="${item.title}" 
-            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
             onerror="this.src='https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80'"
           />
 
           <!-- Category Pill -->
           <div class="absolute top-2.5 left-2.5">
-            <span class="${catBadgeClass} text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+            <span class="${catBadgeClass} text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full backdrop-blur-md shadow-sm">
               ${item.categoryName}
             </span>
           </div>
 
-          <!-- Availability Tag -->
+          <!-- Neon Emerald Status Indicator: ● Available Now -->
           <div class="absolute top-2.5 right-2.5">
             ${isLocked 
               ? `<span class="badge-fest-locked shadow-sm">Booked for Fest</span>`
-              : `<span class="flex items-center text-[10px] font-bold text-emerald-800 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full border border-emerald-200 shadow-sm"><span class="pulse-dot-green mr-1.5"></span> Available</span>`
+              : `<span class="status-indicator-neon shadow-sm"><span class="pulse-dot-green"></span> Available Now</span>`
             }
           </div>
 
           <!-- Deposit Badge -->
           <div class="absolute bottom-2.5 left-2.5">
             <span class="badge-deposit shadow-sm text-[10px]">
-              Deposit: ₹${item.deposit} <span class="text-emerald-700 font-bold">(Refundable)</span>
+              Deposit: ₹${item.deposit} <span class="text-emerald-400 font-bold">(Refundable)</span>
             </span>
           </div>
         </div>
@@ -593,39 +600,39 @@ function renderMarketplace() {
           <div>
             <!-- Title & Verification -->
             <div class="flex items-start justify-between gap-2 mb-1.5">
-              <h3 class="text-base font-extrabold font-heading text-[#111827] leading-snug line-clamp-1">
+              <h3 class="text-base font-extrabold font-heading text-white leading-snug line-clamp-1">
                 ${item.title}
               </h3>
               <span class="badge-verified shrink-0 text-[10px]">
-                <i data-lucide="check" class="w-2.5 h-2.5 text-emerald-600"></i> PRN
+                <i data-lucide="check" class="w-2.5 h-2.5 text-emerald-400"></i> PRN
               </span>
             </div>
 
             <!-- Student Department / Campus Zone -->
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-2.5 font-medium">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#F59E0B] shrink-0"></i>
+            <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-2.5 font-medium">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
               <span class="truncate">${item.owner.dept} • ${item.safeZone}</span>
             </div>
 
-            <p class="text-xs text-slate-600 mb-3 line-clamp-2 leading-relaxed">
+            <p class="text-xs text-slate-400 mb-3 line-clamp-2 leading-relaxed">
               ${item.specs}
             </p>
 
             <!-- Tech Specs Summary Box -->
-            <div class="p-2.5 rounded-lg bg-[#F9FAFB] border border-[#E5E7EB] mb-3 text-xs space-y-1">
+            <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] mb-3 text-xs space-y-1 font-mono">
               ${Object.entries(item.techSheet).slice(0, 2).map(([key, val]) => `
-                <div class="flex justify-between text-slate-600 text-[11px]">
-                  <span class="uppercase text-slate-400 font-semibold tracking-wider text-[10px]">${key}:</span>
-                  <span class="font-bold text-[#111827] truncate max-w-[170px]">${val}</span>
+                <div class="flex justify-between text-slate-400 text-[11px]">
+                  <span class="uppercase text-slate-500 font-semibold tracking-wider text-[10px]">${key}:</span>
+                  <span class="font-bold text-slate-200 truncate max-w-[170px]">${val}</span>
                 </div>
               `).join('')}
             </div>
 
             <!-- Interactive Estimator -->
-            <div class="p-2.5 rounded-lg bg-[#FFFBEB] border border-[#FEF3C7] mb-3">
+            <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] mb-3">
               <div class="flex justify-between items-center text-xs mb-1">
-                <span class="text-slate-600 font-bold text-[10px] uppercase tracking-wider">Est. Total (${currentDays}d):</span>
-                <span class="font-extrabold text-[#111827] text-xs" id="calc-price-${item.id}">₹${totalCalc}</span>
+                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider font-mono">Est. Total (${currentDays}d):</span>
+                <span class="font-extrabold text-[#A3E635] text-xs font-mono" id="calc-price-${item.id}">₹${totalCalc}</span>
               </div>
               <input 
                 type="range" 
@@ -638,19 +645,19 @@ function renderMarketplace() {
             </div>
           </div>
 
-          <!-- Price: "₹450 / Day" with High-visibility "Rent Now" action button in #FBBF24 -->
-          <div class="pt-3 border-t border-[#E5E7EB] flex items-center justify-between gap-3">
+          <!-- Price: "₹450 / Day" with High-visibility Neon Action Button -->
+          <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between gap-3">
             <div>
               <div class="flex items-baseline gap-1">
-                <span class="text-2xl font-black font-heading text-[#111827]">₹${item.dailyRate}</span>
-                <span class="text-xs text-slate-500 font-bold">/ Day</span>
+                <span class="text-2xl font-black font-heading text-white">₹${item.dailyRate}</span>
+                <span class="text-xs text-slate-400 font-bold">/ Day</span>
               </div>
-              <span class="text-[10px] text-slate-400 font-medium">Free 30m campus grace</span>
+              <span class="text-[10px] text-emerald-400 font-medium">Free 30m campus grace</span>
             </div>
 
             ${isLocked 
-              ? `<button onclick="handleRentClick('${item.id}')" class="btn-frosted-pill opacity-75 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">Waitlist</button>`
-              : `<button onclick="handleRentClick('${item.id}')" class="btn-yellow px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm"><span>Rent Now →</span></button>`
+              ? `<button onclick="handleRentClick('${item.id}')" class="btn-ghost opacity-75 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider">Waitlist</button>`
+              : `<button onclick="handleRentClick('${item.id}')" class="btn-neon px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"><span>Rent Now →</span></button>`
             }
           </div>
 
@@ -770,24 +777,24 @@ function updateBookingCalculations() {
   });
 
   if (hasClash) {
-    conflictBanner.className = 'p-3 rounded-lg bg-rose-50 border-1.5 border-[#F43F5E] text-rose-900 text-xs mb-4';
+    conflictBanner.className = 'p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs mb-4';
     conflictBanner.innerHTML = `
       <div class="flex items-center gap-2 mb-1">
-        <span class="rubber-stamp rubber-stamp-danger">Festival Clash</span>
-        <strong class="font-bold">Date slot overlap on ${item.clashDates.join(', ')}</strong>
+        <span class="badge-fest-locked">Festival Clash</span>
+        <strong class="font-bold text-white">Date slot overlap on ${item.clashDates.join(', ')}</strong>
       </div>
-      <p class="text-xs text-rose-800">Another registered campus club holds this date slot. Please select alternative hours or message owner.</p>
+      <p class="text-xs text-rose-300/80">Another registered campus club holds this date slot. Please select alternative hours or message owner.</p>
     `;
     confirmBtn.disabled = true;
     confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
   } else {
-    conflictBanner.className = 'p-3 rounded-lg bg-emerald-50 border-1.5 border-[#10B981] text-emerald-950 text-xs mb-4';
+    conflictBanner.className = 'p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs mb-4';
     conflictBanner.innerHTML = `
       <div class="flex items-center gap-2 mb-1">
-        <span class="rubber-stamp">Conflict Check: Clear</span>
-        <strong class="font-bold">Slot Free for Reservation</strong>
+        <span class="status-indicator-neon"><span class="pulse-dot-green"></span> Conflict Check: Clear</span>
+        <strong class="font-bold text-white">Slot Free for Reservation</strong>
       </div>
-      <p class="text-xs text-emerald-800">Hardware resting at Safe-Zone locker ready for same-day handover with zero schedule clashes.</p>
+      <p class="text-xs text-emerald-300/80">Hardware resting at Safe-Zone locker ready for same-day handover with zero schedule clashes.</p>
     `;
     confirmBtn.disabled = false;
     confirmBtn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -875,10 +882,7 @@ function closeOtpSuccessModal() {
 }
 
 // ----------------------------------------------------
-// ----------------------------------------------------
-// Campus Wanted Board (Studio Glass Cards)
-// ----------------------------------------------------
-// Campus Wanted Board (Structured Request Cards)
+// Campus Wanted Board (Obsidian Dark Glass Cards)
 // ----------------------------------------------------
 function renderWantedBoard() {
   const container = document.getElementById('wanted-board-cards');
@@ -886,35 +890,38 @@ function renderWantedBoard() {
 
   container.innerHTML = state.wantedRequests.map((req, idx) => {
     return `
-      <!-- Structured Wanted Board Card -->
-      <div class="equipment-card p-6 rounded-xl relative flex flex-col justify-between bg-white border border-[#E5E7EB] shadow-sm hover:border-[#FBBF24] transition-all duration-200">
+      <!-- Obsidian Dark Glass Wanted Board Card -->
+      <div 
+        class="glass-panel p-6 rounded-2xl relative flex flex-col justify-between border border-white/[0.08] hover:border-emerald-500/40 transition-all duration-300 shadow-xl"
+        style="background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(12px);"
+      >
         <div>
           <!-- Top Badge & Needed Date -->
           <div class="flex items-center justify-between gap-2 mb-3 text-xs">
-            <span class="px-3 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] font-black text-[10px] uppercase tracking-wider">
+            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-[#A3E635] border border-emerald-500/25 font-black text-[10px] uppercase tracking-wider font-mono">
               ${req.urgencyText}
             </span>
-            <span class="text-slate-500 font-semibold flex items-center gap-1.5 text-xs">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#F59E0B]"></i>
+            <span class="text-slate-400 font-semibold flex items-center gap-1.5 text-xs font-mono">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-400"></i>
               ${req.neededDate}
             </span>
           </div>
 
           <!-- Request Title -->
-          <h4 class="text-base font-extrabold font-heading text-[#111827] mb-1.5 leading-snug">
+          <h4 class="text-base font-extrabold font-heading text-white mb-1.5 leading-snug">
             ${req.title}
           </h4>
-          <p class="text-xs text-slate-600 mb-3.5 leading-relaxed">
+          <p class="text-xs text-slate-400 mb-4 leading-relaxed">
             "${req.description}"
           </p>
 
           <!-- Requester Club Info -->
-          <div class="flex items-center justify-between text-xs py-2 border-y border-[#E5E7EB] mb-3">
-            <div class="flex items-center gap-2 font-bold text-[#111827]">
-              <i data-lucide="users" class="w-3.5 h-3.5 text-[#F59E0B]"></i>
+          <div class="flex items-center justify-between text-xs py-2.5 border-y border-white/[0.08] mb-4 bg-white/[0.02] px-3 rounded-lg">
+            <div class="flex items-center gap-2 font-bold text-slate-200">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-400"></i>
               <span>${req.club}</span>
             </div>
-            <div class="text-[11px] text-slate-400 font-medium">
+            <div class="text-[11px] text-slate-400 font-medium font-mono">
               by ${req.requester}
             </div>
           </div>
@@ -923,13 +930,13 @@ function renderWantedBoard() {
         <!-- Budget & Offer Button -->
         <div class="flex items-center justify-between gap-3 pt-1">
           <div>
-            <span class="text-[10px] uppercase tracking-wider text-slate-400 block font-bold">Max Daily Budget:</span>
-            <span class="text-2xl font-black font-heading text-[#111827]">${req.budget}</span>
+            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-bold font-mono">Max Daily Budget:</span>
+            <span class="text-2xl font-black font-heading text-white">${req.budget}</span>
           </div>
 
           <button 
             onclick="openOfferModal('${req.id}')"
-            class="btn-yellow px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm"
+            class="btn-neon px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"
           >
             <i data-lucide="handshake" class="w-3.5 h-3.5"></i>
             <span>Offer Hardware →</span>
@@ -1033,8 +1040,7 @@ function submitPostWanted(e) {
 }
 
 // ----------------------------------------------------
-// Active Handover Tracker & Escrow Console
-// Industrial Progress Nodes & Controls
+// Active Handover Tracker & Escrow Console (Dark Glass SaaS)
 // ----------------------------------------------------
 function renderActiveTracker() {
   const container = document.getElementById('tracker-card-container');
@@ -1043,7 +1049,7 @@ function renderActiveTracker() {
   const b = state.activeBookingView;
   if (!b) {
     container.innerHTML = `
-      <div class="p-8 text-center text-xs text-slate-500">
+      <div class="p-8 text-center text-xs text-slate-400">
         No active gear handovers. Click "Rent Now" on any hardware card to simulate active lifecycle.
       </div>
     `;
@@ -1056,48 +1062,48 @@ function renderActiveTracker() {
 
   container.innerHTML = `
     <!-- Top Equipment Summary Strip -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
       <div class="flex items-center gap-4">
         <div class="relative">
-          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded-xl object-cover border border-[#E5E7EB] shadow-sm">
+          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded-xl object-cover border border-white/10 shadow-sm">
         </div>
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-[#111827] text-white font-bold uppercase tracking-wider">
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-[#A3E635] border border-emerald-500/30 font-bold uppercase tracking-wider font-mono">
               ${b.id}
             </span>
-            <span class="text-xs text-slate-500 font-semibold">${b.categoryCode || b.category}</span>
+            <span class="text-xs text-slate-400 font-semibold font-mono">${b.categoryCode || b.category}</span>
           </div>
-          <h3 class="text-base font-extrabold font-heading text-[#111827]">${b.title}</h3>
-          <p class="text-xs text-slate-600 mt-0.5">Owner: <span class="text-[#111827] font-bold">${b.ownerName}</span> • Pickup: <span class="text-[#F59E0B] font-bold">${b.pickupSpot}</span></p>
+          <h3 class="text-base font-extrabold font-heading text-white">${b.title}</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Owner: <span class="text-slate-200 font-bold">${b.ownerName}</span> • Pickup: <span class="text-emerald-400 font-bold">${b.pickupSpot}</span></p>
         </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <div class="bg-[#FFFBEB] border border-[#FDE68A] p-2.5 px-5 rounded-xl text-center shadow-sm">
-          <span class="text-[9px] text-[#92400E] uppercase tracking-widest block font-bold">Handover OTP</span>
-          <span class="text-2xl font-black text-[#111827] tracking-widest font-mono">${b.otp}</span>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 p-2.5 px-5 rounded-xl text-center shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+          <span class="text-[9px] text-[#A3E635] uppercase tracking-widest block font-bold font-mono">Handover OTP</span>
+          <span class="text-2xl font-black text-white tracking-widest font-mono">${b.otp}</span>
         </div>
 
         <!-- Segmented Step Controller -->
         <div class="flex flex-col gap-1 text-right">
-          <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Simulate Stage:</span>
-          <div class="inline-flex p-1 rounded-xl bg-white border border-[#E5E7EB] shadow-sm">
+          <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">Simulate Stage:</span>
+          <div class="inline-flex p-1 rounded-xl bg-white/[0.05] border border-white/[0.1] shadow-sm">
             <button 
               onclick="setBookingStep(1)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-[#111827] text-[#FBBF24] shadow-sm' : 'text-slate-600 hover:text-[#111827]'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-white text-[#0B0F17] shadow-sm' : 'text-slate-400 hover:text-white'}"
             >
               1. Verified
             </button>
             <button 
               onclick="setBookingStep(2)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-[#FBBF24] text-[#111827] font-extrabold shadow-sm' : 'text-slate-600 hover:text-[#111827]'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-gradient-to-r from-emerald-500 to-lime-400 text-[#0B0F17] font-extrabold shadow-sm' : 'text-slate-400 hover:text-white'}"
             >
               2. Handover
             </button>
             <button 
               onclick="setBookingStep(3)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-[#111827]'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-emerald-500 text-[#0B0F17] font-bold shadow-sm' : 'text-slate-400 hover:text-white'}"
             >
               3. Settled
             </button>
@@ -1106,45 +1112,45 @@ function renderActiveTracker() {
       </div>
     </div>
 
-    <!-- Stepper Stage Cards with Industrial Nodes -->
+    <!-- Stepper Stage Cards with Obsidian Dark Glass Nodes -->
     <div class="py-5">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
         <!-- Step 1: Verified -->
-        <div class="p-4 rounded-xl border transition-all ${step1Active ? 'bg-white border-[#111827] shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+        <div class="p-4 rounded-xl border transition-all ${step1Active ? 'bg-white/[0.04] border-white/20 shadow-sm' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-[#111827] text-[#FBBF24] font-black text-xs flex items-center justify-center">
+            <span class="w-6 h-6 rounded-full bg-white/10 text-white font-black text-xs flex items-center justify-center font-mono">
               ${step1Active ? '✓' : '1'}
             </span>
-            <h4 class="text-xs font-extrabold text-[#111827] uppercase tracking-wider">1. Verified • OTP Ready</h4>
+            <h4 class="text-xs font-extrabold text-white uppercase tracking-wider">1. Verified • OTP Ready</h4>
           </div>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-400 leading-relaxed">
             OTP #${b.otp} active. Unit verified and stored in Safe-Zone locker box for student handover.
           </p>
         </div>
 
-        <!-- Step 2: Handover / In Use (Electric Yellow) -->
-        <div class="p-4 rounded-xl border transition-all ${step2Active ? 'bg-[#FFFBEB] border-[#F59E0B] shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+        <!-- Step 2: Handover / In Use (Electric Neon) -->
+        <div class="p-4 rounded-xl border transition-all ${step2Active ? 'bg-emerald-500/10 border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.15)]' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-[#FBBF24] text-[#111827] font-black text-xs flex items-center justify-center">
+            <span class="w-6 h-6 rounded-full bg-gradient-to-r from-emerald-500 to-lime-400 text-[#0B0F17] font-black text-xs flex items-center justify-center font-mono">
               ${step2Active ? '✓' : '2'}
             </span>
-            <h4 class="text-xs font-extrabold text-[#92400E] uppercase tracking-wider">2. Handover • In Use</h4>
+            <h4 class="text-xs font-extrabold text-[#A3E635] uppercase tracking-wider">2. Handover • In Use</h4>
           </div>
-          <p class="text-xs text-slate-600 leading-relaxed">
+          <p class="text-xs text-slate-300 leading-relaxed">
             OTP verified by Safe-Zone volunteer. ₹${b.deposit} security deposit locked in peer escrow.
           </p>
         </div>
 
         <!-- Step 3: Settled -->
-        <div class="p-4 rounded-xl border transition-all ${step3Active ? 'bg-white border-emerald-400 shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+        <div class="p-4 rounded-xl border transition-all ${step3Active ? 'bg-emerald-500/10 border-emerald-400 shadow-sm' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center">
+            <span class="w-6 h-6 rounded-full bg-emerald-500 text-[#0B0F17] font-black text-xs flex items-center justify-center font-mono">
               ${step3Active ? '✓' : '3'}
             </span>
-            <h4 class="text-xs font-extrabold text-emerald-950 uppercase tracking-wider">3. Deposit Settled</h4>
+            <h4 class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider">3. Deposit Settled</h4>
           </div>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-400 leading-relaxed">
             Hardware passed return inspection. ₹${b.deposit} deposit instantaneously settled to UPI.
           </p>
         </div>
@@ -1191,14 +1197,14 @@ function updateEscrowCalculations() {
   if (lateLabel) {
     if (lateMinutes === 0) {
       lateLabel.textContent = '0 min (On Time)';
-      lateLabel.className = 'text-xs font-bold text-emerald-700';
+      lateLabel.className = 'text-xs font-bold text-emerald-400 font-mono';
     } else if (lateMinutes <= 30) {
       lateLabel.textContent = `${lateMinutes}m (30-min Free Grace Applied)`;
-      lateLabel.className = 'text-xs font-bold text-emerald-700';
+      lateLabel.className = 'text-xs font-bold text-emerald-400 font-mono';
     } else {
       const extraHours = Math.ceil((lateMinutes - 30) / 60);
       lateLabel.textContent = `${lateMinutes}m late (+${extraHours}h late fee)`;
-      lateLabel.className = 'text-xs font-bold text-rose-700';
+      lateLabel.className = 'text-xs font-bold text-rose-400 font-mono';
     }
   }
 
@@ -1225,19 +1231,19 @@ function updateEscrowCalculations() {
 
   if (elGraceNote) {
     if (lateMinutes <= 30) {
-      elGraceNote.innerHTML = '<span class="text-emerald-800 text-xs font-semibold">✓ 30-min campus peer grace active — Zero deduction applied</span>';
+      elGraceNote.innerHTML = '<span class="text-emerald-400 text-xs font-semibold">✓ 30-min campus peer grace active — Zero deduction applied</span>';
     } else {
-      elGraceNote.innerHTML = `<span class="text-rose-800 text-xs font-semibold">⚠ Exceeded 30m grace by ${lateMinutes - 30} mins — ₹50/hr deducted for peer delay</span>`;
+      elGraceNote.innerHTML = `<span class="text-rose-400 text-xs font-semibold">⚠ Exceeded 30m grace by ${lateMinutes - 30} mins — ₹50/hr deducted for peer delay</span>`;
     }
   }
 
   if (elRefundStatusBadge) {
     if (netRefund === deposit) {
       elRefundStatusBadge.textContent = '100% Escrow Refund Guarantee';
-      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold border border-emerald-500';
+      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/30';
     } else {
       elRefundStatusBadge.textContent = `Partial Escrow Refund: ₹${netRefund}`;
-      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold border border-amber-500';
+      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 font-semibold border border-amber-500/30';
     }
   }
 }
