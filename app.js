@@ -434,13 +434,13 @@ function showToast(message, type = 'info', title = '') {
   if (!container) return;
 
   const toast = document.createElement('div');
-  toast.className = `p-4 rounded-2xl border border-red-500/20 bg-[#0E0E12]/95 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_20px_rgba(255,30,66,0.15)] flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full text-slate-200`;
+  toast.className = `p-4 rounded-2xl border border-[#E9D5FF] bg-white/95 backdrop-blur-xl shadow-[0_15px_35px_-5px_rgba(139,92,246,0.18)] flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full text-[#1E1B4B]`;
 
   const badgeColor = type === 'success' 
-    ? 'bg-red-500/20 text-[#FF3366] border border-red-500/30' 
+    ? 'bg-[#F3E8FF] text-[#7C3AED] border border-[#DDD6FE]' 
     : type === 'warning' 
-    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' 
-    : 'bg-white/10 text-white border border-white/20';
+    ? 'bg-amber-50 text-amber-700 border border-amber-200' 
+    : 'bg-[#F5F3FF] text-[#5B21B6] border border-[#DDD6FE]';
   const label = type === 'success' ? 'SUCCESS' : type === 'warning' ? 'NOTICE' : 'UPDATE';
 
   toast.innerHTML = `
@@ -448,10 +448,10 @@ function showToast(message, type = 'info', title = '') {
       ${label}
     </div>
     <div class="flex-1 min-w-0">
-      ${title ? `<h4 class="text-xs font-black tracking-tight mb-0.5 text-white font-heading">${title}</h4>` : ''}
-      <p class="text-xs leading-relaxed text-slate-400">${message}</p>
+      ${title ? `<h4 class="text-xs font-black tracking-tight mb-0.5 text-[#1E1B4B] font-heading">${title}</h4>` : ''}
+      <p class="text-xs leading-relaxed text-[#64748B]">${message}</p>
     </div>
-    <button class="text-slate-500 hover:text-white transition-colors p-1" onclick="this.parentElement.remove()">
+    <button class="text-slate-400 hover:text-[#1E1B4B] transition-colors p-1" onclick="this.parentElement.remove()">
       <i data-lucide="x" class="w-3.5 h-3.5"></i>
     </button>
   `;
@@ -536,18 +536,18 @@ function renderMarketplace() {
   }
 
   if (countBadge) {
-    countBadge.innerHTML = `<span class="font-bold text-xs text-[#FF3366] bg-red-500/10 border border-red-500/25 px-3 py-1 rounded-full">${filtered.length} Units Online</span>`;
+    countBadge.innerHTML = `<span class="font-bold text-xs text-[#7C3AED] bg-[#F3E8FF] border border-[#DDD6FE] px-3.5 py-1.5 rounded-full shadow-sm">${filtered.length} Units Online</span>`;
   }
 
   if (filtered.length === 0) {
     grid.innerHTML = `
-      <div class="col-span-full py-16 text-center glass-panel rounded-2xl p-8 border border-white/[0.08] shadow-xl">
-        <div class="w-12 h-12 mx-auto mb-3 bg-red-500/10 border border-red-500/25 rounded-2xl flex items-center justify-center font-black text-xl text-[#FF3366]">
+      <div class="col-span-full py-16 text-center glass-panel rounded-3xl p-8 border border-[#E9D5FF] shadow-sm bg-white">
+        <div class="w-12 h-12 mx-auto mb-3 bg-[#F3E8FF] border border-[#DDD6FE] rounded-2xl flex items-center justify-center font-black text-xl text-[#7C3AED]">
           !
         </div>
-        <h3 class="text-base font-extrabold font-heading text-white mb-1">No matching hardware found</h3>
-        <p class="text-xs text-slate-400 max-w-sm mx-auto mb-5">Broadcast an urgent request onto the campus wanted notice board.</p>
-        <button onclick="openPostWantedModal()" class="btn-crimson px-6 py-2.5 text-xs font-black uppercase rounded-full">
+        <h3 class="text-base font-extrabold font-heading text-[#1E1B4B] mb-1">No matching hardware found</h3>
+        <p class="text-xs text-[#64748B] max-w-sm mx-auto mb-5">Broadcast an urgent request onto the campus wanted notice board.</p>
+        <button onclick="openPostWantedModal()" class="btn-lilac px-6 py-2.5 text-xs font-black uppercase rounded-full shadow-md">
           + Post Request on Wanted Board
         </button>
       </div>
@@ -571,84 +571,81 @@ function renderMarketplace() {
     const catBadgeClass = categoryClassMap[item.category] || 'badge-cat-audio';
 
     return `
-      <!-- OBSIDIAN DARK GLASS HARDWARE CARD (CRIMSON PULSE) -->
-      <div 
-        class="equipment-card rounded-2xl overflow-hidden flex flex-col transition-all duration-300"
-        style="background: rgba(18, 18, 24, 0.75); border: 1px solid rgba(255, 30, 66, 0.15); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);"
-      >
+      <!-- LAVENDER & LILAC EQUIPMENT CARD (AWSMD.COM INSPIRED) -->
+      <div class="equipment-card rounded-3xl overflow-hidden flex flex-col transition-all duration-300">
         
-        <!-- Top Image Container: uniform 200px cover container -->
-        <div class="card-image-container relative w-full overflow-hidden bg-[#0A0A0C]/90 border-b border-white/[0.08] group flex items-center justify-center" style="width: 100%; height: 200px;">
+        <!-- Top Image Container with #FAF5FF background -->
+        <div class="card-image-container relative w-full overflow-hidden bg-[#FAF5FF] border-b border-[#F3E8FF] group flex items-center justify-center" style="width: 100%; height: 200px;">
           <img 
             src="${item.image}" 
             alt="${item.title}" 
-            class="w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
+            class="w-full object-cover transition-transform duration-500 group-hover:scale-105"
             style="width: 100%; height: 200px; object-fit: cover;"
             loading="lazy"
             onerror="this.src='https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80'"
           />
 
           <!-- Category Pill -->
-          <div class="absolute top-2.5 left-2.5">
-            <span class="${catBadgeClass} text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full backdrop-blur-md shadow-sm">
+          <div class="absolute top-3 left-3">
+            <span class="${catBadgeClass} text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-md shadow-sm">
               ${item.categoryName}
             </span>
           </div>
 
-          <!-- Obsidian & Crimson Pulse Status Indicator: ● Available Now -->
-          <div class="absolute top-2.5 right-2.5">
+          <!-- Status Indicator: ● Available Today -->
+          <div class="absolute top-3 right-3">
             ${isLocked 
               ? `<span class="badge-fest-locked shadow-sm">Booked for Fest</span>`
-              : `<span class="status-indicator-crimson shadow-sm"><span class="pulse-dot-crimson"></span> Available Now</span>`
+              : `<span class="status-indicator-lilac shadow-sm"><span class="pulse-dot-lilac"></span> Available Today</span>`
             }
           </div>
 
           <!-- Deposit Badge -->
-          <div class="absolute bottom-2.5 left-2.5">
+          <div class="absolute bottom-3 left-3">
             <span class="badge-deposit shadow-sm text-[10px]">
-              Deposit: ₹${item.deposit} <span class="text-[#FF3366] font-bold">(Refundable)</span>
+              Refundable Deposit: ₹${item.deposit}
             </span>
           </div>
         </div>
 
         <!-- Content Details -->
-        <div class="p-5 flex-1 flex flex-col justify-between">
+        <div class="p-6 flex-1 flex flex-col justify-between bg-white">
           <div>
             <!-- Title & Verification -->
             <div class="flex items-start justify-between gap-2 mb-1.5">
-              <h3 class="text-base font-extrabold font-heading text-white leading-snug line-clamp-1">
+              <h3 class="text-base font-extrabold font-heading text-[#1E1B4B] leading-snug line-clamp-1">
                 ${item.title}
               </h3>
               <span class="badge-verified shrink-0 text-[10px]">
-                <i data-lucide="check" class="w-2.5 h-2.5 text-[#FF3366]"></i> PRN
+                <i data-lucide="check" class="w-2.5 h-2.5 text-[#7C3AED]"></i> PRN
               </span>
             </div>
 
             <!-- Student Department / Campus Zone -->
-            <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-2.5 font-medium">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#FF3366] shrink-0"></i>
+            <div class="flex items-center gap-1.5 text-xs text-[#64748B] mb-2.5 font-medium">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#8B5CF6] shrink-0"></i>
               <span class="truncate">${item.owner.dept} • ${item.safeZone}</span>
             </div>
 
-            <p class="text-xs text-slate-400 mb-3 line-clamp-2 leading-relaxed">
+            <p class="text-xs text-[#64748B] mb-4 line-clamp-2 leading-relaxed">
               ${item.specs}
             </p>
 
             <!-- Tech Specs Summary Box -->
-            <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] mb-3 text-xs space-y-1 font-mono">
+            <div class="p-3 rounded-2xl bg-[#FAF5FF] border border-[#F3E8FF] mb-4 text-xs space-y-1 font-mono">
               ${Object.entries(item.techSheet).slice(0, 2).map(([key, val]) => `
-                <div class="flex justify-between text-slate-400 text-[11px]">
-                  <span class="uppercase text-slate-500 font-semibold tracking-wider text-[10px]">${key}:</span>
-                  <span class="font-bold text-slate-200 truncate max-w-[170px]">${val}</span>
+                <div class="flex justify-between text-[#64748B] text-[11px]">
+                  <span class="uppercase text-[#8B5CF6] font-semibold tracking-wider text-[10px]">${key}:</span>
+                  <span class="font-bold text-[#1E1B4B] truncate max-w-[170px]">${val}</span>
                 </div>
               `).join('')}
             </div>
 
             <!-- Interactive Estimator -->
-            <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] mb-3">
-              <div class="flex justify-between items-center text-xs mb-1">
-                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider font-mono">Est. Total (${currentDays}d):</span>
-                <span class="font-extrabold text-[#FF3366] text-xs font-mono" id="calc-price-${item.id}">₹${totalCalc}</span>
+            <div class="p-3 rounded-2xl bg-[#FAF5FF] border border-[#F3E8FF] mb-4">
+              <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="text-[#64748B] font-bold text-[10px] uppercase tracking-wider font-mono">Est. Total (${currentDays}d):</span>
+                <span class="font-black text-[#7C3AED] text-sm font-mono" id="calc-price-${item.id}">₹${totalCalc}</span>
               </div>
               <input 
                 type="range" 
@@ -661,23 +658,22 @@ function renderMarketplace() {
             </div>
           </div>
 
-          <!-- Price: "₹450 / Day" with High-visibility Crimson Action Button -->
-          <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between gap-3">
+          <!-- Clean Price Layout: Bold daily fee in #1E1B4B with a clean "Refundable Deposit: ₹500" tag -->
+          <div class="pt-4 border-t border-[#F3E8FF] flex items-center justify-between gap-3">
             <div>
               <div class="flex items-baseline gap-1">
-                <span class="text-2xl font-black font-heading text-white">₹${item.dailyRate}</span>
-                <span class="text-xs text-slate-400 font-bold">/ Day</span>
+                <span class="text-2xl font-black font-heading text-[#1E1B4B]">₹${item.dailyRate}</span>
+                <span class="text-xs text-[#64748B] font-bold">/ Day</span>
               </div>
-              <span class="text-[10px] text-rose-400 font-medium">Free 30m campus grace</span>
+              <span class="text-[10px] text-[#7C3AED] font-semibold">Free 30m campus grace</span>
             </div>
 
             ${isLocked 
               ? `<button onclick="handleRentClick('${item.id}')" class="btn-ghost opacity-75 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider">Waitlist</button>`
-              : `<button onclick="handleRentClick('${item.id}')" class="btn-crimson px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"><span>Rent Now →</span></button>`
+              : `<button onclick="handleRentClick('${item.id}')" class="btn-lilac px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"><span>Rent Now →</span></button>`
             }
           </div>
 
-        </div>
       </div>
     `;
   }).join('');
@@ -804,13 +800,13 @@ function updateBookingCalculations() {
     confirmBtn.disabled = true;
     confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
   } else {
-    conflictBanner.className = 'p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-rose-200 text-xs mb-4';
+    conflictBanner.className = 'p-3.5 rounded-2xl bg-[#F3E8FF] border border-[#DDD6FE] text-[#6D28D9] text-xs mb-4';
     conflictBanner.innerHTML = `
       <div class="flex items-center gap-2 mb-1">
-        <span class="status-indicator-crimson"><span class="pulse-dot-crimson"></span> Conflict Check: Clear</span>
-        <strong class="font-bold text-white">Slot Free for Reservation</strong>
+        <span class="status-indicator-lilac"><span class="pulse-dot-lilac"></span> Conflict Check: Clear</span>
+        <strong class="font-bold text-[#1E1B4B]">Slot Free for Reservation</strong>
       </div>
-      <p class="text-xs text-slate-300">Hardware resting at Safe-Zone locker ready for same-day handover with zero schedule clashes.</p>
+      <p class="text-xs text-[#64748B]">Hardware resting at Safe-Zone locker ready for same-day handover with zero schedule clashes.</p>
     `;
     confirmBtn.disabled = false;
     confirmBtn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -906,38 +902,37 @@ function renderWantedBoard() {
 
   container.innerHTML = state.wantedRequests.map((req, idx) => {
     return `
-      <!-- Obsidian Dark Glass Wanted Board Card -->
+      <!-- Lavender & Lilac Wanted Board Card -->
       <div 
-        class="glass-panel p-6 rounded-2xl relative flex flex-col justify-between border border-white/[0.08] hover:border-red-500/50 transition-all duration-300 shadow-xl"
-        style="background: rgba(18, 18, 24, 0.75); border: 1px solid rgba(255, 30, 66, 0.15); backdrop-filter: blur(14px);"
+        class="glass-panel p-6 rounded-3xl relative flex flex-col justify-between bg-white border border-[#E9D5FF] shadow-[0_10px_30px_-5px_rgba(139,92,246,0.1)] hover:shadow-[0_20px_40px_-10px_rgba(139,92,246,0.18)] hover:border-[#C084FC] transition-all duration-300"
       >
         <div>
           <!-- Top Badge & Needed Date -->
           <div class="flex items-center justify-between gap-2 mb-3 text-xs">
-            <span class="px-3 py-1 rounded-full bg-red-500/10 text-[#FF3366] border border-red-500/25 font-black text-[10px] uppercase tracking-wider font-mono">
+            <span class="px-3.5 py-1 rounded-full bg-[#F3E8FF] text-[#7C3AED] border border-[#DDD6FE] font-black text-[10px] uppercase tracking-wider font-mono">
               ${req.urgencyText}
             </span>
-            <span class="text-slate-400 font-semibold flex items-center gap-1.5 text-xs font-mono">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#FF3366]"></i>
+            <span class="text-[#64748B] font-semibold flex items-center gap-1.5 text-xs font-mono">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#8B5CF6]"></i>
               ${req.neededDate}
             </span>
           </div>
 
           <!-- Request Title -->
-          <h4 class="text-base font-extrabold font-heading text-white mb-1.5 leading-snug">
+          <h4 class="text-base font-extrabold font-heading text-[#1E1B4B] mb-1.5 leading-snug">
             ${req.title}
           </h4>
-          <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+          <p class="text-xs text-[#64748B] mb-4 leading-relaxed">
             "${req.description}"
           </p>
 
           <!-- Requester Club Info -->
-          <div class="flex items-center justify-between text-xs py-2.5 border-y border-white/[0.08] mb-4 bg-white/[0.02] px-3 rounded-lg">
-            <div class="flex items-center gap-2 font-bold text-slate-200">
-              <i data-lucide="users" class="w-3.5 h-3.5 text-[#FF3366]"></i>
+          <div class="flex items-center justify-between text-xs py-2.5 border-y border-[#F3E8FF] mb-4 bg-[#FAF5FF] px-3.5 rounded-xl">
+            <div class="flex items-center gap-2 font-bold text-[#1E1B4B]">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-[#8B5CF6]"></i>
               <span>${req.club}</span>
             </div>
-            <div class="text-[11px] text-slate-400 font-medium font-mono">
+            <div class="text-[11px] text-[#64748B] font-medium font-mono">
               by ${req.requester}
             </div>
           </div>
@@ -946,13 +941,13 @@ function renderWantedBoard() {
         <!-- Budget & Offer Button -->
         <div class="flex items-center justify-between gap-3 pt-1">
           <div>
-            <span class="text-[10px] uppercase tracking-wider text-slate-500 block font-bold font-mono">Max Daily Budget:</span>
-            <span class="text-2xl font-black font-heading text-white">${req.budget}</span>
+            <span class="text-[10px] uppercase tracking-wider text-[#64748B] block font-bold font-mono">Max Daily Budget:</span>
+            <span class="text-2xl font-black font-heading text-[#1E1B4B]">${req.budget}</span>
           </div>
 
           <button 
             onclick="openOfferModal('${req.id}')"
-            class="btn-crimson px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"
+            class="btn-lilac px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"
           >
             <i data-lucide="handshake" class="w-3.5 h-3.5"></i>
             <span>Offer Hardware →</span>
@@ -1078,48 +1073,48 @@ function renderActiveTracker() {
 
   container.innerHTML = `
     <!-- Top Equipment Summary Strip -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 rounded-2xl bg-[#FAF5FF] border border-[#E9D5FF]">
       <div class="flex items-center gap-4">
         <div class="relative">
-          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded-xl object-cover border border-white/10 shadow-sm">
+          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded-xl object-cover border border-[#E9D5FF] shadow-sm">
         </div>
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-red-500/10 text-[#FF3366] border border-red-500/30 font-bold uppercase tracking-wider font-mono">
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-[#F3E8FF] text-[#7C3AED] border border-[#DDD6FE] font-bold uppercase tracking-wider font-mono">
               ${b.id}
             </span>
-            <span class="text-xs text-slate-400 font-semibold font-mono">${b.categoryCode || b.category}</span>
+            <span class="text-xs text-[#64748B] font-semibold font-mono">${b.categoryCode || b.category}</span>
           </div>
-          <h3 class="text-base font-extrabold font-heading text-white">${b.title}</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Owner: <span class="text-slate-200 font-bold">${b.ownerName}</span> • Pickup: <span class="text-[#FF3366] font-bold">${b.pickupSpot}</span></p>
+          <h3 class="text-base font-extrabold font-heading text-[#1E1B4B]">${b.title}</h3>
+          <p class="text-xs text-[#64748B] mt-0.5">Owner: <span class="text-[#1E1B4B] font-bold">${b.ownerName}</span> • Pickup: <span class="text-[#7C3AED] font-bold">${b.pickupSpot}</span></p>
         </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <div class="bg-red-500/10 border border-red-500/30 p-2.5 px-5 rounded-xl text-center shadow-[0_0_20px_rgba(255,30,66,0.2)]">
-          <span class="text-[9px] text-[#FF3366] uppercase tracking-widest block font-bold font-mono">Handover OTP</span>
-          <span class="text-2xl font-black text-white tracking-widest font-mono">${b.otp}</span>
+        <div class="bg-[#F3E8FF] border border-[#DDD6FE] p-2.5 px-5 rounded-2xl text-center shadow-sm">
+          <span class="text-[9px] text-[#7C3AED] uppercase tracking-widest block font-bold font-mono">Handover OTP</span>
+          <span class="text-2xl font-black text-[#1E1B4B] tracking-widest font-mono">${b.otp}</span>
         </div>
 
         <!-- Segmented Step Controller -->
         <div class="flex flex-col gap-1 text-right">
-          <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">Simulate Stage:</span>
-          <div class="inline-flex p-1 rounded-xl bg-white/[0.05] border border-white/[0.1] shadow-sm">
+          <span class="text-[9px] font-bold text-[#64748B] uppercase tracking-widest font-mono">Simulate Stage:</span>
+          <div class="inline-flex p-1 rounded-xl bg-white border border-[#E9D5FF] shadow-sm">
             <button 
               onclick="setBookingStep(1)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-white text-[#0A0A0C] shadow-sm' : 'text-slate-400 hover:text-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-[#1E1B4B] text-white shadow-sm' : 'text-[#64748B] hover:text-[#1E1B4B]'}"
             >
               1. Verified
             </button>
             <button 
               onclick="setBookingStep(2)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-gradient-to-r from-[#FF1E42] to-[#FF3366] text-white font-extrabold shadow-sm' : 'text-slate-400 hover:text-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] text-white font-extrabold shadow-sm' : 'text-[#64748B] hover:text-[#1E1B4B]'}"
             >
               2. Handover
             </button>
             <button 
               onclick="setBookingStep(3)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-[#FF1E42] text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-[#8B5CF6] text-white font-bold shadow-sm' : 'text-[#64748B] hover:text-[#1E1B4B]'}"
             >
               3. Settled
             </button>
@@ -1128,45 +1123,45 @@ function renderActiveTracker() {
       </div>
     </div>
 
-    <!-- Stepper Stage Cards with Obsidian Dark Glass Nodes -->
+    <!-- Stepper Stage Cards with Studio Lilac Nodes -->
     <div class="py-5">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
         <!-- Step 1: Verified -->
-        <div class="p-4 rounded-xl border transition-all ${step1Active ? 'bg-white/[0.04] border-white/20 shadow-sm' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
+        <div class="p-4 rounded-2xl border transition-all ${step1Active ? 'bg-[#FAF5FF] border-[#E9D5FF] shadow-sm' : 'bg-slate-50 border-slate-200 opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-white/10 text-white font-black text-xs flex items-center justify-center font-mono">
+            <span class="w-6 h-6 rounded-full bg-[#1E1B4B] text-white font-black text-xs flex items-center justify-center font-mono">
               ${step1Active ? '✓' : '1'}
             </span>
-            <h4 class="text-xs font-extrabold text-white uppercase tracking-wider">1. Verified • OTP Ready</h4>
+            <h4 class="text-xs font-extrabold text-[#1E1B4B] uppercase tracking-wider">1. Verified • OTP Ready</h4>
           </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
+          <p class="text-xs text-[#64748B] leading-relaxed">
             OTP #${b.otp} active. Unit verified and stored in Safe-Zone locker box for student handover.
           </p>
         </div>
 
-        <!-- Step 2: Handover / In Use (Crimson Pulse) -->
-        <div class="p-4 rounded-xl border transition-all ${step2Active ? 'bg-red-500/10 border-red-500/40 shadow-[0_0_15px_rgba(255,30,66,0.15)]' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
+        <!-- Step 2: Handover / In Use (Electric Lilac) -->
+        <div class="p-4 rounded-2xl border transition-all ${step2Active ? 'bg-[#F3E8FF] border-[#DDD6FE] shadow-[0_4px_15px_rgba(139,92,246,0.15)]' : 'bg-slate-50 border-slate-200 opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-gradient-to-r from-[#FF1E42] to-[#FF3366] text-white font-black text-xs flex items-center justify-center font-mono">
+            <span class="w-6 h-6 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] text-white font-black text-xs flex items-center justify-center font-mono">
               ${step2Active ? '✓' : '2'}
             </span>
-            <h4 class="text-xs font-extrabold text-[#FF3366] uppercase tracking-wider">2. Handover • In Use</h4>
+            <h4 class="text-xs font-extrabold text-[#7C3AED] uppercase tracking-wider">2. Handover • In Use</h4>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
+          <p class="text-xs text-[#475569] leading-relaxed">
             OTP verified by Safe-Zone volunteer. ₹${b.deposit} security deposit locked in peer escrow.
           </p>
         </div>
 
         <!-- Step 3: Settled -->
-        <div class="p-4 rounded-xl border transition-all ${step3Active ? 'bg-red-500/10 border-red-500/40 shadow-sm' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
+        <div class="p-4 rounded-2xl border transition-all ${step3Active ? 'bg-[#EDE9FE] border-[#C084FC] shadow-sm' : 'bg-slate-50 border-slate-200 opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-[#FF1E42] text-white font-black text-xs flex items-center justify-center font-mono">
+            <span class="w-6 h-6 rounded-full bg-[#8B5CF6] text-white font-black text-xs flex items-center justify-center font-mono">
               ${step3Active ? '✓' : '3'}
             </span>
-            <h4 class="text-xs font-extrabold text-rose-300 uppercase tracking-wider">3. Deposit Settled</h4>
+            <h4 class="text-xs font-extrabold text-[#6D28D9] uppercase tracking-wider">3. Deposit Settled</h4>
           </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
+          <p class="text-xs text-[#64748B] leading-relaxed">
             Hardware passed return inspection. ₹${b.deposit} deposit instantaneously settled to UPI.
           </p>
         </div>
@@ -1213,14 +1208,14 @@ function updateEscrowCalculations() {
   if (lateLabel) {
     if (lateMinutes === 0) {
       lateLabel.textContent = '0 min (On Time)';
-      lateLabel.className = 'text-xs font-bold text-rose-300 font-mono';
+      lateLabel.className = 'text-xs font-bold text-[#7C3AED] font-mono';
     } else if (lateMinutes <= 30) {
       lateLabel.textContent = `${lateMinutes}m (30-min Free Grace Applied)`;
-      lateLabel.className = 'text-xs font-bold text-rose-300 font-mono';
+      lateLabel.className = 'text-xs font-bold text-[#7C3AED] font-mono';
     } else {
       const extraHours = Math.ceil((lateMinutes - 30) / 60);
       lateLabel.textContent = `${lateMinutes}m late (+${extraHours}h late fee)`;
-      lateLabel.className = 'text-xs font-bold text-rose-400 font-mono';
+      lateLabel.className = 'text-xs font-bold text-rose-500 font-mono';
     }
   }
 
@@ -1247,19 +1242,19 @@ function updateEscrowCalculations() {
 
   if (elGraceNote) {
     if (lateMinutes <= 30) {
-      elGraceNote.innerHTML = '<span class="text-rose-300 text-xs font-semibold">✓ 30-min campus peer grace active — Zero deduction applied</span>';
+      elGraceNote.innerHTML = '<span class="text-[#7C3AED] text-xs font-semibold">✓ 30-min campus peer grace active — Zero deduction applied</span>';
     } else {
-      elGraceNote.innerHTML = `<span class="text-rose-400 text-xs font-semibold">⚠ Exceeded 30m grace by ${lateMinutes - 30} mins — ₹50/hr deducted for peer delay</span>`;
+      elGraceNote.innerHTML = `<span class="text-rose-500 text-xs font-semibold">⚠ Exceeded 30m grace by ${lateMinutes - 30} mins — ₹50/hr deducted for peer delay</span>`;
     }
   }
 
   if (elRefundStatusBadge) {
     if (netRefund === deposit) {
       elRefundStatusBadge.textContent = '100% Escrow Refund Guarantee';
-      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-red-500/10 text-rose-200 font-semibold border border-red-500/30';
+      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-[#F3E8FF] text-[#7C3AED] font-semibold border border-[#DDD6FE]';
     } else {
       elRefundStatusBadge.textContent = `Partial Escrow Refund: ₹${netRefund}`;
-      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 font-semibold border border-amber-500/30';
+      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 font-semibold border border-amber-200';
     }
   }
 }
