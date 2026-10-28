@@ -570,3 +570,25 @@ input[type="range"] {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--crimson-pulse);
 }
+
+/* =========================================================================
+   Uniform Equipment Card Image Sizing (object-fit: cover, 100% x 200px)
+   ========================================================================= */
+
+.card-image-container,
+.equipment-card-img-wrap {
+  width: 100% !important;
+  height: 200px !important;
+  position: relative;
+  overflow: hidden;
+  background-color: #0A0A0C;
+}
+
+.card-image-container img,
+.equipment-card-img-wrap img,
+.equipment-card .card-image-container img {
+  width: 100% !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  display: block;
+}

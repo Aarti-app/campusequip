@@ -236,7 +236,7 @@ const INITIAL_EQUIPMENT = [
     category: 'audio',
     categoryName: 'Audio Systems',
     categoryCode: 'AUDIO // MIC-01',
-    image: 'https://images.unsplash.com/photo-1520523839898-50712825e3a7?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80',
     specs: '2x SM58 Dynamic Mics • 2x 10m XLR Cables • 2 Stands',
     techSheet: {
       transducer: 'Dynamic Moving Coil',
@@ -268,7 +268,7 @@ const INITIAL_EQUIPMENT = [
     category: 'photography',
     categoryName: 'Photography',
     categoryCode: 'OPTIC // GIMBAL-03',
-    image: 'https://images.unsplash.com/photo-1589872782782-b7e51c890f57?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1589872766857-2110abb95a08?auto=format&fit=crop&w=800&q=80',
     specs: '2.0kg Payload • ActiveTrack 3.0 • Focus Wheel',
     techSheet: {
       payload: '2.0 kg (4.4 lbs) Tested',
@@ -562,12 +562,13 @@ function renderMarketplace() {
         style="background: rgba(18, 18, 24, 0.75); border: 1px solid rgba(255, 30, 66, 0.15); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);"
       >
         
-        <!-- Top Image Container with #0A0A0C background -->
-        <div class="relative h-48 w-full overflow-hidden bg-[#0A0A0C]/90 border-b border-white/[0.08] group flex items-center justify-center">
+        <!-- Top Image Container: uniform 200px cover container -->
+        <div class="card-image-container relative w-full overflow-hidden bg-[#0A0A0C]/90 border-b border-white/[0.08] group flex items-center justify-center" style="width: 100%; height: 200px;">
           <img 
             src="${item.image}" 
             alt="${item.title}" 
-            class="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
+            class="w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
+            style="width: 100%; height: 200px; object-fit: cover;"
             loading="lazy"
             onerror="this.src='https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80'"
           />
