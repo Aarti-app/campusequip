@@ -1388,6 +1388,43 @@ function closeSafeZonesModal() {
 }
 
 // ----------------------------------------------------
+// Interactive Bento Deck Filter & Smooth Scroll
+// ----------------------------------------------------
+function filterCategoryFromBento(category) {
+  state.selectedCategory = category || 'all';
+  
+  // Sync active pill state
+  const pills = document.querySelectorAll('.filter-pill');
+  pills.forEach(pill => {
+    if (pill.dataset.category === state.selectedCategory) {
+      pill.classList.add('active');
+    } else {
+      pill.classList.remove('active');
+    }
+  });
+
+  // Re-render marketplace with new category filter
+  renderMarketplace();
+
+  // Smooth scroll to catalog
+  const catalogSection = document.getElementById('marketplace-section');
+  if (catalogSection) {
+    catalogSection.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Toast feedback
+  const categoryNames = {
+    audio: 'Audio & Sound Systems',
+    projection: '4K Projection & Visuals',
+    photography: 'Studio & Cinematography',
+    lighting: 'Stage & Fest Lighting',
+    cables: 'Cables & Power',
+    all: 'All Campus Hardware'
+  };
+  showToast(`Filtered catalog to ${categoryNames[category] || 'Selected Category'}.`, 'info', 'Hardware Cluster Activated');
+}
+
+// ----------------------------------------------------
 // Event Listeners Setup
 // ----------------------------------------------------
 function setupEventListeners() {
