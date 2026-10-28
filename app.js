@@ -377,7 +377,21 @@ let activeBookings = [
 ];
 
 // App State
+// Current User Profile Defaults & Storage Structure
+const DEFAULT_USER = {
+  isLoggedIn: true,
+  name: 'Aarti Patil',
+  prn: 'PRN-2024-IT-084',
+  dept: 'Information Technology — Year 2',
+  email: 'aartipatil@student.ac.in',
+  phone: '+91 98765 43210',
+  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
+  karmaScore: 99,
+  verifiedStatus: true
+};
+
 const state = {
+  user: { ...DEFAULT_USER },
   equipment: [...INITIAL_EQUIPMENT],
   wantedRequests: [...INITIAL_WANTED_REQUESTS],
   selectedCategory: 'all',
@@ -396,6 +410,7 @@ const state = {
 
 // DOM Content Loaded Handler
 document.addEventListener('DOMContentLoaded', () => {
+  loadUserProfile();
   initLucideIcons();
   renderMarketplace();
   renderWantedBoard();
@@ -1329,12 +1344,12 @@ function submitListEquipment(e) {
       location: safeZone
     },
     owner: {
-      name: 'Rahul S.',
-      dept: 'Comps Dept (You)',
-      prn: 'PRN: IT-2026-OK',
+      name: `${(state.user && state.user.name) || 'Aarti Patil'} (You)`,
+      dept: (state.user && state.user.dept) || 'Information Technology',
+      prn: (state.user && state.user.prn) || 'PRN-2024-IT-084',
       rating: 5.0,
       reviewsCount: 1,
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80'
+      avatar: (state.user && state.user.avatar) || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80'
     },
     dailyRate: dailyRate,
     deposit: deposit,
@@ -1445,4 +1460,221 @@ function setupEventListeners() {
   const endDateInput = document.getElementById('booking-end-date');
   if (startDateInput) startDateInput.addEventListener('change', updateBookingCalculations);
   if (endDateInput) endDateInput.addEventListener('change', updateBookingCalculations);
+}
+
+// =========================================================================
+// CampusEquip User Profile & LocalStorage Engine
+// =========================================================================
+
+function loadUserProfile() {
+  try {
+    const saved = localStorage.getItem('campusEquipUser');
+    if (saved) {
+      state.user = { ...DEFAULT_USER, ...JSON.parse(saved) };
+    } else {
+      state.user = { ...DEFAULT_USER };
+      localStorage.setItem('campusEquipUser', JSON.stringify(state.user));
+    }
+  } catch (e) {
+    console.error('Error loading user profile from localStorage:', e);
+    state.user = { ...DEFAULT_USER };
+  }
+  updateNavbarProfileUI();
+}
+
+function updateNavbarProfileUI() {
+  const u = state.user;
+  const profileBtn = document.getElementById('nav-profile-btn');
+  const loginBtn = document.getElementById('nav-login-btn');
+  const avatarEl = document.getElementById('nav-user-avatar');
+  const nameEl = document.getElementById('nav-user-name');
+  const prnEl = document.getElementById('nav-user-prn');
+  const drawerAvatar = document.getElementById('drawer-user-avatar');
+  const drawerName = document.getElementById('drawer-user-name');
+  const drawerPrn = document.getElementById('drawer-user-prn');
+
+  if (!u || !u.isLoggedIn) {
+    if (profileBtn) profileBtn.classList.add('hidden');
+    if (loginBtn) loginBtn.classList.remove('hidden');
+    if (drawerName) drawerName.textContent = 'Guest Student';
+    if (drawerPrn) drawerPrn.textContent = 'Not Logged In';
+    return;
+  }
+
+  if (profileBtn) profileBtn.classList.remove('hidden');
+  if (loginBtn) loginBtn.classList.add('hidden');
+
+  if (avatarEl) avatarEl.src = u.avatar || DEFAULT_USER.avatar;
+  if (nameEl) nameEl.textContent = u.name;
+  if (prnEl) prnEl.textContent = u.prn;
+
+  if (drawerAvatar) drawerAvatar.src = u.avatar || DEFAULT_USER.avatar;
+  if (drawerName) drawerName.textContent = u.name;
+  if (drawerPrn) drawerPrn.textContent = u.prn;
+}
+
+function openProfileModal() {
+  const modal = document.getElementById('profile-modal');
+  if (!modal) return;
+
+  const u = state.user || DEFAULT_USER;
+  const nameInput = document.getElementById('profile-name');
+  const prnInput = document.getElementById('profile-prn');
+  const deptInput = document.getElementById('profile-dept');
+  const emailInput = document.getElementById('profile-email');
+  const phoneInput = document.getElementById('profile-phone');
+  const avatarInput = document.getElementById('profile-avatar-url');
+  const previewImg = document.getElementById('profile-avatar-preview');
+
+  if (nameInput) nameInput.value = u.name || '';
+  if (prnInput) prnInput.value = u.prn || '';
+  if (deptInput) deptInput.value = u.dept || '';
+  if (emailInput) emailInput.value = u.email || '';
+  if (phoneInput) phoneInput.value = u.phone || '';
+  if (avatarInput) avatarInput.value = u.avatar || '';
+  if (previewImg) previewImg.src = u.avatar || DEFAULT_USER.avatar;
+
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  initLucideIcons();
+}
+
+function closeProfileModal() {
+  const modal = document.getElementById('profile-modal');
+  if (!modal) return;
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+function selectPresetAvatar(url) {
+  const avatarInput = document.getElementById('profile-avatar-url');
+  const previewImg = document.getElementById('profile-avatar-preview');
+  if (avatarInput) avatarInput.value = url;
+  if (previewImg) previewImg.src = url;
+}
+
+function saveUserProfile(e) {
+  if (e) e.preventDefault();
+
+  const nameVal = document.getElementById('profile-name')?.value.trim() || DEFAULT_USER.name;
+  const prnVal = document.getElementById('profile-prn')?.value.trim() || DEFAULT_USER.prn;
+  const deptVal = document.getElementById('profile-dept')?.value.trim() || DEFAULT_USER.dept;
+  const emailVal = document.getElementById('profile-email')?.value.trim() || DEFAULT_USER.email;
+  const phoneVal = document.getElementById('profile-phone')?.value.trim() || DEFAULT_USER.phone;
+  const avatarVal = document.getElementById('profile-avatar-url')?.value.trim() || DEFAULT_USER.avatar;
+
+  state.user = {
+    ...state.user,
+    name: nameVal,
+    prn: prnVal,
+    dept: deptVal,
+    email: emailVal,
+    phone: phoneVal,
+    avatar: avatarVal,
+    isLoggedIn: true
+  };
+
+  try {
+    localStorage.setItem('campusEquipUser', JSON.stringify(state.user));
+  } catch (err) {
+    console.error('Failed to save to localStorage:', err);
+  }
+
+  updateNavbarProfileUI();
+  closeProfileModal();
+  showToast('Profile updated successfully! ✓', 'success', 'Identity Saved');
+}
+
+function resetUserProfile() {
+  state.user = { ...DEFAULT_USER };
+  try {
+    localStorage.setItem('campusEquipUser', JSON.stringify(state.user));
+  } catch (err) {
+    console.error('Failed to reset localStorage:', err);
+  }
+
+  const nameInput = document.getElementById('profile-name');
+  const prnInput = document.getElementById('profile-prn');
+  const deptInput = document.getElementById('profile-dept');
+  const emailInput = document.getElementById('profile-email');
+  const phoneInput = document.getElementById('profile-phone');
+  const avatarInput = document.getElementById('profile-avatar-url');
+  const previewImg = document.getElementById('profile-avatar-preview');
+
+  if (nameInput) nameInput.value = DEFAULT_USER.name;
+  if (prnInput) prnInput.value = DEFAULT_USER.prn;
+  if (deptInput) deptInput.value = DEFAULT_USER.dept;
+  if (emailInput) emailInput.value = DEFAULT_USER.email;
+  if (phoneInput) phoneInput.value = DEFAULT_USER.phone;
+  if (avatarInput) avatarInput.value = DEFAULT_USER.avatar;
+  if (previewImg) previewImg.src = DEFAULT_USER.avatar;
+
+  updateNavbarProfileUI();
+  showToast('Profile restored to default student account (Aarti Patil).', 'info', 'Profile Reset');
+}
+
+function logoutUser() {
+  state.user.isLoggedIn = false;
+  try {
+    localStorage.setItem('campusEquipUser', JSON.stringify(state.user));
+  } catch (err) {
+    console.error('Failed to update localStorage:', err);
+  }
+
+  updateNavbarProfileUI();
+  closeProfileModal();
+  showToast('Logged out of campus session. Switched to guest mode.', 'warning', 'Account Logged Out');
+}
+
+function openAuthModal() {
+  const modal = document.getElementById('auth-modal');
+  if (!modal) return;
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  initLucideIcons();
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById('auth-modal');
+  if (!modal) return;
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+function handleAuthLogin(e) {
+  if (e) e.preventDefault();
+
+  const name = document.getElementById('auth-name')?.value.trim() || 'Aarti Patil';
+  const prn = document.getElementById('auth-prn')?.value.trim() || 'PRN-2024-IT-084';
+  const email = document.getElementById('auth-email')?.value.trim() || 'aartipatil@student.ac.in';
+
+  state.user = {
+    ...DEFAULT_USER,
+    name: name,
+    prn: prn,
+    email: email,
+    isLoggedIn: true
+  };
+
+  try {
+    localStorage.setItem('campusEquipUser', JSON.stringify(state.user));
+  } catch (err) {
+    console.error('Failed to save user in auth:', err);
+  }
+
+  updateNavbarProfileUI();
+  closeAuthModal();
+  showToast(`Welcome back, ${state.user.name}! Campus credentials verified.`, 'success', 'Session Authenticated');
+}
+
+function quickLoginDefault() {
+  state.user = { ...DEFAULT_USER, isLoggedIn: true };
+  try {
+    localStorage.setItem('campusEquipUser', JSON.stringify(state.user));
+  } catch (err) {
+    console.error('Failed to save user:', err);
+  }
+  updateNavbarProfileUI();
+  closeAuthModal();
+  showToast('Logged in as Aarti Patil (PRN-2024-IT-084).', 'success', 'Quick Auth Success');
 }

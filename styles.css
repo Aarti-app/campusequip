@@ -592,3 +592,27 @@ input[type="range"] {
   object-fit: cover !important;
   display: block;
 }
+
+/* =========================================================================
+   User Profile Modal & Avatar Preset Styling
+   ========================================================================= */
+
+.preset-avatar-btn {
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.preset-avatar-btn:hover {
+  transform: scale(1.12);
+  border-color: #FF1E42 !important;
+  box-shadow: 0 0 10px rgba(255, 30, 66, 0.5);
+}
+
+#nav-profile-btn {
+  transition: all 0.2s ease;
+}
+
+#nav-profile-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 30, 66, 0.25);
+}
