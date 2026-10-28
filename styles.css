@@ -616,3 +616,31 @@ input[type="range"] {
   box-shadow: 0 6px 18px rgba(139, 92, 246, 0.18);
   background: #FFFFFF;
 }
+
+/* =========================================================================
+   Force Center and Multi-Column Grid Overrides
+   ========================================================================= */
+.main-container, main {
+  width: 100% !important;
+  max-width: 1320px !important;
+  margin: 2rem auto !important;
+  padding: 0 1.5rem !important;
+  display: block !important;
+}
+
+#equipment-grid, .equipment-grid, .catalog-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 2rem !important;
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+}
+
+/* Ensure individual cards fill their grid column */
+.equipment-card, #equipment-grid > div, .catalog-grid > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+

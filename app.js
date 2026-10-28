@@ -674,6 +674,7 @@ function renderMarketplace() {
             }
           </div>
 
+        </div>
       </div>
     `;
   }).join('');
