@@ -572,7 +572,7 @@ function renderMarketplace() {
 
     return `
       <!-- LAVENDER & LILAC EQUIPMENT CARD (AWSMD.COM INSPIRED) -->
-      <div class="equipment-card rounded-3xl overflow-hidden flex flex-col transition-all duration-300">
+      <div class="equipment-card w-full rounded-3xl overflow-hidden flex flex-col transition-all duration-300">
         
         <!-- Top Image Container with #FAF5FF background -->
         <div class="card-image-container relative w-full overflow-hidden bg-[#FAF5FF] border-b border-[#F3E8FF] group flex items-center justify-center" style="width: 100%; height: 200px;">

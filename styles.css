@@ -542,13 +542,44 @@ input[type="range"] {
   display: block;
 }
 
+/* =========================================================================
+   Main Equipment Catalog Layout & Responsive Multi-Column Grid
+   ========================================================================= */
+
+.catalog-container,
+.catalog-content-wrapper,
+#marketplace-section > div,
+#marketplace-section .catalog-container {
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 1.5rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#equipment-grid,
+.equipment-grid-container {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+  gap: 1.75rem !important;
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+}
+
 /* Equipment Card Container: Pure White, Rounded-3xl, Diffused Purple Shadows */
 .equipment-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   background: #FFFFFF !important;
   border: 1px solid #E9D5FF !important;
   border-radius: 1.5rem !important;
   box-shadow: 0 10px 30px -5px rgba(139, 92, 246, 0.12) !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .equipment-card:hover {
