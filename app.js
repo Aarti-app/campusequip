@@ -419,10 +419,10 @@ function showToast(message, type = 'info', title = '') {
   if (!container) return;
 
   const toast = document.createElement('div');
-  toast.className = `p-4 rounded-2xl border border-white/[0.1] bg-[#111827]/90 backdrop-blur-xl shadow-2xl flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full text-slate-200`;
+  toast.className = `p-4 rounded-2xl border border-red-500/20 bg-[#0E0E12]/95 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_20px_rgba(255,30,66,0.15)] flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full text-slate-200`;
 
   const badgeColor = type === 'success' 
-    ? 'bg-emerald-500/20 text-[#A3E635] border border-emerald-500/30' 
+    ? 'bg-red-500/20 text-[#FF3366] border border-red-500/30' 
     : type === 'warning' 
     ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' 
     : 'bg-white/10 text-white border border-white/20';
@@ -521,18 +521,18 @@ function renderMarketplace() {
   }
 
   if (countBadge) {
-    countBadge.innerHTML = `<span class="font-bold text-xs text-[#A3E635] bg-emerald-500/10 border border-emerald-500/25 px-3 py-1 rounded-full">${filtered.length} Units Online</span>`;
+    countBadge.innerHTML = `<span class="font-bold text-xs text-[#FF3366] bg-red-500/10 border border-red-500/25 px-3 py-1 rounded-full">${filtered.length} Units Online</span>`;
   }
 
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="col-span-full py-16 text-center glass-panel rounded-2xl p-8 border border-white/[0.08] shadow-xl">
-        <div class="w-12 h-12 mx-auto mb-3 bg-emerald-500/10 border border-emerald-500/25 rounded-2xl flex items-center justify-center font-black text-xl text-emerald-400">
+        <div class="w-12 h-12 mx-auto mb-3 bg-red-500/10 border border-red-500/25 rounded-2xl flex items-center justify-center font-black text-xl text-[#FF3366]">
           !
         </div>
         <h3 class="text-base font-extrabold font-heading text-white mb-1">No matching hardware found</h3>
         <p class="text-xs text-slate-400 max-w-sm mx-auto mb-5">Broadcast an urgent request onto the campus wanted notice board.</p>
-        <button onclick="openPostWantedModal()" class="btn-neon px-6 py-2.5 text-xs font-black uppercase rounded-full">
+        <button onclick="openPostWantedModal()" class="btn-crimson px-6 py-2.5 text-xs font-black uppercase rounded-full">
           + Post Request on Wanted Board
         </button>
       </div>
@@ -556,14 +556,14 @@ function renderMarketplace() {
     const catBadgeClass = categoryClassMap[item.category] || 'badge-cat-audio';
 
     return `
-      <!-- DARK GLASS HARDWARE CARD (ORBIX / ZEBEYOND) -->
+      <!-- OBSIDIAN DARK GLASS HARDWARE CARD (CRIMSON PULSE) -->
       <div 
         class="equipment-card rounded-2xl overflow-hidden flex flex-col transition-all duration-300"
-        style="background: rgba(17, 24, 39, 0.75); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
+        style="background: rgba(18, 18, 24, 0.75); border: 1px solid rgba(255, 30, 66, 0.15); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);"
       >
         
-        <!-- Top Image Container with #0B0F17 background -->
-        <div class="relative h-48 w-full overflow-hidden bg-[#0B0F17]/90 border-b border-white/[0.08] group flex items-center justify-center">
+        <!-- Top Image Container with #0A0A0C background -->
+        <div class="relative h-48 w-full overflow-hidden bg-[#0A0A0C]/90 border-b border-white/[0.08] group flex items-center justify-center">
           <img 
             src="${item.image}" 
             alt="${item.title}" 
@@ -579,18 +579,18 @@ function renderMarketplace() {
             </span>
           </div>
 
-          <!-- Neon Emerald Status Indicator: ● Available Now -->
+          <!-- Obsidian & Crimson Pulse Status Indicator: ● Available Now -->
           <div class="absolute top-2.5 right-2.5">
             ${isLocked 
               ? `<span class="badge-fest-locked shadow-sm">Booked for Fest</span>`
-              : `<span class="status-indicator-neon shadow-sm"><span class="pulse-dot-green"></span> Available Now</span>`
+              : `<span class="status-indicator-crimson shadow-sm"><span class="pulse-dot-crimson"></span> Available Now</span>`
             }
           </div>
 
           <!-- Deposit Badge -->
           <div class="absolute bottom-2.5 left-2.5">
             <span class="badge-deposit shadow-sm text-[10px]">
-              Deposit: ₹${item.deposit} <span class="text-emerald-400 font-bold">(Refundable)</span>
+              Deposit: ₹${item.deposit} <span class="text-[#FF3366] font-bold">(Refundable)</span>
             </span>
           </div>
         </div>
@@ -604,13 +604,13 @@ function renderMarketplace() {
                 ${item.title}
               </h3>
               <span class="badge-verified shrink-0 text-[10px]">
-                <i data-lucide="check" class="w-2.5 h-2.5 text-emerald-400"></i> PRN
+                <i data-lucide="check" class="w-2.5 h-2.5 text-[#FF3366]"></i> PRN
               </span>
             </div>
 
             <!-- Student Department / Campus Zone -->
             <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-2.5 font-medium">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#FF3366] shrink-0"></i>
               <span class="truncate">${item.owner.dept} • ${item.safeZone}</span>
             </div>
 
@@ -632,7 +632,7 @@ function renderMarketplace() {
             <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] mb-3">
               <div class="flex justify-between items-center text-xs mb-1">
                 <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider font-mono">Est. Total (${currentDays}d):</span>
-                <span class="font-extrabold text-[#A3E635] text-xs font-mono" id="calc-price-${item.id}">₹${totalCalc}</span>
+                <span class="font-extrabold text-[#FF3366] text-xs font-mono" id="calc-price-${item.id}">₹${totalCalc}</span>
               </div>
               <input 
                 type="range" 
@@ -645,19 +645,19 @@ function renderMarketplace() {
             </div>
           </div>
 
-          <!-- Price: "₹450 / Day" with High-visibility Neon Action Button -->
+          <!-- Price: "₹450 / Day" with High-visibility Crimson Action Button -->
           <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between gap-3">
             <div>
               <div class="flex items-baseline gap-1">
                 <span class="text-2xl font-black font-heading text-white">₹${item.dailyRate}</span>
                 <span class="text-xs text-slate-400 font-bold">/ Day</span>
               </div>
-              <span class="text-[10px] text-emerald-400 font-medium">Free 30m campus grace</span>
+              <span class="text-[10px] text-rose-400 font-medium">Free 30m campus grace</span>
             </div>
 
             ${isLocked 
               ? `<button onclick="handleRentClick('${item.id}')" class="btn-ghost opacity-75 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider">Waitlist</button>`
-              : `<button onclick="handleRentClick('${item.id}')" class="btn-neon px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"><span>Rent Now →</span></button>`
+              : `<button onclick="handleRentClick('${item.id}')" class="btn-crimson px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"><span>Rent Now →</span></button>`
             }
           </div>
 
@@ -788,13 +788,13 @@ function updateBookingCalculations() {
     confirmBtn.disabled = true;
     confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
   } else {
-    conflictBanner.className = 'p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs mb-4';
+    conflictBanner.className = 'p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-rose-200 text-xs mb-4';
     conflictBanner.innerHTML = `
       <div class="flex items-center gap-2 mb-1">
-        <span class="status-indicator-neon"><span class="pulse-dot-green"></span> Conflict Check: Clear</span>
+        <span class="status-indicator-crimson"><span class="pulse-dot-crimson"></span> Conflict Check: Clear</span>
         <strong class="font-bold text-white">Slot Free for Reservation</strong>
       </div>
-      <p class="text-xs text-emerald-300/80">Hardware resting at Safe-Zone locker ready for same-day handover with zero schedule clashes.</p>
+      <p class="text-xs text-slate-300">Hardware resting at Safe-Zone locker ready for same-day handover with zero schedule clashes.</p>
     `;
     confirmBtn.disabled = false;
     confirmBtn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -892,17 +892,17 @@ function renderWantedBoard() {
     return `
       <!-- Obsidian Dark Glass Wanted Board Card -->
       <div 
-        class="glass-panel p-6 rounded-2xl relative flex flex-col justify-between border border-white/[0.08] hover:border-emerald-500/40 transition-all duration-300 shadow-xl"
-        style="background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(12px);"
+        class="glass-panel p-6 rounded-2xl relative flex flex-col justify-between border border-white/[0.08] hover:border-red-500/50 transition-all duration-300 shadow-xl"
+        style="background: rgba(18, 18, 24, 0.75); border: 1px solid rgba(255, 30, 66, 0.15); backdrop-filter: blur(14px);"
       >
         <div>
           <!-- Top Badge & Needed Date -->
           <div class="flex items-center justify-between gap-2 mb-3 text-xs">
-            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-[#A3E635] border border-emerald-500/25 font-black text-[10px] uppercase tracking-wider font-mono">
+            <span class="px-3 py-1 rounded-full bg-red-500/10 text-[#FF3366] border border-red-500/25 font-black text-[10px] uppercase tracking-wider font-mono">
               ${req.urgencyText}
             </span>
             <span class="text-slate-400 font-semibold flex items-center gap-1.5 text-xs font-mono">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#FF3366]"></i>
               ${req.neededDate}
             </span>
           </div>
@@ -918,7 +918,7 @@ function renderWantedBoard() {
           <!-- Requester Club Info -->
           <div class="flex items-center justify-between text-xs py-2.5 border-y border-white/[0.08] mb-4 bg-white/[0.02] px-3 rounded-lg">
             <div class="flex items-center gap-2 font-bold text-slate-200">
-              <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <i data-lucide="users" class="w-3.5 h-3.5 text-[#FF3366]"></i>
               <span>${req.club}</span>
             </div>
             <div class="text-[11px] text-slate-400 font-medium font-mono">
@@ -936,7 +936,7 @@ function renderWantedBoard() {
 
           <button 
             onclick="openOfferModal('${req.id}')"
-            class="btn-neon px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"
+            class="btn-crimson px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md"
           >
             <i data-lucide="handshake" class="w-3.5 h-3.5"></i>
             <span>Offer Hardware →</span>
@@ -1069,19 +1069,19 @@ function renderActiveTracker() {
         </div>
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-[#A3E635] border border-emerald-500/30 font-bold uppercase tracking-wider font-mono">
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-red-500/10 text-[#FF3366] border border-red-500/30 font-bold uppercase tracking-wider font-mono">
               ${b.id}
             </span>
             <span class="text-xs text-slate-400 font-semibold font-mono">${b.categoryCode || b.category}</span>
           </div>
           <h3 class="text-base font-extrabold font-heading text-white">${b.title}</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Owner: <span class="text-slate-200 font-bold">${b.ownerName}</span> • Pickup: <span class="text-emerald-400 font-bold">${b.pickupSpot}</span></p>
+          <p class="text-xs text-slate-400 mt-0.5">Owner: <span class="text-slate-200 font-bold">${b.ownerName}</span> • Pickup: <span class="text-[#FF3366] font-bold">${b.pickupSpot}</span></p>
         </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <div class="bg-emerald-500/10 border border-emerald-500/30 p-2.5 px-5 rounded-xl text-center shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-          <span class="text-[9px] text-[#A3E635] uppercase tracking-widest block font-bold font-mono">Handover OTP</span>
+        <div class="bg-red-500/10 border border-red-500/30 p-2.5 px-5 rounded-xl text-center shadow-[0_0_20px_rgba(255,30,66,0.2)]">
+          <span class="text-[9px] text-[#FF3366] uppercase tracking-widest block font-bold font-mono">Handover OTP</span>
           <span class="text-2xl font-black text-white tracking-widest font-mono">${b.otp}</span>
         </div>
 
@@ -1091,19 +1091,19 @@ function renderActiveTracker() {
           <div class="inline-flex p-1 rounded-xl bg-white/[0.05] border border-white/[0.1] shadow-sm">
             <button 
               onclick="setBookingStep(1)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-white text-[#0B0F17] shadow-sm' : 'text-slate-400 hover:text-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-white text-[#0A0A0C] shadow-sm' : 'text-slate-400 hover:text-white'}"
             >
               1. Verified
             </button>
             <button 
               onclick="setBookingStep(2)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-gradient-to-r from-emerald-500 to-lime-400 text-[#0B0F17] font-extrabold shadow-sm' : 'text-slate-400 hover:text-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-gradient-to-r from-[#FF1E42] to-[#FF3366] text-white font-extrabold shadow-sm' : 'text-slate-400 hover:text-white'}"
             >
               2. Handover
             </button>
             <button 
               onclick="setBookingStep(3)" 
-              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-emerald-500 text-[#0B0F17] font-bold shadow-sm' : 'text-slate-400 hover:text-white'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-[#FF1E42] text-white font-bold shadow-sm' : 'text-slate-400 hover:text-white'}"
             >
               3. Settled
             </button>
@@ -1129,13 +1129,13 @@ function renderActiveTracker() {
           </p>
         </div>
 
-        <!-- Step 2: Handover / In Use (Electric Neon) -->
-        <div class="p-4 rounded-xl border transition-all ${step2Active ? 'bg-emerald-500/10 border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.15)]' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
+        <!-- Step 2: Handover / In Use (Crimson Pulse) -->
+        <div class="p-4 rounded-xl border transition-all ${step2Active ? 'bg-red-500/10 border-red-500/40 shadow-[0_0_15px_rgba(255,30,66,0.15)]' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-gradient-to-r from-emerald-500 to-lime-400 text-[#0B0F17] font-black text-xs flex items-center justify-center font-mono">
+            <span class="w-6 h-6 rounded-full bg-gradient-to-r from-[#FF1E42] to-[#FF3366] text-white font-black text-xs flex items-center justify-center font-mono">
               ${step2Active ? '✓' : '2'}
             </span>
-            <h4 class="text-xs font-extrabold text-[#A3E635] uppercase tracking-wider">2. Handover • In Use</h4>
+            <h4 class="text-xs font-extrabold text-[#FF3366] uppercase tracking-wider">2. Handover • In Use</h4>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
             OTP verified by Safe-Zone volunteer. ₹${b.deposit} security deposit locked in peer escrow.
@@ -1143,12 +1143,12 @@ function renderActiveTracker() {
         </div>
 
         <!-- Step 3: Settled -->
-        <div class="p-4 rounded-xl border transition-all ${step3Active ? 'bg-emerald-500/10 border-emerald-400 shadow-sm' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
+        <div class="p-4 rounded-xl border transition-all ${step3Active ? 'bg-red-500/10 border-red-500/40 shadow-sm' : 'bg-white/[0.01] border-white/[0.05] opacity-50'}">
           <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-emerald-500 text-[#0B0F17] font-black text-xs flex items-center justify-center font-mono">
+            <span class="w-6 h-6 rounded-full bg-[#FF1E42] text-white font-black text-xs flex items-center justify-center font-mono">
               ${step3Active ? '✓' : '3'}
             </span>
-            <h4 class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider">3. Deposit Settled</h4>
+            <h4 class="text-xs font-extrabold text-rose-300 uppercase tracking-wider">3. Deposit Settled</h4>
           </div>
           <p class="text-xs text-slate-400 leading-relaxed">
             Hardware passed return inspection. ₹${b.deposit} deposit instantaneously settled to UPI.
@@ -1197,10 +1197,10 @@ function updateEscrowCalculations() {
   if (lateLabel) {
     if (lateMinutes === 0) {
       lateLabel.textContent = '0 min (On Time)';
-      lateLabel.className = 'text-xs font-bold text-emerald-400 font-mono';
+      lateLabel.className = 'text-xs font-bold text-rose-300 font-mono';
     } else if (lateMinutes <= 30) {
       lateLabel.textContent = `${lateMinutes}m (30-min Free Grace Applied)`;
-      lateLabel.className = 'text-xs font-bold text-emerald-400 font-mono';
+      lateLabel.className = 'text-xs font-bold text-rose-300 font-mono';
     } else {
       const extraHours = Math.ceil((lateMinutes - 30) / 60);
       lateLabel.textContent = `${lateMinutes}m late (+${extraHours}h late fee)`;
@@ -1231,7 +1231,7 @@ function updateEscrowCalculations() {
 
   if (elGraceNote) {
     if (lateMinutes <= 30) {
-      elGraceNote.innerHTML = '<span class="text-emerald-400 text-xs font-semibold">✓ 30-min campus peer grace active — Zero deduction applied</span>';
+      elGraceNote.innerHTML = '<span class="text-rose-300 text-xs font-semibold">✓ 30-min campus peer grace active — Zero deduction applied</span>';
     } else {
       elGraceNote.innerHTML = `<span class="text-rose-400 text-xs font-semibold">⚠ Exceeded 30m grace by ${lateMinutes - 30} mins — ₹50/hr deducted for peer delay</span>`;
     }
@@ -1240,7 +1240,7 @@ function updateEscrowCalculations() {
   if (elRefundStatusBadge) {
     if (netRefund === deposit) {
       elRefundStatusBadge.textContent = '100% Escrow Refund Guarantee';
-      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/30';
+      elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-red-500/10 text-rose-200 font-semibold border border-red-500/30';
     } else {
       elRefundStatusBadge.textContent = `Partial Escrow Refund: ₹${netRefund}`;
       elRefundStatusBadge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 font-semibold border border-amber-500/30';
