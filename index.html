@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CampusEquip — Lavender & Lilac Creative Studio</title>
-  <meta name="description" content="Peer-to-peer campus hardware network for university fests, productions, and student events. Powered by verified safe-zone lockers and instant UPI escrow.">
+  <title>CampusEquip — High-Energy Campus Equipment Rental Marketplace</title>
+  <meta name="description" content="Peer-to-peer campus hardware rental marketplace for college festivals, auditorium events, hackathons, and student productions.">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,17 +13,15 @@
       theme: {
         extend: {
           colors: {
-            lilac: {
-              50: '#F5F3FF',
-              100: '#EDE9FE',
-              200: '#DDD6FE',
-              300: '#C4B5FD',
-              400: '#A78BFA',
-              500: '#8B5CF6',
-              600: '#7C3AED',
-              700: '#6D28D9',
-              800: '#5B21B6',
-              900: '#1E1B4B',
+            yellow: {
+              400: '#FBBF24',
+              500: '#F59E0B',
+              600: '#D97706',
+            },
+            obsidian: {
+              900: '#111827',
+              800: '#1F2937',
+              700: '#374151',
             }
           },
           fontFamily: {
@@ -38,68 +36,71 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom Stylesheet with Lavender & Lilac Aesthetic -->
+  <!-- Custom Stylesheet: Industrial Electric Yellow Theme -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="text-[#334155] min-h-screen selection:bg-[#8B5CF6] selection:text-white relative overflow-x-hidden">
+<body class="bg-[#FAFAFA] text-[#374151] min-h-screen selection:bg-[#FBBF24] selection:text-[#111827] relative overflow-x-hidden">
 
   <!-- Toast Notification Container -->
   <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
 
   <!-- ========================================================================= -->
-  <!-- 1. FLOATING PILL NAVBAR (awsmd.com inspired) -->
+  <!-- 1. HIGH-CONTRAST NAVBAR -->
   <!-- ========================================================================= -->
-  <header class="sticky top-4 z-40 max-w-7xl mx-auto px-4 sm:px-6 transition-all">
-    <div class="studio-panel rounded-full px-6 py-3 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E5E7EB] py-3.5 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
       
-      <!-- Brand Logo: Pill Mark with Electric Lilac Icon -->
+      <!-- Brand Logo: Obsidian + Electric Yellow Accent -->
       <a href="#" class="flex items-center gap-2.5 group shrink-0">
-        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#7C3AED] to-[#C084FC] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
-          <i data-lucide="zap" class="w-4 h-4 fill-white text-white"></i>
+        <div class="w-9 h-9 rounded-xl bg-[#111827] flex items-center justify-center text-[#FBBF24] shadow-sm group-hover:bg-[#FBBF24] group-hover:text-[#111827] transition-all">
+          <i data-lucide="zap" class="w-5 h-5 fill-current"></i>
         </div>
-        <span class="font-heading font-extrabold text-base tracking-tight text-[#1E1B4B]">CampusEquip</span>
-        <span class="text-[10px] font-bold text-[#7C3AED] bg-[#F3E8FF] border border-[#DDD6FE] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Studio</span>
+        <div class="flex items-baseline">
+          <span class="font-heading font-black text-xl tracking-tight text-[#111827]">Campus</span>
+          <span class="font-heading font-black text-xl tracking-tight text-[#D97706] ml-0.5">Equip</span>
+          <span class="ml-2 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]">RENTAL</span>
+        </div>
       </a>
 
-      <!-- Live Campus Status Pill -->
-      <div class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#E9D5FF] text-xs font-semibold text-[#1E1B4B] shadow-sm">
+      <!-- Live Campus Status Badge -->
+      <div class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] text-xs font-semibold text-[#111827]">
         <span class="pulse-dot-green"></span>
-        <span class="font-bold">MUMBAI CAMPUS LIVE</span>
-        <span class="text-[#C4B5FD]">|</span>
-        <span class="text-[#7C3AED] font-semibold">Fest Season 2026</span>
+        <span class="font-extrabold uppercase">CAMPUS LIVE</span>
+        <span class="text-slate-300">|</span>
+        <span class="text-slate-500 font-medium">9 Units Available</span>
       </div>
 
       <!-- Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-1.5 text-xs font-bold text-slate-600">
-        <a href="#marketplace-section" class="px-3.5 py-1.5 rounded-full hover:text-[#7C3AED] hover:bg-[#F3E8FF] transition-all">Catalog</a>
-        <a href="#bento-showcase" class="px-3.5 py-1.5 rounded-full hover:text-[#7C3AED] hover:bg-[#F3E8FF] transition-all">Featured Rig</a>
-        <a href="#wanted-board-section" class="px-3.5 py-1.5 rounded-full hover:text-[#7C3AED] hover:bg-[#F3E8FF] transition-all flex items-center gap-1.5">
+      <nav class="hidden lg:flex items-center gap-1 text-xs font-bold text-slate-700">
+        <a href="#marketplace-section" class="px-3.5 py-2 rounded-lg hover:text-[#111827] hover:bg-[#F3F4F6] transition-all">Catalog</a>
+        <a href="#bento-showcase" class="px-3.5 py-2 rounded-lg hover:text-[#111827] hover:bg-[#F3F4F6] transition-all">Featured Rigs</a>
+        <a href="#wanted-board-section" class="px-3.5 py-2 rounded-lg hover:text-[#111827] hover:bg-[#F3F4F6] transition-all flex items-center gap-1.5">
           <span>Wanted Board</span>
-          <span class="text-[9px] bg-[#FEF3C7] text-[#B45309] border border-[#FDE68A] px-2 py-0.5 rounded-full font-extrabold">Hot</span>
+          <span class="text-[9px] bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] px-1.5 py-0.5 rounded-full font-black">HOT</span>
         </a>
-        <a href="#tracker-section" class="px-3.5 py-1.5 rounded-full hover:text-[#7C3AED] hover:bg-[#F3E8FF] transition-all">Escrow Console</a>
+        <a href="#tracker-section" class="px-3.5 py-2 rounded-lg hover:text-[#111827] hover:bg-[#F3F4F6] transition-all">Escrow Console</a>
       </nav>
 
       <!-- Right Action Area -->
       <div class="flex items-center gap-3">
         
-        <!-- Primary Action Button: Glossy Purple Pill -->
+        <!-- Primary Action Button: Energetic Yellow with Bold Black Text -->
         <button 
           onclick="openListEquipmentModal()"
-          class="btn-purple-pill px-5 py-2 text-xs font-bold flex items-center gap-1.5"
+          class="btn-yellow px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm flex items-center gap-1.5"
         >
-          <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span class="hidden sm:inline">+ List Gear</span>
           <span class="sm:hidden">+ List</span>
         </button>
 
         <!-- User Profile Avatar with PRN Badge -->
-        <div class="flex items-center gap-2 pl-2 border-l border-purple-200">
+        <div class="flex items-center gap-2 pl-2 border-l border-slate-200">
           <div class="relative cursor-pointer" onclick="showToast('PRN 21BCE1048 verified in University Student Roster.', 'success', 'PRN Verified')">
             <img 
               src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" 
               alt="Rahul S." 
-              class="w-8 h-8 rounded-full object-cover border-2 border-[#8B5CF6] ring-2 ring-purple-100"
+              class="w-8 h-8 rounded-full object-cover border-2 border-[#FBBF24]"
             >
             <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
           </div>
@@ -109,7 +110,7 @@
         <button 
           id="mobile-menu-toggle"
           onclick="document.getElementById('mobile-nav-drawer').classList.toggle('hidden')"
-          class="lg:hidden p-2 rounded-full border border-purple-200 bg-white hover:bg-purple-50 text-slate-700"
+          class="lg:hidden p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700"
         >
           <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
@@ -118,123 +119,121 @@
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-nav-drawer" class="hidden lg:hidden studio-panel rounded-3xl mt-2 p-5 space-y-2 text-xs font-bold bg-white/95 shadow-2xl">
-      <a href="#marketplace-section" class="block px-3 py-2 rounded-xl hover:bg-[#F3E8FF] text-slate-700">Catalog</a>
-      <a href="#bento-showcase" class="block px-3 py-2 rounded-xl hover:bg-[#F3E8FF] text-slate-700">Featured Rig</a>
-      <a href="#wanted-board-section" class="block px-3 py-2 rounded-xl hover:bg-[#F3E8FF] text-[#7C3AED]">Wanted Board</a>
-      <a href="#tracker-section" class="block px-3 py-2 rounded-xl hover:bg-[#F3E8FF] text-slate-700">Escrow Console</a>
-      <button onclick="openSafeZonesModal()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-purple-50 text-[#6D28D9] font-bold flex items-center gap-2">
-        <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+    <div id="mobile-nav-drawer" class="hidden lg:hidden max-w-7xl mx-auto px-4 mt-3 pt-3 border-t border-slate-200 space-y-2 text-xs font-bold">
+      <a href="#marketplace-section" class="block px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">Catalog</a>
+      <a href="#bento-showcase" class="block px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">Featured Rigs</a>
+      <a href="#wanted-board-section" class="block px-3 py-2 rounded-lg hover:bg-slate-100 text-[#D97706]">Wanted Board</a>
+      <a href="#tracker-section" class="block px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">Escrow Console</a>
+      <button onclick="openSafeZonesModal()" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-[#111827] font-bold flex items-center gap-2">
+        <i data-lucide="shield" class="w-3.5 h-3.5 text-[#F59E0B]"></i>
         Safe Zones Guide
       </button>
     </div>
   </header>
 
   <!-- ========================================================================= -->
-  <!-- 2. EDITORIAL HERO SECTION: "WE POWER CAMPUS EVENTS." -->
+  <!-- 2. HIGH-ENERGY SPLIT HERO SECTION WITH ELECTRIC YELLOW BANNER -->
   <!-- ========================================================================= -->
-  <section class="relative pt-16 pb-14 md:pt-20 md:pb-20 overflow-hidden">
-    
-    <!-- Ambient Iridescent Orbs in Background -->
-    <div class="ambient-orb ambient-orb-lilac -top-20 -left-20"></div>
-    <div class="ambient-orb ambient-orb-lavender -top-10 right-0"></div>
-    <div class="ambient-orb ambient-orb-rose top-1/2 left-1/4"></div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+  <section class="relative pt-10 pb-14 md:pt-14 md:pb-18 overflow-hidden bg-white border-b border-[#E5E7EB]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
-        <!-- Left Column: Editorial Headline & Dual Pill Buttons -->
+        <!-- Left Side: Crisp Headline, Integrated Pill Search & Trust Badges -->
         <div class="lg:col-span-7">
           
-          <!-- Glowing Pill Badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 backdrop-blur border border-[#DDD6FE] text-[#6D28D9] text-xs font-bold tracking-wide shadow-[0_2px_14px_rgba(139,92,246,0.14)] mb-6">
-            <span class="text-amber-500 font-extrabold">✦</span>
-            <span>PRN VERIFIED HARDWARE</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse"></span>
-            <span class="text-slate-300 font-normal">|</span>
-            <span class="text-[#1E1B4B]">ZERO VENDOR HASSLE</span>
+          <!-- High-Visibility Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-xs font-extrabold uppercase tracking-wider mb-5">
+            <i data-lucide="zap" class="w-3.5 h-3.5 fill-[#F59E0B]"></i>
+            <span>High-Energy Peer Rental Marketplace</span>
           </div>
 
-          <!-- Bold Editorial Headline (awsmd.com inspired) -->
-          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight font-heading text-[#1E1B4B] leading-[0.98] mb-6">
-            WE POWER <br>
-            <span class="bg-gradient-to-r from-[#6D28D9] via-[#8B5CF6] to-[#C084FC] bg-clip-text text-transparent">CAMPUS EVENTS.</span>
+          <!-- Bold Crisp Black Headline -->
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight font-heading text-[#111827] leading-[1.08] mb-5">
+            Trying To Find The Best Campus Equipment?
           </h1>
 
-          <p class="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed mb-8">
-            Audio rigs, 4K high-lumen projectors, wireless tie-clip microphones, and DMX concert lighting directly from fellow students. Verified safe-zone lockers with instantaneous UPI escrow settlements.
+          <p class="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed mb-7">
+            Rent verified auditorium sound, 4K projectors, DSLR kits, and stage lighting directly from trusted campus peers. Transparent daily rates, student PRN verification, and 100% refundable UPI escrow.
           </p>
 
-          <!-- Clean Dual Buttons (Primary: glossy deep purple pill; Secondary: frosted white capsule) -->
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="#marketplace-section" class="btn-purple-pill px-8 py-4 text-xs font-bold uppercase tracking-wider flex items-center gap-2.5">
-              <span>Explore Catalog</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-
-            <button onclick="openListEquipmentModal()" class="btn-frosted-pill px-7 py-4 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-              <i data-lucide="plus-circle" class="w-4 h-4 text-[#8B5CF6]"></i>
-              <span>+ List Equipment</span>
+          <!-- Integrated Pill-Shaped Search Input with Dark Icon Button -->
+          <form onsubmit="event.preventDefault();" class="hero-search-bar mb-7">
+            <i data-lucide="search" class="w-5 h-5 text-slate-400 mr-3 shrink-0"></i>
+            <input 
+              type="text" 
+              id="hero-quick-search"
+              placeholder="Search by equipment, camera model, speaker..." 
+              class="hero-search-input"
+            />
+            <button 
+              type="submit" 
+              class="hero-search-btn" 
+              onclick="document.getElementById('marketplace-section').scrollIntoView({behavior: 'smooth'})"
+            >
+              <span>Search Gear</span>
+              <i data-lucide="arrow-right" class="w-4 h-4 text-[#FBBF24]"></i>
             </button>
+          </form>
+
+          <!-- Quick Trust Badges -->
+          <div class="flex flex-wrap items-center gap-5 sm:gap-7 text-xs font-bold text-slate-700 pt-2 border-t border-slate-100">
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+              <span>100% PRN Verified</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="clock" class="w-4 h-4 text-[#F59E0B] shrink-0"></i>
+              <span>30m Free Return Grace</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-[#111827] shrink-0"></i>
+              <span>Instant UPI Escrow</span>
+            </div>
           </div>
 
-          <!-- Stats Strip in Hero -->
-          <div class="flex items-center gap-6 mt-10 pt-6 border-t border-purple-200/60 text-xs text-slate-600">
-            <div class="flex items-center gap-2">
-              <span class="font-heading font-extrabold text-lg text-[#1E1B4B]">9</span>
-              <span class="font-medium">Active Units</span>
-            </div>
-            <div class="w-1 h-1 rounded-full bg-purple-300"></div>
-            <div class="flex items-center gap-2">
-              <span class="font-heading font-extrabold text-lg text-emerald-600">100%</span>
-              <span class="font-medium">PRN Verified</span>
-            </div>
-            <div class="w-1 h-1 rounded-full bg-purple-300"></div>
-            <div class="flex items-center gap-2">
-              <span class="font-heading font-extrabold text-lg text-[#8B5CF6]">3</span>
-              <span class="font-medium">Safe-Zone Stations</span>
-            </div>
-          </div>
         </div>
 
-        <!-- Right Column: Floating Interactive Preview Badge with Live Event Gear Specs -->
+        <!-- Right Side: High-Contrast Vibrant Yellow Angled Banner Highlighting Top Fest Equipment -->
         <div class="lg:col-span-5">
-          <div class="studio-card p-6 sm:p-7 rounded-3xl bg-white/95 backdrop-blur-md border border-[#E9D5FF] shadow-[0_20px_50px_-10px_rgba(139,92,246,0.22)] relative group">
+          <div class="hero-yellow-banner p-6 sm:p-8 text-[#111827]">
             
-            <!-- Floating Live Pill Badge -->
-            <div class="flex items-center justify-between pb-4 mb-4 border-b border-purple-100">
-              <div class="flex items-center gap-2">
-                <span class="pulse-dot-green"></span>
-                <span class="text-xs font-extrabold uppercase tracking-wider text-[#1E1B4B] font-heading">LIVE RIG SPOTLIGHT</span>
-              </div>
-              <span class="badge-cat-audio text-[10px] font-bold px-3 py-1">STD-01 // AUDITORIUM RIG</span>
+            <!-- Top Spotlight Header -->
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#F59E0B]/50">
+              <span class="bg-[#111827] text-[#FBBF24] font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm">
+                🔥 Top Fest Equipment Choice
+              </span>
+              <span class="text-xs font-black uppercase text-[#78350F]">STD-01 // AUDITORIUM RIG</span>
             </div>
 
-            <!-- Photo Preview -->
-            <div class="relative h-56 rounded-2xl overflow-hidden bg-slate-100 mb-5 border border-purple-100">
-              <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1000&q=80" alt="JBL PartyBox Rig" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[#1E1B4B] px-3 py-1 text-xs font-bold rounded-full shadow-sm flex items-center gap-1.5">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <!-- Hardware Image Container -->
+            <div class="relative h-56 rounded-2xl overflow-hidden bg-white/40 mb-4 border border-white/60 shadow-inner group">
+              <img 
+                src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1000&q=80" 
+                alt="JBL PartyBox Dual Rig" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              >
+              <div class="absolute top-3 left-3 bg-[#111827] text-white px-3 py-1 text-xs font-bold rounded-lg shadow-md flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#FBBF24]"></i>
                 <span>Canteen Locker #02</span>
               </div>
-              <div class="absolute bottom-3 right-3 bg-[#1E1B4B]/90 backdrop-blur-sm text-white px-3 py-1 text-xs font-bold rounded-full">
+              <div class="absolute bottom-3 right-3 bg-white/95 text-[#111827] px-3 py-1 text-xs font-black rounded-lg shadow-md">
                 Rahul S. ★ 4.9
               </div>
             </div>
 
-            <!-- Spec Highlights -->
-            <h3 class="text-xl font-extrabold font-heading text-[#1E1B4B] mb-1.5 leading-snug">
-              JBL PartyBox Dual Rig + Lapel Pack
+            <!-- Gear Specs -->
+            <h3 class="text-xl sm:text-2xl font-black font-heading text-[#111827] leading-tight mb-1">
+              JBL PartyBox 310 Dual Rig + Lapel Pack
             </h3>
-            <p class="text-xs text-slate-500 mb-4">
-              240W RMS dynamic sound, dual VHF wireless lapel receiver, 18h battery pack.
+            <p class="text-xs text-[#78350F] font-semibold mb-4 leading-relaxed">
+              240W RMS dynamic sound, dual VHF wireless lapel receiver, and heavy-duty 18hr battery.
             </p>
 
-            <!-- Mini Interactive Days Slider -->
-            <div class="p-3.5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] mb-5">
+            <!-- Multi-Day Estimator Slider -->
+            <div class="p-3.5 rounded-xl bg-white/80 border border-white mb-4 shadow-sm">
               <div class="flex justify-between items-center text-xs mb-1.5">
-                <span class="font-bold text-slate-700 text-[11px] uppercase tracking-wider">Reservation Duration:</span>
-                <span class="font-extrabold text-[#7C3AED] text-sm" id="featured-days-label">1 Day</span>
+                <span class="font-extrabold text-[#111827] text-xs uppercase tracking-wider">Rental Duration:</span>
+                <span class="font-black text-[#111827] text-sm" id="featured-days-label">1 Day</span>
               </div>
               <input 
                 type="range" 
@@ -243,28 +242,32 @@
                 value="1" 
                 id="featured-duration-slider"
                 oninput="updateFeaturedKitDays(this.value)"
-                class="w-full cursor-pointer h-1.5"
+                class="w-full cursor-pointer h-2"
               >
-              <div class="flex justify-between text-[10px] text-slate-400 font-medium mt-1">
-                <span>1d</span>
-                <span>2d (Weekend)</span>
-                <span>3d (Fest)</span>
-                <span>5d</span>
+              <div class="flex justify-between text-[10px] text-slate-700 font-bold mt-1">
+                <span>1 Day</span>
+                <span>2 Days</span>
+                <span>3 Days (Fest)</span>
+                <span>5 Days</span>
               </div>
             </div>
 
-            <!-- Price & Action -->
-            <div class="flex items-center justify-between pt-2">
+            <!-- Price & Action Button -->
+            <div class="flex items-center justify-between pt-1">
               <div>
                 <div class="flex items-baseline gap-1.5">
-                  <span class="text-3xl font-extrabold font-heading text-[#1E1B4B]" id="featured-total-display">₹900</span>
-                  <span class="text-xs text-slate-400 font-medium">total</span>
+                  <span class="text-3xl sm:text-4xl font-black font-heading text-[#111827]" id="featured-total-display">₹900</span>
+                  <span class="text-xs text-[#78350F] font-bold">total</span>
                 </div>
-                <span class="badge-deposit text-[10px] mt-0.5">₹500 Deposit Included</span>
+                <span class="text-[11px] text-[#78350F] font-bold block">Includes ₹500 refundable deposit</span>
               </div>
 
-              <button onclick="handleRentClick('eq-1')" class="btn-purple-pill px-6 py-3 text-xs font-bold uppercase tracking-wider shadow-md">
-                Reserve Pass →
+              <button 
+                onclick="handleRentClick('eq-1')" 
+                class="btn-obsidian px-6 py-3 rounded-xl font-black text-xs uppercase tracking-wider shadow-md flex items-center gap-2"
+              >
+                <span>Reserve Rig</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-[#FBBF24]"></i>
               </button>
             </div>
 
@@ -276,156 +279,151 @@
   </section>
 
   <!-- ========================================================================= -->
-  <!-- 3. FEATURED STUDIO GEAR SHOWCASE -->
+  <!-- 3. FEATURED FESTIVAL RIGS BENTO -->
   <!-- ========================================================================= -->
-  <section id="bento-showcase" class="py-12">
+  <section id="bento-showcase" class="py-12 bg-[#FAFAFA] border-b border-[#E5E7EB]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
       <div class="flex items-center justify-between gap-4 mb-8">
         <div class="flex items-center gap-3">
-          <div class="w-3 h-3 rounded-full bg-[#8B5CF6]"></div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-[#1E1B4B] tracking-tight">
+          <div class="w-3.5 h-3.5 rounded-md bg-[#FBBF24] border border-[#F59E0B]"></div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-[#111827] tracking-tight">
             Curated Festival Rigs
           </h2>
         </div>
         <span class="text-xs text-slate-500 font-semibold hidden sm:inline">Handover Ready Across Campus Safe-Zones</span>
       </div>
 
-      <!-- Studio Bento Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- BENTO CARD 1: Large Featured Studio Rig (7 Columns) -->
-        <div class="lg:col-span-7 studio-card p-7 sm:p-8 rounded-3xl bg-white flex flex-col justify-between border border-[#E9D5FF]">
+        <!-- Bento Card 1: Large Featured Rig (7 Columns) -->
+        <div class="lg:col-span-7 bg-white p-6 sm:p-7 rounded-xl flex flex-col justify-between border border-[#E5E7EB] shadow-sm">
           <div>
-            <!-- Header Tag -->
-            <div class="flex items-center justify-between gap-2 pb-4 mb-5 border-b border-purple-100">
-              <div class="flex items-center gap-2.5">
-                <span class="badge-cat-audio text-xs font-bold uppercase tracking-wider px-3.5 py-1">
-                  Fest Rig Choice
-                </span>
-                <span class="text-xs font-bold text-slate-400">#STD-01</span>
-              </div>
+            <div class="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100">
+              <span class="badge-cat-audio text-xs font-bold uppercase tracking-wider px-3 py-1">
+                Fest Rig Choice
+              </span>
               <span class="badge-verified">
                 <i data-lucide="check" class="w-3 h-3 text-emerald-600"></i> Stage Verified
               </span>
             </div>
 
-            <!-- Title & Spec Summary -->
-            <h3 class="text-2xl sm:text-3xl font-extrabold font-heading text-[#1E1B4B] tracking-tight leading-tight mb-2.5">
+            <h3 class="text-xl sm:text-2xl font-extrabold font-heading text-[#111827] tracking-tight mb-2">
               JBL Dual PartyBox Rig + Wireless Lapel Pack
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
+            <p class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed">
               Complete auditorium and flashmob sonic package. 240W high-output speaker with dynamic bass, dual VHF wireless lapel receiver, 10m heavy XLR patch cable, and stand.
             </p>
 
-            <!-- Hardware Photo Preview -->
-            <div class="relative h-64 w-full rounded-2xl overflow-hidden bg-slate-100 mb-6 group border border-purple-100">
+            <div class="relative h-60 w-full rounded-xl overflow-hidden bg-slate-100 mb-5 group border border-slate-200">
               <img 
                 src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1000&q=80" 
                 alt="JBL PartyBox Rig" 
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               >
-              <div class="absolute top-3.5 left-3.5 bg-white/90 backdrop-blur-sm text-[#1E1B4B] px-3.5 py-1 text-xs font-bold rounded-full shadow-sm">
+              <div class="absolute top-3 left-3 bg-white/95 text-[#111827] px-3 py-1 text-xs font-bold rounded-lg shadow-sm">
                 Safe-Zone: Central Canteen Locker #02
               </div>
-              <div class="absolute bottom-3.5 right-3.5 bg-white/95 text-[#1E1B4B] px-3.5 py-1 text-xs font-bold rounded-full shadow-sm">
+              <div class="absolute bottom-3 right-3 bg-[#111827] text-white px-3 py-1 text-xs font-bold rounded-lg shadow-sm">
                 Rahul S. (Comps) ★ 4.9
               </div>
             </div>
           </div>
 
-          <!-- Bottom Price & Instant Booking CTA -->
-          <div class="pt-5 border-t border-purple-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-extrabold font-heading text-[#1E1B4B]">₹450</span>
-                <span class="text-xs text-slate-500 font-bold">/day</span>
-                <span class="badge-deposit text-[10px]">Deposit: ₹500 (Refundable)</span>
+              <div class="flex items-baseline gap-1.5">
+                <span class="text-3xl font-black font-heading text-[#111827]">₹450</span>
+                <span class="text-xs text-slate-500 font-bold">/ Day</span>
+                <span class="badge-deposit text-[10px] ml-2">Deposit: ₹500 (Refundable)</span>
               </div>
-              <div class="text-xs text-slate-500 font-medium mt-1">
+              <div class="text-xs text-slate-500 font-medium mt-0.5">
                 Zero vendor commission • Instant UPI handover escrow
               </div>
             </div>
 
             <button 
               onclick="handleRentClick('eq-1')"
-              class="btn-purple-pill px-7 py-3.5 text-xs font-bold uppercase tracking-wider shadow-md w-full sm:w-auto"
+              class="btn-yellow px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm w-full sm:w-auto"
             >
               <span>Rent Fest Rig →</span>
             </button>
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: BENTO CARDS 2 & 3 (5 Columns) -->
+        <!-- Bento Right Column: Cards 2 & 3 (5 Columns) -->
         <div class="lg:col-span-5 flex flex-col gap-6">
           
-          <!-- BENTO CARD 2: Spec Sheet Card (Ahuja Mics) -->
-          <div class="studio-card p-6 rounded-3xl bg-white border border-[#E9D5FF] flex-1">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b border-purple-100">
-              <span class="badge-cat-audio text-[10px] font-bold uppercase tracking-wider px-3 py-1">
-                Audio // Mic-02
-              </span>
-              <span class="flex items-center text-xs font-bold text-emerald-700">
-                <span class="pulse-dot-green mr-1.5"></span> Available Today
-              </span>
-            </div>
+          <!-- Bento Card 2: Ahuja Wireless Mics -->
+          <div class="bg-white p-6 rounded-xl border border-[#E5E7EB] shadow-sm flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+                <span class="badge-cat-audio text-[10px] font-bold uppercase tracking-wider px-2.5 py-1">
+                  Audio // Mic-02
+                </span>
+                <span class="flex items-center text-xs font-bold text-emerald-700">
+                  <span class="pulse-dot-green mr-1.5"></span> Available Today
+                </span>
+              </div>
 
-            <div class="flex items-start gap-4 mb-4">
-              <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=400&q=80" alt="Mics" class="w-16 h-16 rounded-2xl object-cover border border-purple-100 shrink-0">
-              <div>
-                <h4 class="text-base font-extrabold font-heading text-[#1E1B4B] leading-tight mb-1">
-                  Ahuja Dual Wireless Lapel Mics
-                </h4>
-                <p class="text-xs text-slate-500">Dual bodypack transmitter with cardioid tie-clip capsules.</p>
+              <div class="flex items-start gap-3.5 mb-3">
+                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=400&q=80" alt="Mics" class="w-16 h-16 rounded-xl object-cover border border-slate-200 shrink-0">
+                <div>
+                  <h4 class="text-base font-extrabold font-heading text-[#111827] leading-tight mb-1">
+                    Ahuja Dual Wireless Lapel Mics
+                  </h4>
+                  <p class="text-xs text-slate-500">Dual bodypack transmitter with cardioid tie-clip capsules.</p>
+                </div>
               </div>
-            </div>
 
-            <!-- Tech Spec Matrix -->
-            <div class="bg-[#F5F3FF] p-3.5 rounded-2xl border border-[#DDD6FE] mb-4 space-y-1.5 text-xs">
-              <div class="flex justify-between">
-                <span class="text-slate-500 font-medium">RF Range:</span>
-                <span class="font-bold text-[#1E1B4B]">60m Line-of-sight</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-slate-500 font-medium">Batteries:</span>
-                <span class="font-bold text-[#1E1B4B]">4x AA Included</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-slate-500 font-medium">Security Deposit:</span>
-                <span class="font-bold text-emerald-700">₹300 (100% Refundable)</span>
+              <!-- Tech Spec Box -->
+              <div class="bg-[#F9FAFB] p-3 rounded-lg border border-[#E5E7EB] mb-4 space-y-1 text-xs">
+                <div class="flex justify-between">
+                  <span class="text-slate-500 font-medium">RF Range:</span>
+                  <span class="font-bold text-[#111827]">60m Line-of-sight</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500 font-medium">Batteries:</span>
+                  <span class="font-bold text-[#111827]">4x AA Included</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500 font-medium">Security Deposit:</span>
+                  <span class="font-bold text-emerald-700">₹300 (100% Refundable)</span>
+                </div>
               </div>
             </div>
 
             <div class="flex items-center justify-between pt-2">
               <div>
-                <span class="text-2xl font-extrabold font-heading text-[#1E1B4B]">₹250</span>
-                <span class="text-xs text-slate-500 font-medium">/day</span>
+                <span class="text-2xl font-black font-heading text-[#111827]">₹250</span>
+                <span class="text-xs text-slate-500 font-medium">/ Day</span>
               </div>
-              <button onclick="handleRentClick('eq-3')" class="btn-purple-pill px-5 py-2.5 text-xs font-bold uppercase tracking-wider">
+              <button onclick="handleRentClick('eq-3')" class="btn-yellow px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider">
                 Reserve Mic →
               </button>
             </div>
           </div>
 
-          <!-- BENTO CARD 3: Safe-Zone Hardware Lockers Status Widget -->
-          <div class="studio-panel p-5 rounded-3xl bg-white/95 border border-[#E9D5FF]">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b border-purple-100 text-xs font-bold">
-              <span class="flex items-center gap-2 text-[#1E1B4B]">
-                <i data-lucide="shield-check" class="w-4 h-4 text-[#8B5CF6]"></i>
+          <!-- Bento Card 3: Safe-Zone Hardware Lockers Status -->
+          <div class="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-sm">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 text-xs font-bold">
+              <span class="flex items-center gap-2 text-[#111827]">
+                <i data-lucide="shield-check" class="w-4 h-4 text-[#F59E0B]"></i>
                 <span>Safe-Zone Lockers</span>
               </span>
-              <span class="text-emerald-700 font-bold uppercase text-[10px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">Active</span>
+              <span class="text-emerald-700 font-extrabold uppercase text-[10px] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">ACTIVE</span>
             </div>
 
             <div class="grid grid-cols-2 gap-3 text-xs">
-              <div class="p-3 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE]">
-                <div class="font-bold text-[#1E1B4B] text-[11px] mb-0.5">Nescafe Food Court</div>
-                <div class="text-[#7C3AED] font-bold text-[10px]">Lockers #01-04 Ready</div>
+              <div class="p-3 rounded-lg bg-[#F9FAFB] border border-[#E5E7EB]">
+                <div class="font-extrabold text-[#111827] text-[11px] mb-0.5">Nescafe Food Court</div>
+                <div class="text-[#D97706] font-bold text-[10px]">Lockers #01-04 Ready</div>
                 <div class="text-slate-400 text-[10px]">240V Test Bench Online</div>
               </div>
-              <div class="p-3 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE]">
-                <div class="font-bold text-[#1E1B4B] text-[11px] mb-0.5">IT Lab 302 Desk</div>
-                <div class="text-[#7C3AED] font-bold text-[10px]">Lockers #05-08 Ready</div>
+              <div class="p-3 rounded-lg bg-[#F9FAFB] border border-[#E5E7EB]">
+                <div class="font-extrabold text-[#111827] text-[11px] mb-0.5">IT Lab 302 Desk</div>
+                <div class="text-[#D97706] font-bold text-[10px]">Lockers #05-08 Ready</div>
                 <div class="text-slate-400 text-[10px]">Multimeter Bench Online</div>
               </div>
             </div>
@@ -439,75 +437,75 @@
   </section>
 
   <!-- ========================================================================= -->
-  <!-- 4. FULL EQUIPMENT CATALOG & STUDIO PASSES -->
+  <!-- 4. EQUIPMENT CATALOG & STRUCTURED E-COMMERCE CARDS -->
   <!-- ========================================================================= -->
-  <section id="marketplace-section" class="py-14 border-t border-purple-100">
+  <section id="marketplace-section" class="py-14 bg-[#FAFAFA]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
       <!-- Catalog Filter Bar -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
         <div>
-          <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F3E8FF] border border-[#DDD6FE] text-[#7C3AED] text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Curated Equipment Passes
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-[#1E1B4B] tracking-tight">
-            Campus Hardware Catalog
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-[10px] font-black uppercase tracking-wider mb-2">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i> Equipment Inventory
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-[#111827] tracking-tight">
+            Campus Equipment Catalog
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 mt-1">
-            Pure white studio passes with live campus locker availability and refundable security deposits.
+            Clean, structured peer passes with live locker availability and refundable security deposits.
           </p>
         </div>
 
         <!-- Filter & Search Controls -->
         <div class="flex flex-wrap items-center gap-3">
           <div class="relative">
-            <i data-lucide="search" class="w-4 h-4 text-[#8B5CF6] absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
             <input 
               type="text" 
               id="marketplace-search"
               placeholder="Search gear by name..." 
-              class="pl-10 pr-4 py-2.5 rounded-full text-xs font-semibold neo-input w-52 sm:w-64"
+              class="pl-10 pr-4 py-2 rounded-xl text-xs font-semibold neo-input w-52 sm:w-64"
             >
           </div>
 
-          <select id="marketplace-sort" class="px-4 py-2.5 rounded-full text-xs font-bold neo-input cursor-pointer text-[#1E1B4B]">
+          <select id="marketplace-sort" class="px-4 py-2 rounded-xl text-xs font-bold neo-input cursor-pointer text-[#111827]">
             <option value="recommended">Sort: Recommended</option>
             <option value="price-low">Rate: Low to High</option>
             <option value="price-high">Rate: High to Low</option>
             <option value="rating">Top Peer Reputation</option>
           </select>
 
-          <span id="marketplace-count" class="text-xs font-bold bg-[#F3E8FF] text-[#7C3AED] px-4 py-2.5 rounded-full border border-[#DDD6FE]">
-            9 units available
+          <span id="marketplace-count" class="text-xs font-bold">
+            <!-- Rendered by JS -->
           </span>
         </div>
       </div>
 
-      <!-- Category Filter Pills -->
-      <div class="flex items-center gap-2.5 overflow-x-auto pb-4 mb-8 scrollbar-none">
-        <button data-category="all" class="filter-pill active px-5 py-2.5 shrink-0">
+      <!-- Active Category Tabs with High-Visibility Yellow Accents -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+        <button data-category="all" class="filter-pill active">
           All Equipment (9)
         </button>
-        <button data-category="audio" class="filter-pill px-5 py-2.5 shrink-0">
+        <button data-category="audio" class="filter-pill">
           Audio & Sound
         </button>
-        <button data-category="projection" class="filter-pill px-5 py-2.5 shrink-0">
+        <button data-category="projection" class="filter-pill">
           Projectors & Displays
         </button>
-        <button data-category="lighting" class="filter-pill px-5 py-2.5 shrink-0">
+        <button data-category="lighting" class="filter-pill">
           Stage Lighting
         </button>
-        <button data-category="photography" class="filter-pill px-5 py-2.5 shrink-0">
+        <button data-category="photography" class="filter-pill">
           Cameras & Video
         </button>
-        <button data-category="cables" class="filter-pill px-5 py-2.5 shrink-0">
+        <button data-category="cables" class="filter-pill">
           Cables & Power
         </button>
       </div>
 
       <!-- Passes Grid -->
-      <div id="equipment-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Rendered dynamically by app.js with rounded-3xl cards & soft diffused purple shadows -->
+      <div id="equipment-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js with clean structured e-commerce cards -->
       </div>
 
     </div>
@@ -516,15 +514,15 @@
   <!-- ========================================================================= -->
   <!-- 5. ACTIVE HANDOVER TRACKER & ESCROW CONSOLE -->
   <!-- ========================================================================= -->
-  <section id="tracker-section" class="py-14 border-t border-purple-100">
+  <section id="tracker-section" class="py-14 bg-white border-t border-[#E5E7EB]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F3E8FF] border border-[#DDD6FE] text-[#7C3AED] text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-[10px] font-black uppercase tracking-wider mb-2">
             <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Telemetry & Escrow Ledger
           </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-[#1E1B4B] tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-[#111827] tracking-tight">
             Active Handover & Escrow Console
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 mt-1">
@@ -533,28 +531,28 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <span class="text-xs font-bold px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-1.5 shadow-sm">
+          <span class="text-xs font-bold px-4 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-1.5 shadow-sm">
             <span class="pulse-dot-green"></span> Peer Escrow: Active
           </span>
         </div>
       </div>
 
       <!-- Main Console Panel -->
-      <div class="studio-panel rounded-3xl p-6 sm:p-8 bg-white border border-[#E9D5FF] shadow-[0_10px_30px_-5px_rgba(139,92,246,0.12)]">
+      <div class="marketplace-panel rounded-xl p-6 sm:p-8 bg-white border border-[#E5E7EB] shadow-sm">
         
         <div id="tracker-card-container">
-          <!-- Rendered dynamically by app.js with studio progress nodes -->
+          <!-- Rendered dynamically by app.js -->
         </div>
 
         <!-- Escrow Simulation Playground -->
-        <div class="mt-8 pt-8 border-t border-[#F3E8FF]">
+        <div class="mt-8 pt-8 border-t border-[#E5E7EB]">
           <div class="flex flex-col lg:flex-row gap-8 items-start justify-between">
             
             <!-- Controls Area -->
             <div class="flex-1 w-full space-y-5">
               <div class="flex items-center justify-between">
-                <h4 class="text-xs font-bold text-[#1E1B4B] uppercase tracking-wider flex items-center gap-1.5">
-                  <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#8B5CF6]"></i> Escrow Latency & Penalty Simulator
+                <h4 class="text-xs font-extrabold text-[#111827] uppercase tracking-wider flex items-center gap-1.5">
+                  <i data-lucide="sliders" class="w-3.5 h-3.5 text-[#F59E0B]"></i> Escrow Latency & Penalty Simulator
                 </h4>
                 <span id="escrow-status-badge" class="text-xs px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
                   ✓ 100% Escrow Refund Guarantee
@@ -562,9 +560,9 @@
               </div>
 
               <!-- Late return slider -->
-              <div class="p-5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE]">
+              <div class="p-5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
                 <div class="flex items-center justify-between text-xs mb-2">
-                  <span class="font-bold text-[#1E1B4B]">Return Handover Delay:</span>
+                  <span class="font-extrabold text-[#111827]">Return Handover Delay:</span>
                   <span id="sim-late-label" class="font-bold text-emerald-700">15m (30-min Free Grace Applied)</span>
                 </div>
                 <input 
@@ -576,9 +574,9 @@
                   value="15" 
                   class="w-full cursor-pointer h-2"
                 >
-                <div class="flex justify-between text-[11px] text-slate-400 mt-2 font-medium">
+                <div class="flex justify-between text-[11px] text-slate-400 mt-2 font-semibold">
                   <span>0m (On Time)</span>
-                  <span class="text-[#7C3AED] font-bold">30m Grace (Free)</span>
+                  <span class="text-[#D97706] font-bold">30m Grace (Free)</span>
                   <span>1h (+₹50)</span>
                   <span>2h (+₹100)</span>
                   <span>3h (+₹150)</span>
@@ -589,55 +587,55 @@
               </div>
 
               <!-- Damage inspection toggle -->
-              <div class="p-4 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] flex items-center justify-between">
+              <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-between">
                 <div>
-                  <div class="text-xs font-bold text-[#1E1B4B]">Safe-Zone Bench Inspection</div>
+                  <div class="text-xs font-bold text-[#111827]">Safe-Zone Bench Inspection</div>
                   <div class="text-xs text-slate-400">Physical multimeter / scratch verification</div>
                 </div>
-                <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-[#1E1B4B]">
-                  <input type="checkbox" id="sim-damage-toggle" class="w-4 h-4 rounded text-[#8B5CF6] accent-[#8B5CF6]">
+                <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-[#111827]">
+                  <input type="checkbox" id="sim-damage-toggle" class="w-4 h-4 rounded text-[#F59E0B] accent-[#F59E0B]">
                   <span>Simulate Cable Damage (-₹150)</span>
                 </label>
               </div>
             </div>
 
             <!-- Receipt Card -->
-            <div class="w-full lg:w-96 p-6 rounded-3xl border border-[#E9D5FF] bg-[#FDFBFE] shadow-sm">
-              <div class="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest pb-3 border-b border-dashed border-[#DDD6FE]">
+            <div class="w-full lg:w-96 p-6 rounded-xl border border-[#E5E7EB] bg-[#FFFBEB] shadow-sm">
+              <div class="flex items-center justify-between text-[10px] font-black text-slate-500 uppercase tracking-widest pb-3 border-b border-dashed border-[#FDE68A]">
                 <span>Escrow Manifest</span>
-                <span class="text-[#1E1B4B] font-mono">Ref: TXN-8902</span>
+                <span class="text-[#111827] font-mono">Ref: TXN-8902</span>
               </div>
 
-              <div class="space-y-3 py-4 text-xs border-b border-dashed border-[#DDD6FE]">
+              <div class="space-y-3 py-4 text-xs border-b border-dashed border-[#FDE68A]">
                 <div class="flex justify-between">
-                  <span class="text-slate-500 font-medium">Locked Deposit:</span>
-                  <span id="escrow-locked-amount" class="font-bold text-[#1E1B4B]">₹500</span>
+                  <span class="text-slate-600 font-medium">Locked Deposit:</span>
+                  <span id="escrow-locked-amount" class="font-black text-[#111827]">₹500</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-slate-500 font-medium">Delay Penalty:</span>
+                  <span class="text-slate-600 font-medium">Delay Penalty:</span>
                   <span id="escrow-late-deduction" class="font-bold text-emerald-700">₹0</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-slate-500 font-medium">Damage Assessment:</span>
+                  <span class="text-slate-600 font-medium">Damage Assessment:</span>
                   <span id="escrow-damage-deduction" class="font-bold text-emerald-700">₹0</span>
                 </div>
               </div>
 
               <div class="pt-4 mb-5">
                 <div class="flex items-baseline justify-between">
-                  <span class="text-xs font-bold text-[#1E1B4B]">Net Return to UPI:</span>
-                  <span id="escrow-net-refund" class="text-3xl font-extrabold font-heading text-emerald-700">₹500</span>
+                  <span class="text-xs font-bold text-[#111827]">Net Return to UPI:</span>
+                  <span id="escrow-net-refund" class="text-3xl font-black font-heading text-emerald-700">₹500</span>
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1">
+                <p class="text-[11px] text-slate-500 mt-1 font-medium">
                   Transferred in seconds upon digital sign-off from Safe-Zone Marshall.
                 </p>
               </div>
 
               <button 
                 onclick="simulateInstantRefund()"
-                class="btn-purple-pill w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                class="btn-yellow w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm"
               >
-                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-300"></i>
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
                 <span>Simulate Instant UPI Refund</span>
               </button>
             </div>
@@ -653,15 +651,15 @@
   <!-- ========================================================================= -->
   <!-- 6. CAMPUS WANTED BOARD -->
   <!-- ========================================================================= -->
-  <section id="wanted-board-section" class="py-14 border-t border-purple-100">
+  <section id="wanted-board-section" class="py-14 bg-[#FAFAFA] border-t border-[#E5E7EB]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
-          <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F3E8FF] border border-[#DDD6FE] text-[#7C3AED] text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
-            <i data-lucide="pin" class="w-3 h-3 text-[#8B5CF6]"></i> Reverse Marketplace // Notice Board
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-[10px] font-black uppercase tracking-wider mb-2">
+            <i data-lucide="pin" class="w-3.5 h-3.5 text-[#F59E0B]"></i> Reverse Marketplace // Notice Board
           </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-[#1E1B4B] tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-[#111827] tracking-tight">
             Campus Wanted Board
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 mt-1">
@@ -671,16 +669,16 @@
 
         <button 
           onclick="openPostWantedModal()"
-          class="btn-purple-pill px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2 shrink-0 shadow-md"
+          class="btn-yellow px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-2 shrink-0 shadow-sm"
         >
-          <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span>+ Post Urgent Request</span>
         </button>
       </div>
 
       <!-- Wanted Cards Grid -->
       <div id="wanted-board-cards" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Rendered dynamically by app.js with studio glass cards -->
+        <!-- Rendered dynamically by app.js with clean structured cards -->
       </div>
 
     </div>
@@ -689,16 +687,16 @@
   <!-- ========================================================================= -->
   <!-- 7. CAMPUS SAFE ZONES INFO STRIP -->
   <!-- ========================================================================= -->
-  <section class="py-12 border-t border-purple-100">
+  <section class="py-12 bg-white border-t border-[#E5E7EB]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="studio-panel p-6 sm:p-8 rounded-3xl bg-white/95 border border-[#E9D5FF] flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_10px_30px_-5px_rgba(139,92,246,0.12)]">
+      <div class="p-6 sm:p-8 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
         <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#8B5CF6] to-[#6D28D9] text-white flex items-center justify-center font-heading font-extrabold text-lg shrink-0 shadow-md">
-            <i data-lucide="shield-check" class="w-6 h-6 text-purple-200"></i>
+          <div class="w-12 h-12 rounded-xl bg-[#111827] text-[#FBBF24] flex items-center justify-center font-heading font-black text-lg shrink-0 shadow-sm">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
           </div>
           <div>
-            <h3 class="text-lg font-extrabold font-heading text-[#1E1B4B]">Campus Safe-Zone Exchange Protocol</h3>
-            <p class="text-xs sm:text-sm text-slate-500 max-w-2xl mt-1 leading-relaxed">
+            <h3 class="text-lg font-black font-heading text-[#111827]">Campus Safe-Zone Exchange Protocol</h3>
+            <p class="text-xs sm:text-sm text-slate-600 max-w-2xl mt-1 leading-relaxed">
               Zero unvetted hostel exchanges. All CampusEquip physical transfers occur at registered safe-zones featuring 240V test sockets, high-def campus CCTV, and trained student marshals.
             </p>
           </div>
@@ -706,9 +704,9 @@
 
         <button 
           onclick="openSafeZonesModal()"
-          class="btn-frosted-pill px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2 shrink-0 shadow-sm"
+          class="btn-obsidian px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-2 shrink-0 shadow-sm"
         >
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#8B5CF6]"></i>
+          <i data-lucide="map-pin" class="w-4 h-4 text-[#FBBF24]"></i>
           <span>View Safe Zone Details →</span>
         </button>
       </div>
@@ -718,22 +716,22 @@
   <!-- ========================================================================= -->
   <!-- FOOTER -->
   <!-- ========================================================================= -->
-  <footer class="border-t border-purple-100 bg-white/80 backdrop-blur-md py-12 text-slate-500 text-xs">
+  <footer class="border-t border-[#E5E7EB] bg-white py-12 text-slate-500 text-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3">
-        <div class="bg-gradient-to-r from-[#8B5CF6] to-[#6D28D9] text-white px-3.5 py-1.5 rounded-full font-bold font-heading shadow-sm">
+        <div class="bg-[#111827] text-[#FBBF24] px-3.5 py-1.5 rounded-lg font-black font-heading shadow-sm">
           CampusEquip
         </div>
-        <span class="text-[#7C3AED] font-semibold tracking-wide">Lavender & Lilac Creative Studio</span>
+        <span class="text-[#D97706] font-bold tracking-wide">Industrial Electric Marketplace</span>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-6 font-semibold text-[#1E1B4B]">
-        <a href="#bento-showcase" class="hover:text-[#7C3AED] transition-colors">Featured Gear</a>
-        <a href="#marketplace-section" class="hover:text-[#7C3AED] transition-colors">Catalog</a>
-        <a href="#wanted-board-section" class="hover:text-[#7C3AED] transition-colors">Wanted Board</a>
-        <a href="#tracker-section" class="hover:text-[#7C3AED] transition-colors">Escrow Console</a>
-        <button onclick="openSafeZonesModal()" class="hover:text-[#7C3AED] transition-colors">Safe Zones</button>
+      <div class="flex flex-wrap items-center justify-center gap-6 font-bold text-[#111827]">
+        <a href="#bento-showcase" class="hover:text-[#F59E0B] transition-colors">Featured Rigs</a>
+        <a href="#marketplace-section" class="hover:text-[#F59E0B] transition-colors">Catalog</a>
+        <a href="#wanted-board-section" class="hover:text-[#F59E0B] transition-colors">Wanted Board</a>
+        <a href="#tracker-section" class="hover:text-[#F59E0B] transition-colors">Escrow Console</a>
+        <button onclick="openSafeZonesModal()" class="hover:text-[#F59E0B] transition-colors">Safe Zones</button>
       </div>
 
       <div class="badge-verified">
@@ -746,38 +744,35 @@
   <!-- ========================================================================= -->
   <!-- MODAL 1: CHECKOUT TICKET DIALOG -->
   <!-- ========================================================================= -->
-  <div id="booking-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#1E1B4B]/40 backdrop-blur-xl hidden items-center justify-center p-4">
-    <div class="studio-panel max-w-xl w-full rounded-3xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto bg-white/95 backdrop-blur-2xl border border-[#E9D5FF] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.25)]">
+  <div id="booking-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#111827]/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-xl w-full rounded-2xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto border border-[#E5E7EB] shadow-2xl">
       
-      <!-- Top Punch Hole Graphic -->
-      <div class="punch-slot mb-4"></div>
-
       <!-- Ticket Header Strip -->
-      <div class="flex items-start justify-between gap-4 pb-4 border-b border-purple-100">
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <span id="modal-item-category" class="badge-cat-audio text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
             Audio // Sys-01
           </span>
-          <h3 id="modal-item-title" class="text-xl sm:text-2xl font-extrabold font-heading text-[#1E1B4B] mt-2 tracking-tight">
+          <h3 id="modal-item-title" class="text-xl sm:text-2xl font-black font-heading text-[#111827] mt-2 tracking-tight">
             JBL PartyBox 310 Speaker Set
           </h3>
           <p id="modal-item-owner" class="text-xs text-slate-500 mt-1">
             Owner: Rahul S. (Comps Dept) • PRN: IT-2026-OK
           </p>
         </div>
-        <button onclick="closeBookingModal()" class="p-2 rounded-full border border-purple-200 text-slate-400 hover:text-[#1E1B4B] hover:bg-purple-50 transition-colors">
+        <button onclick="closeBookingModal()" class="p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-[#111827] hover:bg-slate-100 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <!-- Barcode Identification Banner -->
-      <div class="my-4 p-4 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] flex items-center justify-between text-xs">
+      <div class="my-4 p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-between text-xs">
         <div>
           <span class="text-slate-400 block text-[10px] uppercase font-bold tracking-wider">Equipment Pass:</span>
-          <span id="modal-barcode-id" class="font-extrabold text-[#1E1B4B] font-mono text-sm">JBL-PB310-8902</span>
+          <span id="modal-barcode-id" class="font-black text-[#111827] font-mono text-sm">JBL-PB310-8902</span>
         </div>
         <div class="text-right">
-          <span id="modal-item-rate" class="font-extrabold text-[#1E1B4B] text-base">₹450/day</span>
+          <span id="modal-item-rate" class="font-black text-[#111827] text-base">₹450/day</span>
           <span class="badge-deposit text-[10px] block mt-0.5" id="modal-item-deposit">₹500 refundable</span>
         </div>
       </div>
@@ -790,19 +785,19 @@
       <!-- Date Selection -->
       <div class="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label class="block text-xs font-bold text-[#1E1B4B] mb-1">Start Date:</label>
-          <input type="date" id="booking-start-date" class="w-full p-2.5 rounded-full neo-input text-xs font-semibold px-4">
+          <label class="block text-xs font-bold text-[#111827] mb-1">Start Date:</label>
+          <input type="date" id="booking-start-date" class="w-full p-2.5 rounded-xl neo-input text-xs font-semibold px-4">
         </div>
         <div>
-          <label class="block text-xs font-bold text-[#1E1B4B] mb-1">Return Date:</label>
-          <input type="date" id="booking-end-date" class="w-full p-2.5 rounded-full neo-input text-xs font-semibold px-4">
+          <label class="block text-xs font-bold text-[#111827] mb-1">Return Date:</label>
+          <input type="date" id="booking-end-date" class="w-full p-2.5 rounded-xl neo-input text-xs font-semibold px-4">
         </div>
       </div>
 
       <!-- Safe Zone Pickup Point -->
       <div class="mb-5">
-        <label class="block text-xs font-bold text-[#1E1B4B] mb-1">Pickup Safe-Zone Locker:</label>
-        <select id="booking-safe-zone" class="w-full p-3 rounded-full neo-input text-xs cursor-pointer font-semibold text-[#1E1B4B] px-4">
+        <label class="block text-xs font-bold text-[#111827] mb-1">Pickup Safe-Zone Locker:</label>
+        <select id="booking-safe-zone" class="w-full p-2.5 rounded-xl neo-input text-xs cursor-pointer font-semibold text-[#111827] px-4">
           <option value="canteen">Canteen Safe-Zone Locker (Near Nescafe, 10 AM - 6 PM)</option>
           <option value="it_lab">IT Lab 302 Desk (Hardware Testing Desk, 9 AM - 5 PM)</option>
           <option value="council_desk">Student Council Desk (Admin Foyer, 11 AM - 7 PM)</option>
@@ -810,14 +805,14 @@
       </div>
 
       <!-- Transparent Cost Breakdown -->
-      <div class="p-4 sm:p-5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] space-y-2.5 mb-6 text-xs">
-        <div class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider pb-1.5 border-b border-purple-200">
+      <div class="p-4 sm:p-5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] space-y-2 mb-6 text-xs">
+        <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider pb-1.5 border-b border-slate-200">
           Cost Breakdown
         </div>
         
         <div class="flex justify-between">
           <span class="text-slate-600 font-medium">Rental Fee (<span id="breakdown-rent-days">₹450 × 1d</span>):</span>
-          <span id="breakdown-rent-total" class="font-bold text-[#1E1B4B]">₹450</span>
+          <span id="breakdown-rent-total" class="font-black text-[#111827]">₹450</span>
         </div>
         
         <div class="flex justify-between">
@@ -827,12 +822,12 @@
 
         <div class="flex justify-between">
           <span class="text-slate-600 font-medium">Peer Discount:</span>
-          <span id="breakdown-discount" class="font-bold text-[#7C3AED]">-₹50</span>
+          <span id="breakdown-discount" class="font-bold text-[#D97706]">-₹50</span>
         </div>
 
-        <div class="pt-2.5 border-t border-purple-200 flex justify-between items-baseline">
-          <span class="text-xs font-bold text-[#1E1B4B]">Total Amount at Handover:</span>
-          <span id="breakdown-final-total" class="text-2xl font-extrabold font-heading text-[#1E1B4B]">₹900</span>
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-baseline">
+          <span class="text-xs font-bold text-[#111827]">Total Amount at Handover:</span>
+          <span id="breakdown-final-total" class="text-2xl font-black font-heading text-[#111827]">₹900</span>
         </div>
 
         <div id="breakdown-refund-note" class="text-[11px] text-slate-500 italic pt-1">
@@ -841,19 +836,19 @@
       </div>
 
       <!-- Bottom Actions -->
-      <div class="pt-2 border-t border-dashed border-purple-200">
+      <div class="pt-2 border-t border-dashed border-slate-200">
         <div class="barcode-lines opacity-75 mb-3.5"></div>
         <div class="flex items-center gap-3">
           <button 
             onclick="closeBookingModal()" 
-            class="btn-frosted-pill flex-1 py-3 rounded-full text-xs font-bold uppercase tracking-wider"
+            class="btn-frosted-pill flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider"
           >
             Cancel
           </button>
           <button 
             id="confirm-booking-btn"
             onclick="confirmBooking()" 
-            class="btn-purple-pill flex-2 w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+            class="btn-yellow flex-2 w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm"
           >
             <i data-lucide="check" class="w-4 h-4"></i>
             <span>Confirm Reservation • Generate OTP</span>
@@ -867,16 +862,14 @@
   <!-- ========================================================================= -->
   <!-- MODAL 2: OTP CELEBRATION MANIFEST -->
   <!-- ========================================================================= -->
-  <div id="otp-success-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#1E1B4B]/40 backdrop-blur-xl hidden items-center justify-center p-4">
-    <div class="studio-panel max-w-md w-full rounded-3xl p-6 sm:p-8 text-center bg-white/95 backdrop-blur-2xl border border-[#E9D5FF] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.25)]">
+  <div id="otp-success-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#111827]/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-2xl p-6 sm:p-8 text-center border border-[#E5E7EB] shadow-2xl">
       
-      <div class="punch-slot mb-4"></div>
-
-      <div class="w-14 h-14 mx-auto mb-3 bg-gradient-to-br from-[#8B5CF6] to-[#6D28D9] text-white rounded-2xl flex items-center justify-center shadow-md">
-        <i data-lucide="check" class="w-7 h-7"></i>
+      <div class="w-14 h-14 mx-auto mb-3 bg-[#FBBF24] text-[#111827] rounded-xl flex items-center justify-center shadow-sm">
+        <i data-lucide="check" class="w-7 h-7 stroke-[3]"></i>
       </div>
 
-      <h3 class="text-xl sm:text-2xl font-extrabold font-heading text-[#1E1B4B] mb-1">
+      <h3 class="text-xl sm:text-2xl font-black font-heading text-[#111827] mb-1">
         Gear Pass Reserved!
       </h3>
       <p class="text-xs text-slate-500 mb-6">
@@ -884,26 +877,26 @@
       </p>
 
       <!-- OTP STAMP BOX -->
-      <div class="p-6 rounded-3xl bg-[#F5F3FF] border border-[#DDD6FE] mb-6 shadow-sm">
-        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1.5">
+      <div class="p-6 rounded-xl bg-[#FFFBEB] border-2 border-[#FBBF24] mb-6 shadow-sm">
+        <span class="text-[10px] uppercase font-black text-[#92400E] tracking-wider block mb-1.5">
           Handover Verification Code
         </span>
-        <div id="otp-code-display" class="font-heading text-4xl sm:text-5xl font-black text-[#7C3AED] tracking-[0.25em] py-1 font-mono">
+        <div id="otp-code-display" class="font-heading text-4xl sm:text-5xl font-black text-[#111827] tracking-[0.25em] py-1 font-mono">
           7492
         </div>
-        <p class="text-xs text-slate-500 mt-2 font-medium">
-          Booking ID: <span id="otp-booking-id" class="font-bold text-[#1E1B4B]">PASS-4821</span>
+        <p class="text-xs text-slate-600 mt-2 font-medium">
+          Booking ID: <span id="otp-booking-id" class="font-bold text-[#111827]">PASS-4821</span>
         </p>
       </div>
 
-      <div class="text-left text-xs space-y-1.5 p-4 rounded-2xl bg-[#F5F3FF]/70 border border-[#DDD6FE] mb-6">
-        <div class="truncate text-[#1E1B4B] font-bold" id="otp-item-name">JBL PartyBox 310 Speaker Set</div>
+      <div class="text-left text-xs space-y-1.5 p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] mb-6">
+        <div class="truncate text-[#111827] font-bold" id="otp-item-name">JBL PartyBox 310 Speaker Set</div>
         <div class="text-slate-500 font-medium" id="otp-safe-spot">Canteen Safe-Zone Locker #02</div>
       </div>
 
       <button 
         onclick="closeOtpSuccessModal()" 
-        class="btn-purple-pill w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg"
+        class="btn-yellow w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm"
       >
         Done • View in Escrow Console →
       </button>
@@ -914,29 +907,29 @@
   <!-- ========================================================================= -->
   <!-- MODAL 3: + LIST EQUIPMENT -->
   <!-- ========================================================================= -->
-  <div id="list-equipment-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#1E1B4B]/40 backdrop-blur-xl hidden items-center justify-center p-4">
-    <div class="studio-panel max-w-lg w-full rounded-3xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto bg-white/95 backdrop-blur-2xl border border-[#E9D5FF] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.25)]">
+  <div id="list-equipment-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#111827]/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-lg w-full rounded-2xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto border border-[#E5E7EB] shadow-2xl">
       
-      <div class="flex items-center justify-between pb-4 border-b border-purple-100 mb-5">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
         <div>
-          <h3 class="text-lg font-extrabold font-heading text-[#1E1B4B]">List Hardware • Issue Pass</h3>
+          <h3 class="text-lg font-black font-heading text-[#111827]">List Hardware • Issue Pass</h3>
           <p class="text-xs text-slate-500">Register idle audio, projection, or stage units to the campus network.</p>
         </div>
-        <button onclick="closeListEquipmentModal()" class="p-2 rounded-full border border-purple-200 text-slate-400 hover:text-[#1E1B4B] hover:bg-purple-50 transition-colors">
+        <button onclick="closeListEquipmentModal()" class="p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-[#111827] hover:bg-slate-100 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <form onsubmit="submitListEquipment(event)" class="space-y-4 text-xs">
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Equipment Model & Brand:</label>
-          <input type="text" id="list-form-title" required placeholder="e.g. Rode Wireless GO II Mic Set" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+          <label class="block font-bold text-[#111827] mb-1">Equipment Model & Brand:</label>
+          <input type="text" id="list-form-title" required placeholder="e.g. Rode Wireless GO II Mic Set" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-bold text-[#1E1B4B] mb-1">Category:</label>
-            <select id="list-form-category" class="w-full p-2.5 rounded-full neo-input font-semibold cursor-pointer px-4 text-[#1E1B4B]">
+            <label class="block font-bold text-[#111827] mb-1">Category:</label>
+            <select id="list-form-category" class="w-full p-2.5 rounded-xl neo-input font-semibold cursor-pointer px-4 text-[#111827]">
               <option value="audio">Audio Systems</option>
               <option value="projection">Projectors</option>
               <option value="lighting">Stage Lights</option>
@@ -945,19 +938,19 @@
             </select>
           </div>
           <div>
-            <label class="block font-bold text-[#1E1B4B] mb-1">Daily Rate (₹):</label>
-            <input type="number" id="list-form-rate" required placeholder="350" min="50" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+            <label class="block font-bold text-[#111827] mb-1">Daily Rate (₹):</label>
+            <input type="number" id="list-form-rate" required placeholder="350" min="50" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-bold text-[#1E1B4B] mb-1">Refundable Deposit (₹):</label>
-            <input type="number" id="list-form-deposit" required placeholder="500" min="100" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+            <label class="block font-bold text-[#111827] mb-1">Refundable Deposit (₹):</label>
+            <input type="number" id="list-form-deposit" required placeholder="500" min="100" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
           </div>
           <div>
-            <label class="block font-bold text-[#1E1B4B] mb-1">Pickup Safe-Zone:</label>
-            <select id="list-form-safezone" class="w-full p-2.5 rounded-full neo-input font-semibold cursor-pointer px-4 text-[#1E1B4B]">
+            <label class="block font-bold text-[#111827] mb-1">Pickup Safe-Zone:</label>
+            <select id="list-form-safezone" class="w-full p-2.5 rounded-xl neo-input font-semibold cursor-pointer px-4 text-[#111827]">
               <option value="Canteen Safe-Zone Locker #01">Canteen Safe-Zone Locker #01</option>
               <option value="IT Lab 302 Hardware Desk">IT Lab 302 Hardware Desk</option>
               <option value="Student Council Desk Foyer">Student Council Desk Foyer</option>
@@ -966,24 +959,24 @@
         </div>
 
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Specifications & Included Accessories:</label>
-          <textarea id="list-form-specs" rows="2" required placeholder="Dual transmitter, receiver, 3.5mm coiled cord, carrying case..." class="w-full p-3 rounded-2xl neo-input font-medium"></textarea>
+          <label class="block font-bold text-[#111827] mb-1">Specifications & Included Accessories:</label>
+          <textarea id="list-form-specs" rows="2" required placeholder="Dual transmitter, receiver, 3.5mm coiled cord, carrying case..." class="w-full p-3 rounded-xl neo-input font-medium"></textarea>
         </div>
 
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Hardware Photo URL (Optional):</label>
-          <input type="url" id="list-form-image" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+          <label class="block font-bold text-[#111827] mb-1">Hardware Photo URL (Optional):</label>
+          <input type="url" id="list-form-image" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
         </div>
 
-        <div class="p-4 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] text-xs text-slate-600 leading-relaxed">
+        <div class="p-3.5 rounded-xl bg-[#FFFBEB] border border-[#FDE68A] text-xs text-[#92400E] leading-relaxed">
           🛡️ <strong>Student Escrow Guarantee:</strong> The borrower's deposit is held by campus escrow until you verify equipment condition at the safe-zone test socket.
         </div>
 
         <div class="flex items-center gap-3 pt-2">
-          <button type="button" onclick="closeListEquipmentModal()" class="btn-frosted-pill flex-1 py-3 rounded-full text-xs font-bold uppercase tracking-wider">
+          <button type="button" onclick="closeListEquipmentModal()" class="btn-frosted-pill flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider">
             Cancel
           </button>
-          <button type="submit" class="btn-purple-pill flex-2 w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg">
+          <button type="submit" class="btn-yellow flex-2 w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm">
             Publish Equipment Pass
           </button>
         </div>
@@ -995,23 +988,23 @@
   <!-- ========================================================================= -->
   <!-- MODAL 4: OFFER RENT TO WANTED REQUEST -->
   <!-- ========================================================================= -->
-  <div id="offer-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#1E1B4B]/40 backdrop-blur-xl hidden items-center justify-center p-4">
-    <div class="studio-panel max-w-md w-full rounded-3xl p-6 sm:p-7 bg-white/95 backdrop-blur-2xl border border-[#E9D5FF] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.25)]">
+  <div id="offer-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#111827]/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-2xl p-6 sm:p-7 border border-[#E5E7EB] shadow-2xl">
       
-      <div class="flex items-center justify-between pb-3.5 border-b border-purple-100 mb-4">
+      <div class="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
         <div>
-          <span class="text-[10px] font-bold bg-[#F3E8FF] text-[#7C3AED] px-2.5 py-0.5 rounded-full border border-[#DDD6FE] uppercase tracking-wider">
+          <span class="text-[10px] font-black bg-[#FEF3C7] text-[#92400E] px-2.5 py-0.5 rounded-full border border-[#FDE68A] uppercase tracking-wider">
             Peer Bidding
           </span>
-          <h3 class="text-base font-extrabold font-heading text-[#1E1B4B] mt-1.5">Offer Hardware to Student Club</h3>
+          <h3 class="text-base font-black font-heading text-[#111827] mt-1.5">Offer Hardware to Student Club</h3>
         </div>
-        <button onclick="closeOfferModal()" class="p-2 rounded-full border border-purple-200 text-slate-400 hover:text-[#1E1B4B] hover:bg-purple-50 transition-colors">
+        <button onclick="closeOfferModal()" class="p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-[#111827] hover:bg-slate-100 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <div class="p-3.5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] mb-4">
-        <h4 id="offer-req-title" class="text-xs font-bold text-[#1E1B4B]">Request title...</h4>
+      <div class="p-3.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] mb-4">
+        <h4 id="offer-req-title" class="text-xs font-bold text-[#111827]">Request title...</h4>
         <p id="offer-req-club" class="text-xs text-slate-500 mt-0.5">Club info...</p>
       </div>
 
@@ -1019,25 +1012,25 @@
         <input type="hidden" id="offer-target-id">
 
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Your Hardware Model:</label>
-          <input type="text" id="offer-gear-name" required placeholder="e.g. Sennheiser EW 100 G4 Wireless Mic" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+          <label class="block font-bold text-[#111827] mb-1">Your Hardware Model:</label>
+          <input type="text" id="offer-gear-name" required placeholder="e.g. Sennheiser EW 100 G4 Wireless Mic" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
         </div>
 
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Offered Daily Rate (₹):</label>
-          <input type="number" id="offer-rent-rate" required placeholder="300" min="50" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+          <label class="block font-bold text-[#111827] mb-1">Offered Daily Rate (₹):</label>
+          <input type="number" id="offer-rent-rate" required placeholder="300" min="50" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
         </div>
 
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Note for Event Convenor:</label>
-          <input type="text" id="offer-note" placeholder="Fresh duracell batteries included, ready today." class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+          <label class="block font-bold text-[#111827] mb-1">Note for Event Convenor:</label>
+          <input type="text" id="offer-note" placeholder="Fresh duracell batteries included, ready today." class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
         </div>
 
         <div class="flex items-center gap-2 pt-2">
-          <button type="button" onclick="closeOfferModal()" class="btn-frosted-pill flex-1 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider">
+          <button type="button" onclick="closeOfferModal()" class="btn-frosted-pill flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
             Cancel
           </button>
-          <button type="submit" class="btn-purple-pill flex-2 w-full py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg">
+          <button type="submit" class="btn-yellow flex-2 w-full py-3 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm">
             Submit Offer Bid
           </button>
         </div>
@@ -1049,53 +1042,53 @@
   <!-- ========================================================================= -->
   <!-- MODAL 5: PIN URGENT REQUEST -->
   <!-- ========================================================================= -->
-  <div id="post-wanted-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#1E1B4B]/40 backdrop-blur-xl hidden items-center justify-center p-4">
-    <div class="studio-panel max-w-md w-full rounded-3xl p-6 sm:p-7 bg-white/95 backdrop-blur-2xl border border-[#E9D5FF] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.25)]">
+  <div id="post-wanted-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#111827]/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-2xl p-6 sm:p-7 border border-[#E5E7EB] shadow-2xl">
       
-      <div class="flex items-center justify-between pb-3.5 border-b border-purple-100 mb-4">
+      <div class="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
         <div>
-          <span class="text-[10px] font-bold bg-[#F3E8FF] text-[#7C3AED] px-2.5 py-0.5 rounded-full border border-[#DDD6FE] uppercase tracking-wider">
+          <span class="text-[10px] font-black bg-[#111827] text-[#FBBF24] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
             Campus Broadcast
           </span>
-          <h3 class="text-base font-extrabold font-heading text-[#1E1B4B] mt-1.5">Post Urgent Hardware Need</h3>
+          <h3 class="text-base font-black font-heading text-[#111827] mt-1.5">Post Urgent Hardware Need</h3>
         </div>
-        <button onclick="closePostWantedModal()" class="p-2 rounded-full border border-purple-200 text-slate-400 hover:text-[#1E1B4B] hover:bg-purple-50 transition-colors">
+        <button onclick="closePostWantedModal()" class="p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-[#111827] hover:bg-slate-100 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <form onsubmit="submitPostWanted(event)" class="space-y-3.5 text-xs">
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Hardware Required:</label>
-          <input type="text" id="wanted-form-title" required placeholder="e.g. 2x DMX Stage Par Lights for Dance Prelims" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+          <label class="block font-bold text-[#111827] mb-1">Hardware Required:</label>
+          <input type="text" id="wanted-form-title" required placeholder="e.g. 2x DMX Stage Par Lights for Dance Prelims" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-bold text-[#1E1B4B] mb-1">Club / Society Name:</label>
-            <input type="text" id="wanted-form-club" required placeholder="Drama Society" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+            <label class="block font-bold text-[#111827] mb-1">Club / Society Name:</label>
+            <input type="text" id="wanted-form-club" required placeholder="Drama Society" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
           </div>
           <div>
-            <label class="block font-bold text-[#1E1B4B] mb-1">Needed By Date:</label>
-            <input type="text" id="wanted-form-date" required placeholder="This Friday 5 PM" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+            <label class="block font-bold text-[#111827] mb-1">Needed By Date:</label>
+            <input type="text" id="wanted-form-date" required placeholder="This Friday 5 PM" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
           </div>
         </div>
 
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Max Daily Budget (₹):</label>
-          <input type="number" id="wanted-form-budget" required placeholder="400" min="50" class="w-full p-2.5 rounded-full neo-input px-4 font-medium">
+          <label class="block font-bold text-[#111827] mb-1">Max Daily Budget (₹):</label>
+          <input type="number" id="wanted-form-budget" required placeholder="400" min="50" class="w-full p-2.5 rounded-xl neo-input px-4 font-medium">
         </div>
 
         <div>
-          <label class="block font-bold text-[#1E1B4B] mb-1">Event Context / Requirements:</label>
-          <textarea id="wanted-form-desc" rows="2" placeholder="Required for 3-hour annual showcase at Open Air Amphitheatre." class="w-full p-3 rounded-2xl neo-input font-medium"></textarea>
+          <label class="block font-bold text-[#111827] mb-1">Event Context / Requirements:</label>
+          <textarea id="wanted-form-desc" rows="2" placeholder="Required for 3-hour annual showcase at Open Air Amphitheatre." class="w-full p-3 rounded-xl neo-input font-medium"></textarea>
         </div>
 
         <div class="flex items-center gap-2 pt-2">
-          <button type="button" onclick="closePostWantedModal()" class="btn-frosted-pill flex-1 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider">
+          <button type="button" onclick="closePostWantedModal()" class="btn-frosted-pill flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
             Cancel
           </button>
-          <button type="submit" class="btn-purple-pill flex-2 w-full py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg">
+          <button type="submit" class="btn-yellow flex-2 w-full py-3 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm">
             Broadcast Request
           </button>
         </div>
@@ -1107,20 +1100,20 @@
   <!-- ========================================================================= -->
   <!-- MODAL 6: CAMPUS SAFE ZONES GUIDE -->
   <!-- ========================================================================= -->
-  <div id="safe-zones-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#1E1B4B]/40 backdrop-blur-xl hidden items-center justify-center p-4">
-    <div class="studio-panel max-w-2xl w-full rounded-3xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto bg-white/95 backdrop-blur-2xl border border-[#E9D5FF] shadow-[0_25px_60px_-15px_rgba(139,92,246,0.25)]">
+  <div id="safe-zones-modal" class="modal-backdrop fixed inset-0 z-50 bg-[#111827]/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-2xl w-full rounded-2xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto border border-[#E5E7EB] shadow-2xl">
       
-      <div class="flex items-center justify-between pb-4 border-b border-purple-100 mb-6">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
         <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#8B5CF6] to-[#6D28D9] text-white flex items-center justify-center font-heading font-extrabold text-sm shadow-md">
+          <div class="w-11 h-11 rounded-xl bg-[#111827] text-[#FBBF24] flex items-center justify-center font-heading font-black text-sm shadow-sm">
             SZ
           </div>
           <div>
-            <h3 class="text-lg font-extrabold font-heading text-[#1E1B4B]">Campus Safe-Zone Locations</h3>
+            <h3 class="text-lg font-black font-heading text-[#111827]">Campus Safe-Zone Locations</h3>
             <p class="text-xs text-slate-500">3 Verified spots with CCTV, 240V test sockets, and volunteer presence.</p>
           </div>
         </div>
-        <button onclick="closeSafeZonesModal()" class="p-2 rounded-full border border-purple-200 text-slate-400 hover:text-[#1E1B4B] hover:bg-purple-50 transition-colors">
+        <button onclick="closeSafeZonesModal()" class="p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-[#111827] hover:bg-slate-100 transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -1128,17 +1121,17 @@
       <div class="space-y-4 mb-6 text-xs">
         
         <!-- Spot 1 -->
-        <div class="p-5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE]">
+        <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
           <div class="flex items-start justify-between gap-3 mb-2">
             <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-[#1E1B4B] text-white font-bold text-xs flex items-center justify-center">1</span>
-              <h4 class="font-extrabold text-[#1E1B4B] uppercase tracking-wide">Central Canteen Safe-Zone</h4>
+              <span class="w-6 h-6 rounded-md bg-[#111827] text-[#FBBF24] font-black text-xs flex items-center justify-center">1</span>
+              <h4 class="font-black text-[#111827] uppercase tracking-wide">Central Canteen Safe-Zone</h4>
             </div>
             <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
               10 AM - 6 PM
             </span>
           </div>
-          <p class="text-slate-600 mb-3 leading-relaxed">
+          <p class="text-slate-600 mb-2 leading-relaxed">
             Located beside the Nescafe kiosk inside Food Court. Dual 16A outlets for testing amplifiers, soundbars, and DJ decks.
           </p>
           <div class="flex items-center gap-4 text-xs text-slate-500 font-semibold">
@@ -1149,17 +1142,17 @@
         </div>
 
         <!-- Spot 2 -->
-        <div class="p-5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE]">
+        <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
           <div class="flex items-start justify-between gap-3 mb-2">
             <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-[#1E1B4B] text-white font-bold text-xs flex items-center justify-center">2</span>
-              <h4 class="font-extrabold text-[#1E1B4B] uppercase tracking-wide">IT Lab 302 Hardware Testing Desk</h4>
+              <span class="w-6 h-6 rounded-md bg-[#111827] text-[#FBBF24] font-black text-xs flex items-center justify-center">2</span>
+              <h4 class="font-black text-[#111827] uppercase tracking-wide">IT Lab 302 Hardware Testing Desk</h4>
             </div>
             <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
               9 AM - 5 PM
             </span>
           </div>
-          <p class="text-slate-600 mb-3 leading-relaxed">
+          <p class="text-slate-600 mb-2 leading-relaxed">
             Technology Wing Third Floor. Equipped with multimeters, HDMI test monitors for projectors, and audio verification benches.
           </p>
           <div class="flex items-center gap-4 text-xs text-slate-500 font-semibold">
@@ -1170,17 +1163,17 @@
         </div>
 
         <!-- Spot 3 -->
-        <div class="p-5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE]">
+        <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
           <div class="flex items-start justify-between gap-3 mb-2">
             <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-[#1E1B4B] text-white font-bold text-xs flex items-center justify-center">3</span>
-              <h4 class="font-extrabold text-[#1E1B4B] uppercase tracking-wide">Student Council Desk (Admin Foyer)</h4>
+              <span class="w-6 h-6 rounded-md bg-[#111827] text-[#FBBF24] font-black text-xs flex items-center justify-center">3</span>
+              <h4 class="font-black text-[#111827] uppercase tracking-wide">Student Council Desk (Admin Foyer)</h4>
             </div>
             <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
               11 AM - 7 PM
             </span>
           </div>
-          <p class="text-slate-600 mb-3 leading-relaxed">
+          <p class="text-slate-600 mb-2 leading-relaxed">
             Admin Block Ground Floor Reception. Ideal for high-value gear like Sony Mirrorless cameras and DMX stage lights. Overnight temporary lockers available.
           </p>
           <div class="flex items-center gap-4 text-xs text-slate-500 font-semibold">
@@ -1191,8 +1184,8 @@
 
       </div>
 
-      <div class="p-4 rounded-2xl bg-[#1E1B4B] text-white text-xs leading-relaxed flex items-center gap-2">
-        <span>💡</span> <span><strong>Pro Tip:</strong> Always spend 2 minutes at the Safe-Zone test socket checking microphone batteries or projector bulb hours before releasing your 4-digit OTP.</span>
+      <div class="p-3.5 rounded-xl bg-[#111827] text-[#FBBF24] text-xs leading-relaxed flex items-center gap-2.5 font-semibold">
+        <span>💡</span> <span class="text-white"><strong class="text-[#FBBF24]">Pro Tip:</strong> Always spend 2 minutes at the Safe-Zone test socket checking microphone batteries or projector bulb hours before releasing your 4-digit OTP.</span>
       </div>
 
     </div>

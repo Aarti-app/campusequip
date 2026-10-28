@@ -419,20 +419,20 @@ function showToast(message, type = 'info', title = '') {
   if (!container) return;
 
   const toast = document.createElement('div');
-  toast.className = `p-4 rounded-2xl border border-[#E9D5FF] bg-white/95 backdrop-blur-xl shadow-[0_10px_30px_-5px_rgba(139,92,246,0.2)] flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full`;
+  toast.className = `p-4 rounded-xl border border-[#E5E7EB] bg-white shadow-lg flex items-start gap-3.5 transform translate-y-4 opacity-0 transition-all duration-200 pointer-events-auto max-w-sm w-full`;
 
-  const badgeColor = type === 'success' ? 'bg-[#10B981] text-white' : type === 'warning' ? 'bg-[#F59E0B] text-black' : 'bg-[#7C3AED] text-white';
+  const badgeColor = type === 'success' ? 'bg-[#10B981] text-white' : type === 'warning' ? 'bg-[#F59E0B] text-black' : 'bg-[#FBBF24] text-[#111827]';
   const label = type === 'success' ? 'SUCCESS' : type === 'warning' ? 'NOTICE' : 'UPDATE';
 
   toast.innerHTML = `
-    <div class="mt-0.5 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full ${badgeColor}">
+    <div class="mt-0.5 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider rounded-full ${badgeColor}">
       ${label}
     </div>
     <div class="flex-1 min-w-0">
-      ${title ? `<h4 class="text-xs font-extrabold tracking-tight mb-0.5 text-[#1E1B4B]">${title}</h4>` : ''}
+      ${title ? `<h4 class="text-xs font-black tracking-tight mb-0.5 text-[#111827] font-heading">${title}</h4>` : ''}
       <p class="text-xs leading-relaxed text-slate-600">${message}</p>
     </div>
-    <button class="text-slate-400 hover:text-[#1E1B4B] transition-colors p-1" onclick="this.parentElement.remove()">
+    <button class="text-slate-400 hover:text-[#111827] transition-colors p-1" onclick="this.parentElement.remove()">
       <i data-lucide="x" class="w-3.5 h-3.5"></i>
     </button>
   `;
@@ -487,7 +487,7 @@ function handlePassDayChange(id, days) {
 }
 
 // ----------------------------------------------------
-// Equipment Marketplace & Clean Equipment Pass Cards
+// Equipment Marketplace: High-Energy Industrial E-Commerce Cards
 // ----------------------------------------------------
 function renderMarketplace() {
   const grid = document.getElementById('equipment-grid');
@@ -517,18 +517,18 @@ function renderMarketplace() {
   }
 
   if (countBadge) {
-    countBadge.innerHTML = `<span class="font-bold text-xs text-[#7C3AED]">${filtered.length} units available</span>`;
+    countBadge.innerHTML = `<span class="font-extrabold text-xs text-[#111827] bg-[#FEF3C7] border border-[#FDE68A] px-3 py-1 rounded-full">${filtered.length} Units Available</span>`;
   }
 
   if (filtered.length === 0) {
     grid.innerHTML = `
-      <div class="col-span-full py-16 text-center studio-panel rounded-3xl p-8 border border-[#E9D5FF] bg-white">
-        <div class="w-12 h-12 mx-auto mb-3 bg-[#F5F3FF] border border-[#DDD6FE] rounded-2xl flex items-center justify-center font-bold text-lg text-[#7C3AED]">
+      <div class="col-span-full py-16 text-center marketplace-panel rounded-xl p-8 border border-[#E5E7EB] bg-white shadow-sm">
+        <div class="w-12 h-12 mx-auto mb-3 bg-[#FEF3C7] border border-[#FDE68A] rounded-xl flex items-center justify-center font-black text-xl text-[#92400E]">
           !
         </div>
-        <h3 class="text-base font-bold font-heading text-[#1E1B4B] mb-1">No matching hardware found</h3>
+        <h3 class="text-base font-extrabold font-heading text-[#111827] mb-1">No matching hardware found</h3>
         <p class="text-xs text-slate-500 max-w-sm mx-auto mb-5">Broadcast an urgent request onto the campus wanted notice board.</p>
-        <button onclick="openPostWantedModal()" class="btn-purple-pill px-5 py-2.5 text-xs font-bold uppercase rounded-full">
+        <button onclick="openPostWantedModal()" class="btn-yellow px-5 py-2.5 text-xs font-black uppercase rounded-xl">
           + Post Request on Wanted Board
         </button>
       </div>
@@ -552,89 +552,80 @@ function renderMarketplace() {
     const catBadgeClass = categoryClassMap[item.category] || 'badge-cat-audio';
 
     return `
-      <!-- ULTRA-CLEAN LAVENDER & LILAC EQUIPMENT PASS CARD -->
-      <div class="studio-card rounded-3xl overflow-hidden flex flex-col bg-white border border-[#E9D5FF] shadow-[0_10px_30px_-5px_rgba(139,92,246,0.12)] hover:shadow-[0_20px_45px_-10px_rgba(139,92,246,0.2)] hover:-translate-y-1 transition-all duration-300">
+      <!-- STRUCTURED E-COMMERCE EQUIPMENT CARD -->
+      <div class="equipment-card rounded-xl overflow-hidden flex flex-col bg-white border border-[#E5E7EB] shadow-sm hover:shadow-md hover:border-[#FBBF24] transition-all duration-200">
         
-        <!-- Top Pass Header -->
-        <div class="bg-[#FDFBFE] border-b border-[#F3E8FF] p-3.5 flex items-center justify-between text-xs font-medium">
-          <span class="${catBadgeClass} text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-            ${item.categoryName}
-          </span>
-          <div class="punch-slot"></div>
-          ${isLocked 
-            ? `<span class="badge-fest-locked">Booked for Fest</span>`
-            : `<span class="flex items-center text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200"><span class="pulse-dot-green mr-1.5"></span> Available Today</span>`
-          }
-        </div>
-
-        <!-- Hardware Image Container -->
-        <div class="relative h-52 w-full overflow-hidden bg-slate-50 border-b border-[#F3E8FF] group">
+        <!-- Top Image Container with #F3F4F6 background -->
+        <div class="relative h-48 w-full overflow-hidden bg-[#F3F4F6] border-b border-[#E5E7EB] group flex items-center justify-center">
           <img 
             src="${item.image}" 
             alt="${item.title}" 
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
             onerror="this.src='https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80'"
           />
 
-          <!-- Deposit Badge -->
-          <div class="absolute bottom-3 left-3">
-            <span class="badge-deposit shadow-sm">
-              <span class="font-bold">Refundable Deposit:</span> ₹${item.deposit}
+          <!-- Category Pill -->
+          <div class="absolute top-2.5 left-2.5">
+            <span class="${catBadgeClass} text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+              ${item.categoryName}
             </span>
           </div>
 
-          <!-- Safe Zone Tag -->
-          <div class="absolute top-3 right-3 text-[10px] font-bold bg-[#1E1B4B]/90 backdrop-blur-sm text-white px-3 py-1 rounded-full tracking-wider uppercase shadow-sm">
-            ${item.safeZone.split(' ')[0]}
+          <!-- Availability Tag -->
+          <div class="absolute top-2.5 right-2.5">
+            ${isLocked 
+              ? `<span class="badge-fest-locked shadow-sm">Booked for Fest</span>`
+              : `<span class="flex items-center text-[10px] font-bold text-emerald-800 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full border border-emerald-200 shadow-sm"><span class="pulse-dot-green mr-1.5"></span> Available</span>`
+            }
+          </div>
+
+          <!-- Deposit Badge -->
+          <div class="absolute bottom-2.5 left-2.5">
+            <span class="badge-deposit shadow-sm text-[10px]">
+              Deposit: ₹${item.deposit} <span class="text-emerald-700 font-bold">(Refundable)</span>
+            </span>
           </div>
         </div>
 
-        <!-- Content Body -->
-        <div class="p-6 flex-1 flex flex-col justify-between">
+        <!-- Content Details -->
+        <div class="p-5 flex-1 flex flex-col justify-between">
           <div>
-            <!-- Title & PRN Badge -->
-            <div class="flex items-start justify-between gap-2 mb-2">
-              <h3 class="text-base font-extrabold font-heading text-[#1E1B4B] tracking-tight leading-snug">
+            <!-- Title & Verification -->
+            <div class="flex items-start justify-between gap-2 mb-1.5">
+              <h3 class="text-base font-extrabold font-heading text-[#111827] leading-snug line-clamp-1">
                 ${item.title}
               </h3>
-              <span class="badge-verified shrink-0">
-                <i data-lucide="check" class="w-2.5 h-2.5 text-emerald-600"></i> PRN Verified
+              <span class="badge-verified shrink-0 text-[10px]">
+                <i data-lucide="check" class="w-2.5 h-2.5 text-emerald-600"></i> PRN
               </span>
             </div>
 
-            <p class="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed">
+            <!-- Student Department / Campus Zone -->
+            <div class="flex items-center gap-1.5 text-xs text-slate-500 mb-2.5 font-medium">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#F59E0B] shrink-0"></i>
+              <span class="truncate">${item.owner.dept} • ${item.safeZone}</span>
+            </div>
+
+            <p class="text-xs text-slate-600 mb-3 line-clamp-2 leading-relaxed">
               ${item.specs}
             </p>
 
-            <!-- Technical Spec Sheet Table -->
-            <div class="p-3.5 rounded-2xl bg-[#F5F3FF] border border-[#DDD6FE] mb-4 text-xs space-y-1.5">
-              ${Object.entries(item.techSheet).slice(0, 3).map(([key, val]) => `
-                <div class="flex justify-between text-slate-700">
-                  <span class="uppercase text-slate-400 font-semibold text-[10px] tracking-wider">${key}:</span>
-                  <span class="font-bold text-[#1E1B4B] truncate max-w-[170px]">${val}</span>
+            <!-- Tech Specs Summary Box -->
+            <div class="p-2.5 rounded-lg bg-[#F9FAFB] border border-[#E5E7EB] mb-3 text-xs space-y-1">
+              ${Object.entries(item.techSheet).slice(0, 2).map(([key, val]) => `
+                <div class="flex justify-between text-slate-600 text-[11px]">
+                  <span class="uppercase text-slate-400 font-semibold tracking-wider text-[10px]">${key}:</span>
+                  <span class="font-bold text-[#111827] truncate max-w-[170px]">${val}</span>
                 </div>
               `).join('')}
             </div>
 
-            <!-- Owner Strip -->
-            <div class="flex items-center justify-between text-xs py-2.5 border-y border-[#F3E8FF] mb-4">
-              <div class="flex items-center gap-2">
-                <img src="${item.owner.avatar}" alt="${item.owner.name}" class="w-6 h-6 rounded-full object-cover border border-purple-200">
-                <span class="font-bold text-[#1E1B4B]">${item.owner.name}</span>
-                <span class="text-[11px] text-slate-400">(${item.owner.dept})</span>
-              </div>
-              <div class="font-bold text-slate-800 flex items-center gap-1">
-                <span class="text-amber-500">★</span> ${item.owner.rating}
-              </div>
-            </div>
-
-            <!-- Mini Interactive Rent Estimator Slider directly on card -->
-            <div class="p-3.5 rounded-2xl bg-[#F5F3FF]/70 border border-[#DDD6FE] mb-4">
-              <div class="flex justify-between items-center text-xs mb-1.5">
-                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider">Estimated Total:</span>
-                <span class="font-semibold text-slate-600" id="calc-days-${item.id}">${currentDays}d:</span>
-                <span class="font-extrabold text-[#7C3AED] text-sm" id="calc-price-${item.id}">₹${totalCalc}</span>
+            <!-- Interactive Estimator -->
+            <div class="p-2.5 rounded-lg bg-[#FFFBEB] border border-[#FEF3C7] mb-3">
+              <div class="flex justify-between items-center text-xs mb-1">
+                <span class="text-slate-600 font-bold text-[10px] uppercase tracking-wider">Est. Total (${currentDays}d):</span>
+                <span class="font-extrabold text-[#111827] text-xs" id="calc-price-${item.id}">₹${totalCalc}</span>
               </div>
               <input 
                 type="range" 
@@ -647,28 +638,20 @@ function renderMarketplace() {
             </div>
           </div>
 
-          <!-- Bottom Action & Barcode Strip -->
-          <div>
-            <div class="pt-2 flex items-center justify-between gap-3 mb-3">
-              <div>
-                <span class="text-2xl font-extrabold font-heading text-[#1E1B4B]">₹${item.dailyRate}</span>
-                <span class="text-xs text-slate-400 font-medium">/day</span>
+          <!-- Price: "₹450 / Day" with High-visibility "Rent Now" action button in #FBBF24 -->
+          <div class="pt-3 border-t border-[#E5E7EB] flex items-center justify-between gap-3">
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-2xl font-black font-heading text-[#111827]">₹${item.dailyRate}</span>
+                <span class="text-xs text-slate-500 font-bold">/ Day</span>
               </div>
-
-              ${isLocked 
-                ? `<button onclick="handleRentClick('${item.id}')" class="btn-frosted-pill opacity-75 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider">Waitlist</button>`
-                : `<button onclick="handleRentClick('${item.id}')" class="btn-purple-pill px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:shadow-lg"><span>Rent Now →</span></button>`
-              }
+              <span class="text-[10px] text-slate-400 font-medium">Free 30m campus grace</span>
             </div>
 
-            <!-- Barcode Footer Strip -->
-            <div class="pt-2.5 border-t border-[#F3E8FF]">
-              <div class="barcode-lines opacity-60 mb-1"></div>
-              <div class="flex justify-between text-[9px] text-slate-400 font-medium uppercase tracking-wider">
-                <span>Pass #${item.barcodeId}</span>
-                <span class="text-emerald-700 font-semibold">✓ Safe-Zone Verified</span>
-              </div>
-            </div>
+            ${isLocked 
+              ? `<button onclick="handleRentClick('${item.id}')" class="btn-frosted-pill opacity-75 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">Waitlist</button>`
+              : `<button onclick="handleRentClick('${item.id}')" class="btn-yellow px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm"><span>Rent Now →</span></button>`
+            }
           </div>
 
         </div>
@@ -895,38 +878,40 @@ function closeOtpSuccessModal() {
 // ----------------------------------------------------
 // Campus Wanted Board (Studio Glass Cards)
 // ----------------------------------------------------
+// Campus Wanted Board (Structured Request Cards)
+// ----------------------------------------------------
 function renderWantedBoard() {
   const container = document.getElementById('wanted-board-cards');
   if (!container) return;
 
   container.innerHTML = state.wantedRequests.map((req, idx) => {
     return `
-      <!-- Ultra-Clean Studio Wanted Board Card -->
-      <div class="studio-card p-6 sm:p-7 rounded-3xl relative flex flex-col justify-between bg-white border border-[#E9D5FF] shadow-[0_10px_30px_-5px_rgba(139,92,246,0.12)] hover:border-[#C084FC] hover:-translate-y-1 transition-all duration-300">
+      <!-- Structured Wanted Board Card -->
+      <div class="equipment-card p-6 rounded-xl relative flex flex-col justify-between bg-white border border-[#E5E7EB] shadow-sm hover:border-[#FBBF24] transition-all duration-200">
         <div>
           <!-- Top Badge & Needed Date -->
-          <div class="flex items-center justify-between gap-2 mb-3.5 text-xs">
-            <span class="px-3 py-1 rounded-full bg-[#F3E8FF] text-[#7C3AED] border border-[#DDD6FE] font-extrabold text-[10px] uppercase tracking-wider">
+          <div class="flex items-center justify-between gap-2 mb-3 text-xs">
+            <span class="px-3 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A] font-black text-[10px] uppercase tracking-wider">
               ${req.urgencyText}
             </span>
             <span class="text-slate-500 font-semibold flex items-center gap-1.5 text-xs">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#8B5CF6]"></i>
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#F59E0B]"></i>
               ${req.neededDate}
             </span>
           </div>
 
           <!-- Request Title -->
-          <h4 class="text-lg font-extrabold font-heading text-[#1E1B4B] mb-2 leading-snug">
+          <h4 class="text-base font-extrabold font-heading text-[#111827] mb-1.5 leading-snug">
             ${req.title}
           </h4>
-          <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+          <p class="text-xs text-slate-600 mb-3.5 leading-relaxed">
             "${req.description}"
           </p>
 
           <!-- Requester Club Info -->
-          <div class="flex items-center justify-between text-xs py-2.5 border-y border-purple-100 mb-4">
-            <div class="flex items-center gap-2 font-bold text-[#1E1B4B]">
-              <i data-lucide="users" class="w-3.5 h-3.5 text-[#8B5CF6]"></i>
+          <div class="flex items-center justify-between text-xs py-2 border-y border-[#E5E7EB] mb-3">
+            <div class="flex items-center gap-2 font-bold text-[#111827]">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-[#F59E0B]"></i>
               <span>${req.club}</span>
             </div>
             <div class="text-[11px] text-slate-400 font-medium">
@@ -936,17 +921,17 @@ function renderWantedBoard() {
         </div>
 
         <!-- Budget & Offer Button -->
-        <div class="flex items-center justify-between gap-3 pt-2">
+        <div class="flex items-center justify-between gap-3 pt-1">
           <div>
             <span class="text-[10px] uppercase tracking-wider text-slate-400 block font-bold">Max Daily Budget:</span>
-            <span class="text-xl font-extrabold font-heading text-[#1E1B4B]">${req.budget}</span>
+            <span class="text-2xl font-black font-heading text-[#111827]">${req.budget}</span>
           </div>
 
           <button 
             onclick="openOfferModal('${req.id}')"
-            class="btn-purple-pill px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:shadow-lg"
+            class="btn-yellow px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm"
           >
-            <i data-lucide="handshake" class="w-3.5 h-3.5 text-purple-200"></i>
+            <i data-lucide="handshake" class="w-3.5 h-3.5"></i>
             <span>Offer Hardware →</span>
           </button>
         </div>
@@ -1049,7 +1034,7 @@ function submitPostWanted(e) {
 
 // ----------------------------------------------------
 // Active Handover Tracker & Escrow Console
-// Studio Progress Nodes (Emerald, Electric Lilac, Royal Orchid)
+// Industrial Progress Nodes & Controls
 // ----------------------------------------------------
 function renderActiveTracker() {
   const container = document.getElementById('tracker-card-container');
@@ -1071,48 +1056,48 @@ function renderActiveTracker() {
 
   container.innerHTML = `
     <!-- Top Equipment Summary Strip -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 sm:p-6 rounded-3xl bg-[#F5F3FF] border border-[#DDD6FE]">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 p-5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
       <div class="flex items-center gap-4">
         <div class="relative">
-          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded-2xl object-cover border border-purple-200 shadow-sm">
+          <img src="${b.image}" alt="${b.title}" class="w-16 h-16 rounded-xl object-cover border border-[#E5E7EB] shadow-sm">
         </div>
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] px-3 py-0.5 rounded-full bg-[#1E1B4B] text-white font-bold uppercase tracking-wider">
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-[#111827] text-white font-bold uppercase tracking-wider">
               ${b.id}
             </span>
             <span class="text-xs text-slate-500 font-semibold">${b.categoryCode || b.category}</span>
           </div>
-          <h3 class="text-lg font-extrabold font-heading text-[#1E1B4B]">${b.title}</h3>
-          <p class="text-xs text-slate-600 mt-0.5">Owner: <span class="text-[#1E1B4B] font-bold">${b.ownerName}</span> • Pickup: <span class="text-[#7C3AED] font-bold">${b.pickupSpot}</span></p>
+          <h3 class="text-base font-extrabold font-heading text-[#111827]">${b.title}</h3>
+          <p class="text-xs text-slate-600 mt-0.5">Owner: <span class="text-[#111827] font-bold">${b.ownerName}</span> • Pickup: <span class="text-[#F59E0B] font-bold">${b.pickupSpot}</span></p>
         </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <div class="bg-white border border-[#E9D5FF] p-3 px-5 rounded-2xl text-center shadow-sm">
-          <span class="text-[9px] text-slate-400 uppercase tracking-widest block font-bold">Handover OTP</span>
-          <span class="text-2xl font-black text-[#7C3AED] tracking-widest font-mono">${b.otp}</span>
+        <div class="bg-[#FFFBEB] border border-[#FDE68A] p-2.5 px-5 rounded-xl text-center shadow-sm">
+          <span class="text-[9px] text-[#92400E] uppercase tracking-widest block font-bold">Handover OTP</span>
+          <span class="text-2xl font-black text-[#111827] tracking-widest font-mono">${b.otp}</span>
         </div>
 
         <!-- Segmented Step Controller -->
         <div class="flex flex-col gap-1 text-right">
           <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Simulate Stage:</span>
-          <div class="inline-flex p-1 rounded-full bg-white border border-[#E9D5FF] shadow-inner">
+          <div class="inline-flex p-1 rounded-xl bg-white border border-[#E5E7EB] shadow-sm">
             <button 
               onclick="setBookingStep(1)" 
-              class="px-3.5 py-1.5 text-xs font-bold uppercase rounded-full transition-all ${b.statusStep === 1 ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-[#1E1B4B]'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 1 ? 'bg-[#111827] text-[#FBBF24] shadow-sm' : 'text-slate-600 hover:text-[#111827]'}"
             >
               1. Verified
             </button>
             <button 
               onclick="setBookingStep(2)" 
-              class="px-3.5 py-1.5 text-xs font-bold uppercase rounded-full transition-all ${b.statusStep === 2 ? 'bg-[#8B5CF6] text-white shadow-sm' : 'text-slate-600 hover:text-[#1E1B4B]'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 2 ? 'bg-[#FBBF24] text-[#111827] font-extrabold shadow-sm' : 'text-slate-600 hover:text-[#111827]'}"
             >
               2. Handover
             </button>
             <button 
               onclick="setBookingStep(3)" 
-              class="px-3.5 py-1.5 text-xs font-bold uppercase rounded-full transition-all ${b.statusStep === 3 ? 'bg-[#6D28D9] text-white shadow-sm' : 'text-slate-600 hover:text-[#1E1B4B]'}"
+              class="px-3 py-1.5 text-xs font-bold uppercase rounded-lg transition-all ${b.statusStep === 3 ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-[#111827]'}"
             >
               3. Settled
             </button>
@@ -1121,43 +1106,43 @@ function renderActiveTracker() {
       </div>
     </div>
 
-    <!-- Stepper Stage Cards with Studio Nodes -->
-    <div class="py-6 px-1">
+    <!-- Stepper Stage Cards with Industrial Nodes -->
+    <div class="py-5">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
-        <!-- Step 1: Emerald Node (Verified) -->
-        <div class="p-5 rounded-3xl border transition-all ${step1Active ? 'bg-white border-emerald-300 shadow-sm' : 'bg-slate-50/60 border-slate-200 opacity-60'}">
-          <div class="flex items-center gap-2.5 mb-2">
-            <span class="w-7 h-7 rounded-full tracker-node-emerald font-extrabold text-xs flex items-center justify-center">
+        <!-- Step 1: Verified -->
+        <div class="p-4 rounded-xl border transition-all ${step1Active ? 'bg-white border-[#111827] shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+          <div class="flex items-center gap-2.5 mb-1.5">
+            <span class="w-6 h-6 rounded-full bg-[#111827] text-[#FBBF24] font-black text-xs flex items-center justify-center">
               ${step1Active ? '✓' : '1'}
             </span>
-            <h4 class="text-xs font-bold text-emerald-950 uppercase tracking-wider">1. Verified • OTP Ready</h4>
+            <h4 class="text-xs font-extrabold text-[#111827] uppercase tracking-wider">1. Verified • OTP Ready</h4>
           </div>
           <p class="text-xs text-slate-500 leading-relaxed">
             OTP #${b.otp} active. Unit verified and stored in Safe-Zone locker box for student handover.
           </p>
         </div>
 
-        <!-- Step 2: Electric Lilac Node (Handover / In Use) -->
-        <div class="p-5 rounded-3xl border transition-all ${step2Active ? 'bg-white border-purple-300 shadow-sm' : 'bg-slate-50/60 border-slate-200 opacity-60'}">
-          <div class="flex items-center gap-2.5 mb-2">
-            <span class="w-7 h-7 rounded-full tracker-node-indigo font-extrabold text-xs flex items-center justify-center">
+        <!-- Step 2: Handover / In Use (Electric Yellow) -->
+        <div class="p-4 rounded-xl border transition-all ${step2Active ? 'bg-[#FFFBEB] border-[#F59E0B] shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+          <div class="flex items-center gap-2.5 mb-1.5">
+            <span class="w-6 h-6 rounded-full bg-[#FBBF24] text-[#111827] font-black text-xs flex items-center justify-center">
               ${step2Active ? '✓' : '2'}
             </span>
-            <h4 class="text-xs font-bold text-purple-950 uppercase tracking-wider">2. Handover • In Use</h4>
+            <h4 class="text-xs font-extrabold text-[#92400E] uppercase tracking-wider">2. Handover • In Use</h4>
           </div>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-600 leading-relaxed">
             OTP verified by Safe-Zone volunteer. ₹${b.deposit} security deposit locked in peer escrow.
           </p>
         </div>
 
-        <!-- Step 3: Deep Royal Orchid Node (Deposit Settled / Inspected) -->
-        <div class="p-5 rounded-3xl border transition-all ${step3Active ? 'bg-white border-violet-400 shadow-sm' : 'bg-slate-50/60 border-slate-200 opacity-60'}">
-          <div class="flex items-center gap-2.5 mb-2">
-            <span class="w-7 h-7 rounded-full tracker-node-violet font-extrabold text-xs flex items-center justify-center">
+        <!-- Step 3: Settled -->
+        <div class="p-4 rounded-xl border transition-all ${step3Active ? 'bg-white border-emerald-400 shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'}">
+          <div class="flex items-center gap-2.5 mb-1.5">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center">
               ${step3Active ? '✓' : '3'}
             </span>
-            <h4 class="text-xs font-bold text-purple-950 uppercase tracking-wider">3. Deposit Settled</h4>
+            <h4 class="text-xs font-extrabold text-emerald-950 uppercase tracking-wider">3. Deposit Settled</h4>
           </div>
           <p class="text-xs text-slate-500 leading-relaxed">
             Hardware passed return inspection. ₹${b.deposit} deposit instantaneously settled to UPI.
